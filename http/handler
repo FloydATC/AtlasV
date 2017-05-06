@@ -1,0 +1,64 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Data::Dumper::Concise;
+use HTTP::Headers;
+use HTTP::Response;
+use HTTP::Date;
+use Template;
+use Cwd qw( getcwd );
+
+
+my $mime = {
+  html => 'text/html',
+  txt  => 'text/plain',
+  svg  => 'xml/svg',
+  png  => 'image/png',
+};
+
+my @status = ( 200 => 'OK' );
+my $req = shift @ARGV;
+my $doc = $req->uri->path;
+if ($doc eq '/') { $doc = 'index.html'; }
+$doc =~ s/\.{2,}/\./g;
+$doc =~ s/^[\/\.]+//g;
+unless (-e 'http/'.$doc) { 
+  $doc = 'error_404.html'; 
+  @status = ( 404 => 'Not found' );
+}
+
+my $content = '';
+my $header = HTTP::Headers->new(
+  Date		=> time2str(time),
+  Cache_Control	=> 'no-cache, no-store, must-revalidate',
+  Connection	=> 'keep-alive',
+);
+
+my $tt = {
+  INCLUDE_PATH	=> 'http',
+  INTERPOLATE	=> 1,
+  POST_CHOMP	=> 0,
+  PRE_PROCESS	=> '',
+  EVAL_PERL	=> 1,
+};
+my $template = Template->new($tt);
+my $vars = {
+  req		=> $req,
+};
+
+unless ($template->process($doc, $vars, \$content, binmode => ':utf8')) {
+  @status = ( 500 => 'Server error' );
+  $doc = 'error_500.html';
+  my $error = $template->error();
+  warn "$0 $$ Template: $error\n";
+  $vars->{'error'} = $error;
+  $template->process('error_500.html', $vars, \$content, binmode => ':utf8');
+}
+my $ext = $doc =~ m/\.(\w)$/;
+$header->header( Content_Length => length($content) );
+$header->header( Content_Type => $mime->{$ext} );
+my $res = HTTP::Response->new( @status, $header, $content );
+print 'HTTP/1.1 '.$res->as_string;
+
+exit;

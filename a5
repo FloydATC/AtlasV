@@ -1,0 +1,260 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Carp;
+use IO::Socket::INET;
+use IO::Select;
+use Data::Dumper::Concise;
+use HTTP::Response;
+use HTTP::Headers;
+use HTTP::Date;
+use Session;
+use Session::Async;
+use Time::HiRes qw( sleep );
+use DBI;
+use JSON;
+use AtlasV;
+
+$SIG{CHLD} = 'IGNORE';	# Let perl reap dead processes
+$SIG{PIPE} = 'IGNORE';  # Ignore peers that close connections prematurely
+
+my $json = JSON->new( allow_nonref => 1 );
+
+my $http = IO::Socket::INET->new(
+  Listen	=> 20,
+  LocalHost	=> '0.0.0.0',
+  LocalPort	=> 81,
+  Proto		=> 'tcp',
+  ReuseAddr     => 1,
+  Blocking	=> 0,
+) || confess "Error binding port tcp/81: $@";
+
+my $line = IO::Socket::INET->new(
+  Listen	=> 20,
+  LocalHost	=> '0.0.0.0',
+  LocalPort	=> 1337,
+  Proto		=> 'tcp',
+  ReuseAddr     => 1,
+  Blocking	=> 0,
+) || confess "Error binding port tcp/1337: $@";
+
+my @db = ( 
+  'dbi:mysql:dbname=atlas5', 'atlas5', 'atlas5',
+  { 
+    ShowErrorStatement  => 1,
+    AutoCommit 		=> 1,
+    RaiseError 		=> 0,
+    PrintError 		=> 0, 
+  } 
+);
+my $dbh = DBI->connect(@db);
+$dbh->{'mysql_auto_reconnect'} = 1;
+
+my $atlas = AtlasV->new();
+#print Dumper($atlas);
+
+my $sessions = {};
+my $select = IO::Select->new();
+
+
+my $pingd = Session::Async->new( cmd => 'pingd', args => [], select => $select, type => 'line', dbh => $dbh );
+$sessions->{$pingd->socket} = $pingd;
+
+my $pcapd = Session::Async->new( cmd => 'pcapd', args => [], select => $select, type => 'line', dbh => $dbh );
+$sessions->{$pcapd->socket} = $pcapd;
+
+
+print "Atlas V launched\n";
+while (1) {
+  # Accept connections
+  while (my $socket = $http->accept()) {
+    $sessions->{$socket} = Session->new( socket => $socket, select => $select, type => 'http_client', dbh => $dbh );
+    #print "$0 $$ HTTP connection from ".$sessions->{$socket}->peer()."\n";
+  }
+  while (my $socket = $line->accept()) {
+    $sessions->{$socket} = Session->new( socket => $socket, select => $select, type => 'line', dbh => $dbh );
+    #print "$0 $$ LINE connection from ".$sessions->{$socket}->peer()."\n";
+  }
+
+  # Read from sockets
+  foreach my $socket ($select->can_read(0)) {
+    #print "$0 $$ attempting to read from $socket\n";
+    my $session = $sessions->{$socket};
+    my $bytes = $session->read();
+    
+    if ($session->type() eq 'http_client') {
+      my $req = $session->get_http_request();
+      handle_http_request($session, $req) if $req;
+      next;
+    };
+    if ($session->type() eq 'http_server') {
+      while (my $line = $session->get_line()) {
+        if ($session->echo) { $session->echo->send($line); }
+      }
+      next;
+    };
+    if ($session->type() eq 'line') {
+      while (my $line = $session->get_line()) {
+        handle_line_request($session, $line);
+      }
+      next;
+    }
+  }
+  
+  # Write to sockets
+  foreach my $socket ($select->can_write(0)) {
+    $sessions->{$socket}->write();
+  }
+
+  # Clean up closed sessions
+  foreach my $socket (keys %{$sessions}) {
+    if ($sessions->{$socket}->closed()) {
+      #print "$0 $$ cleaning up ".$sessions->{$socket}->peer()."\n";
+      delete $sessions->{$socket};
+    }
+  }
+  
+  #print "Looping\n";
+  sleep (0.01);
+}
+
+
+
+sub handle_http_request {
+  my $session = shift;	# Session
+  my $req = shift;	# HTTP::Request
+  
+  #print "$0 $$ ".$session->peer()." ".$req->uri()."\n";
+  my $async = Session::Async->new( cmd => 'http/handler', args => [$req], sessions => $sessions, select => $select, type => 'http_server', echo => $session, dbh => $dbh );
+  $sessions->{$async->socket} = $async;
+}
+
+
+
+sub handle_line_request {
+  my $session = shift;	# Session
+  my $line = shift;	# command line
+
+  # Remove CR+LF  
+  $line =~ s/[\r\n]+$//;
+  
+  # Remove whitespace padding (if any)
+  $line =~ s/^\s*(.*)\s*$/$1/;
+  
+  #print "$0 $$ ".$session->peer()." ".$line."\n";
+  return unless $line; # Ignore empty lines
+
+  # Comments and errors are relevant for terminal/line sessions only
+  if ($line =~ /^[\#\!]/) {
+    if ($session->echo) { $session->echo->send($line."\n"); }
+    return;
+  }
+  my ($cmd, @args) = split(/\s/, $line);
+  $cmd = lc($cmd);
+
+  # SQL commands  
+  if ($cmd eq 'create') { cmd_sql($session, $line); return; }
+  if ($cmd eq 'drop') 	{ cmd_sql($session, $line); return; }
+  if ($cmd eq 'insert') { cmd_sql($session, $line); return; }
+  if ($cmd eq 'delete') { cmd_sql($session, $line); return; }
+  if ($cmd eq 'update') { cmd_sql($session, $line); return; }
+  if ($cmd eq 'select') { cmd_sql($session, $line); return; }
+
+  # Internal commands  
+  if ($cmd eq 'show') {
+    $cmd = lc(shift @args);
+    $cmd = 'help'; @args = ('show');
+  }
+  if ($cmd eq 'quit' || $line eq 'exit') { cmd_quit($session); return; }
+  if ($cmd eq 'restart') { cmd_restart($session); return; }
+  if ($cmd eq 'shutdown') { cmd_shutdown($session); return; }
+
+  # All other commands should be handled by an asyncronous session  
+  #print "$0 $$ cmd=$cmd will be handled asynchronously\n";
+  my $async = Session::Async->new( cmd => 'scripts/'.$cmd, args => \@args, sessions => $sessions, select => $select, type => 'line', echo => $session, dbh => $dbh );
+  $sessions->{$async->socket} = $async;
+
+}
+
+
+sub cmd_quit {
+  my $session = shift;
+
+  $session->send("# bye\n");
+  $session->finish(); # Session will close as soon as the output buffer is empty
+}
+
+sub cmd_restart {
+  my $session = shift;
+  
+  $session->send("# restarting...\n");
+  warn "$0 $$ process restarting\n";
+  $session->write();
+  $session->close();
+  $http->close();
+  $line->close();
+  foreach my $s (values %{$sessions}) {
+    if ($s->{'pid'}) {
+      kill(9, $s->{'pid'});
+      warn "$0 $$ sent SIGKILL to pid ".$s->{'pid'}."\n";
+    }
+  }
+  $sessions = {};
+  sleep 1;
+  exec($0);
+}
+
+sub cmd_shutdown {
+  my $session = shift;
+  
+  $session->send("# shutting down...\n");
+  warn "$0 $$ process shutting down\n";
+  $session->write();
+  foreach my $s (values %{$sessions}) {
+    if ($s->{'pid'}) {
+      kill(9, $s->{'pid'});
+      warn "$0 $$ sent SIGKILL to pid ".$s->{'pid'}."\n";
+    }
+  }
+  sleep 1;
+  exit;
+}
+
+sub cmd_sql {
+  my $session = shift;
+  my $query = shift;
+
+  my $dbh = $session->dbh;
+  #warn "$0 $$ $query\n";
+  my $sth = $dbh->prepare($query);
+  if ($dbh->errstr) {
+    $session->send("! ".$dbh->errstr."\n");
+    $session->send("\n");
+    return;
+  } 
+  my $res = $sth->execute();
+  if ($dbh->errstr) {
+    $session->send("! ".$dbh->errstr."\n");
+    $session->send("\n");
+    return;
+  }
+  my $cols = $sth->{'NAME_lc'}; 
+  if ($cols) { 
+    $session->send("@".$json->encode($cols)."\n");
+    my $count = 0;
+    while (my $row = $sth->fetchrow_arrayref()) {
+      $count++;
+      $session->send($json->encode($row)."\n");
+    }
+  } else {
+    $session->send("# result=".$res."\n");
+  }
+  $sth->finish;
+  $session->send("\n");
+  return;
+}
+
+
+

@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $about = shift @ARGV;
+my $prefix = 'scripts/txt/help.';
+if ($about && -e $prefix.$about.'.txt') {
+  show_file($prefix.$about.'.txt');
+} else {
+  show_file($prefix.'index'.'.txt');
+}
+
+print "\n";
+exit;
+
+
+sub show_file {
+  my $fname = shift;
+  open(my $fh, '<', $fname) || die "! error reading $fname: $!";
+  foreach my $line (<$fh>) { print "# ".$line; }
+  close $fh;
+}
+
+

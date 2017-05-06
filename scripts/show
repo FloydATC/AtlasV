@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Net::Ping;
+use Time::HiRes;
+use Data::Dumper::Concise;
+
+$SIG{ALRM} = sub { die "timeout\n"; };
+alarm 10;
+
+my $type = shift @ARGV;
+
+
+# show object type $type
+
+if ($type eq 'self') { 
+  print "# ".join("\n# ", split(/\n/, Dumper($self)))."\n"; 
+}
+
+if ($type eq 'sessions') { 
+  print "# ".join("\n# ", split(/\n/, Dumper($self->{'sessions'})))."\n"; 
+}
+
+print "# ok\n";
+
+exit;
+

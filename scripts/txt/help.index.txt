@@ -1,0 +1,10 @@
+
+Valid commands:
+
+help
+ping
+show
+exit
+restart
+shutdown
+

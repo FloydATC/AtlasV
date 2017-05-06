@@ -1,0 +1,65 @@
+#!/usr/bin/perl
+
+# NOTE! This script is designed to be executed within Atlas V only!
+
+# Look for inactive hosts and send ICMP ping packets (do not listen for replies)
+
+use strict;
+use warnings;
+use Net::Ping;
+use Time::HiRes;
+use Data::Dumper;
+use JSON;
+
+my $json = JSON->new( allow_nonref => 1 );
+warn "$0 $$ running\n";
+while (1) {
+
+      
+  # Fetch list of ip addresses to ping
+  print $session "SELECT id,ip FROM hosts WHERE checked < DATE_SUB(NOW(), INTERVAL 2 MINUTE)\n";
+  my @records = query_result($session);
+  # ...
+  
+  my $p = Net::Ping->new('icmp');
+  $p->hires();
+  my @ids = ();
+  foreach my $record (@records) {
+    for (1 .. 3) {
+      #warn "$0 $$ ping ".$hashref->{'ip'}."\n";
+      $p->ping($record->{'ip'}, 0.1);
+    }
+    print $session "UPDATE hosts SET checked=NOW() WHERE id=".int($record->{'id'})."\n";
+    query_result($session);
+  }
+  $p->close();
+
+  sleep 2;
+
+}
+
+
+sub query_result {
+  my $session = shift;
+  my $cols = [];
+  my @records = ();
+  while (my $line = <$session>) {
+    chomp $line;
+    last unless $line; # Empty line = end of response
+    next if $line =~ /^#/; # Comment/message
+    if ($line =~ /^\!/) {
+      # Error
+      warn "$0 $$ $line\n";
+      last;
+    }
+    #warn "$0 $$ decode line=".$line."\n";
+    if ($line =~ /^\@(.+)/) { $cols = $json->decode($1); next; }
+    my $row = $json->decode($line);
+    my %hash = ();
+    @hash{@{$cols}} = @{$row}; 
+    push @records, \%hash;
+    #warn "$0 $$ hash=".Dumper(\%hash);
+  } 
+  return @records;
+}
+

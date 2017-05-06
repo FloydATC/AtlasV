@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Net::Ping;
+use Time::HiRes;
+
+$SIG{ALRM} = sub { die "timeout\n"; };
+alarm 10;
+
+my $host = shift @ARGV;
+die "# $0 no host specified\n" unless $host;
+my $p = Net::Ping->new('icmp');
+my $replies = 0;
+my $attempts = 5;
+my $elapsed = 0;
+my $min = undef;
+my $max = undef;
+$p->hires();
+for (1 .. $attempts) {
+my ($ret, $duration, $ip) = $p->ping($host, 1);
+  if ($ret) {
+    printf("# reply from $ip: %.2f ms\n", 1000 * $duration);
+    $replies++;
+    $elapsed += $duration;
+    unless (defined $min && $min < $duration) { $min = $duration; }
+    unless (defined $max && $max > $duration) { $max = $duration; }
+  } else {
+    print "# no reply from $ip\n";
+  }
+}
+$p->close();
+my $loss = sprintf("%d", 100 * ($attempts - $replies) / $attempts); 
+printf("# packet loss=%s%% min=%.3f avg=%.3f max=%.3f ms\n", $loss, ($min||0)*1000, ($elapsed/$attempts)*1000, ($max||0)*1000);
+my $up = sprintf("%.3f", $replies / $attempts);
+print "update host $host up=$up\n";
+print "\n";
+exit;
+

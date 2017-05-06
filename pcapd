@@ -1,0 +1,90 @@
+#!/usr/bin/perl
+
+# NOTE! This script is designed to be executed within Atlas V only!
+
+# Listen for network traffic and report live hosts back to the main process
+
+use strict;
+use warnings;
+use Net::Pcap;
+use Data::Dumper;
+use NetAddr::IP::Util qw( inet_ntoa );
+use Time::HiRes;
+
+my $TTL = 60;
+my $address = {};
+warn "$0 $$ running\n";
+while (1) {
+  # Get device
+  my $err = '';
+  print "# ".pcap_lib_version()."\n";
+  my $dev = shift @ARGV || pcap_lookupdev(\$err);  # find a device
+  my $snaplen = shift @ARGV || 56;
+  if ($err) { die "! pcap error looking up device: ".$err."\n"; }
+  print "# device: ".$dev."\n";
+  print "# size: ".$snaplen."\n";
+
+  # Open the device for live packet capturing
+  my $pcap = pcap_open_live($dev, $snaplen, 0, 0, \$err);
+  if ($err) { die "! pcap error opening device ".$dev.": ".$err."\n"; }
+  print "# link type: ".pcap_datalink_val_to_description(pcap_datalink($pcap))."\n";
+
+  # Capture packets in non-promiscuous mode and call process_packet() for each one
+  pcap_loop($pcap, 0, \&process_packet, '');
+
+  # That should loop indefinitely so something must have gone wrong
+  my $errno = pcap_geterr($pcap);
+  if ($err) {
+    die "! pcap error ".$errno.": ".pcap_strerror($errno)."\n";
+  }
+  
+  # Close the device
+  pcap_close($pcap);
+  sleep 1;
+}
+
+sub process_packet {
+  my ($user_data, $header, $packet) = @_;
+  
+  # Examine packet header
+  #my $dst_mac = unpack("H*", substr($packet, 0, 6));
+  #my $src_mac = unpack("H*", substr($packet, 6, 6));
+  my $eth_type = unpack("n", substr($packet, 12, 2));
+  if ($eth_type == 0x0800) {
+    # Payload is an IP packet
+    my $payload = substr($packet, 14);
+    my $src_ip = inet_ntoa(substr($payload, 12, 4));
+    #my $dst_ip = inet_ntoa(substr($payload, 16, 4));
+    #print "$src_ip > $dst_ip\n";
+    $src_ip = is_valid($src_ip) ? $src_ip : '';
+    #$dst_ip = is_valid($dst_ip) ? $dst_ip : '';
+
+    my $now = time;
+    unless ($src_ip eq '' || ($address->{$src_ip} && $address->{$src_ip} + $TTL > $now)) {
+      print "UPDATE hosts SET up=1 WHERE ip='".$src_ip."'\n";
+       $address->{$src_ip} = $now;
+    }
+    #print hexdump($packet);    
+  }
+}
+
+#sub hexdump { 
+#  my $pkt = shift;
+#  my @lines = ();
+#  while ($pkt) {
+#    my $line = substr($pkt, 0, 16);
+#    my $hex = unpack("H*", $line);
+#    $hex =~ s/(..)/$1 /sg;
+#    push @lines,  "# ".$hex."\n";
+#    $pkt = substr($pkt, (length($pkt) < 16 ? length($pkt) : 16) );
+#  }
+#  return @lines;
+#}
+
+sub is_valid {
+  my $ip = shift;
+  return 0 if $ip eq '0.0.0.0';
+  return 0 if $ip eq '127.0.0.1';
+  return 0 if $ip eq '255.255.255.255';
+  return 1;
+}
