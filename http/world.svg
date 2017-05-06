@@ -1,0 +1,1044 @@
+[% INCLUDE svg_header.template %]
+<svg x="763" y="331" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup67')" class="sitegroup" id="sitegroup67">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup67">Skedsmo</text>
+</svg>
+<svg x="1549" y="654" width="223" height="204" onclick="map.sitegroup_click(evt, 'sitegroup63')" class="sitegroup" id="sitegroup63">
+<rect x="0" y="0" width="223" height="204" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup63">Garderåsen</text>
+</svg>
+<svg x="450" y="545" width="225" height="170" onclick="map.sitegroup_click(evt, 'sitegroup71')" class="sitegroup" id="sitegroup71">
+<rect x="0" y="0" width="225" height="170" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup71">Øgardshøgda</text>
+</svg>
+<svg x="1061" y="1563" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup70')" class="sitegroup" id="sitegroup70">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup70">Nordby</text>
+</svg>
+<svg x="301" y="1255" width="250" height="174" onclick="map.sitegroup_click(evt, 'sitegroup68')" class="sitegroup" id="sitegroup68">
+<rect x="0" y="0" width="250" height="174" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup68">Marikollen</text>
+</svg>
+<svg x="0" y="0" width="0" height="0" onclick="map.sitegroup_click(evt, 'sitegroup72')" class="sitegroup" id="sitegroup72">
+<rect x="0" y="0" width="0" height="0" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup72">Nordbyhagen  </text>
+</svg>
+<svg x="238" y="968" width="354" height="267" onclick="map.sitegroup_click(evt, 'sitegroup55')" class="sitegroup" id="sitegroup55">
+<rect x="0" y="0" width="354" height="267" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup55">Blystadlia</text>
+</svg>
+<svg x="0" y="0" width="0" height="0" onclick="map.sitegroup_click(evt, 'sitegroup74')" class="sitegroup" id="sitegroup74">
+<rect x="0" y="0" width="0" height="0" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup74">Lahaugmoen</text>
+</svg>
+<svg x="2047" y="816" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup75')" class="sitegroup" id="sitegroup75">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup75">Ramstad</text>
+</svg>
+<svg x="2058" y="1521" width="137" height="183" onclick="map.sitegroup_click(evt, 'sitegroup57')" class="sitegroup" id="sitegroup57">
+<rect x="0" y="0" width="137" height="183" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup57">Dalen</text>
+</svg>
+<svg x="1632" y="1300" width="404" height="394" onclick="map.sitegroup_click(evt, 'sitegroup61')" class="sitegroup" id="sitegroup61">
+<rect x="0" y="0" width="404" height="394" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup61">Hval</text>
+</svg>
+<svg x="1395" y="1298" width="224" height="212" onclick="map.sitegroup_click(evt, 'sitegroup69')" class="sitegroup" id="sitegroup69">
+<rect x="0" y="0" width="224" height="212" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup69">Nerdrum</text>
+</svg>
+<svg x="1345" y="601" width="139" height="182" onclick="map.sitegroup_click(evt, 'sitegroup59')" class="sitegroup" id="sitegroup59">
+<rect x="0" y="0" width="139" height="182" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup59">Enga</text>
+</svg>
+<svg x="0" y="0" width="0" height="0" onclick="map.sitegroup_click(evt, 'sitegroup49')" class="sitegroup" id="sitegroup49">
+<rect x="0" y="0" width="0" height="0" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup49">Østanes</text>
+</svg>
+<svg x="1398" y="1094" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup53')" class="sitegroup" id="sitegroup53">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup53">Kulturkvartalet</text>
+</svg>
+<svg x="104" y="359" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup78')" class="sitegroup" id="sitegroup78">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup78">Sæter</text>
+</svg>
+<svg x="714" y="639" width="311" height="247" onclick="map.sitegroup_click(evt, 'sitegroup48')" class="sitegroup" id="sitegroup48">
+<rect x="0" y="0" width="311" height="247" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup48">Aamodt</text>
+</svg>
+<svg x="0" y="0" width="0" height="0" onclick="map.sitegroup_click(evt, 'sitegroup79')" class="sitegroup" id="sitegroup79">
+<rect x="0" y="0" width="0" height="0" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup79">Sørum</text>
+</svg>
+<svg x="1039" y="1457" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup77')" class="sitegroup" id="sitegroup77">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup77">Smestad</text>
+</svg>
+<svg x="2046" y="934" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup65')" class="sitegroup" id="sitegroup65">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup65">Heia</text>
+</svg>
+<svg x="0" y="0" width="0" height="0" onclick="map.sitegroup_click(evt, 'sitegroup50')" class="sitegroup" id="sitegroup50">
+<rect x="0" y="0" width="0" height="0" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup50">Åkrene</text>
+</svg>
+<svg x="69" y="488" width="322" height="262" onclick="map.sitegroup_click(evt, 'sitegroup64')" class="sitegroup" id="sitegroup64">
+<rect x="0" y="0" width="322" height="262" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup64">Løvenstad</text>
+</svg>
+<svg x="671" y="950" width="498" height="445" onclick="map.sitegroup_click(evt, 'sitegroup51')" class="sitegroup" id="sitegroup51">
+<rect x="0" y="0" width="498" height="445" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup51">Fjerdingby</text>
+</svg>
+<svg x="0" y="0" width="0" height="0" onclick="map.sitegroup_click(evt, 'sitegroup58')" class="sitegroup" id="sitegroup58">
+<rect x="0" y="0" width="0" height="0" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup58">Enebakkneset</text>
+</svg>
+<svg x="1264" y="2093" width="611" height="711" onclick="map.sitegroup_click(evt, 'sitegroup52')" class="sitegroup" id="sitegroup52">
+<rect x="0" y="0" width="611" height="711" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup52">Kirkebygda</text>
+</svg>
+<svg x="1794" y="824" width="211" height="336" onclick="map.sitegroup_click(evt, 'sitegroup60')" class="sitegroup" id="sitegroup60">
+<rect x="0" y="0" width="211" height="336" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup60">Fetsund</text>
+</svg>
+<svg x="258" y="195" width="438" height="267" onclick="map.sitegroup_click(evt, 'sitegroup56')" class="sitegroup" id="sitegroup56">
+<rect x="0" y="0" width="438" height="267" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup56">Rud</text>
+</svg>
+<svg x="1363" y="902" width="135" height="100" onclick="map.sitegroup_click(evt, 'sitegroup66')" class="sitegroup" id="sitegroup66">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup66">Hovin</text>
+</svg>
+<svg x="0" y="0" width="0" height="0" onclick="map.sitegroup_click(evt, 'sitegroup73')" class="sitegroup" id="sitegroup73">
+<rect x="0" y="0" width="0" height="0" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup73">Skedsmokorset</text>
+</svg>
+<svg x="176" y="768" width="261" height="165" onclick="map.sitegroup_click(evt, 'sitegroup76')" class="sitegroup" id="sitegroup76">
+<rect x="0" y="0" width="261" height="165" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup76">Sandbekken</text>
+</svg>
+<svg x="1316" y="1719" width="682" height="365" onclick="map.sitegroup_click(evt, 'sitegroup62')" class="sitegroup" id="sitegroup62">
+<rect x="0" y="0" width="682" height="365" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup62">Flateby</text>
+</svg>
+<svg x="521" y="2530" width="667" height="612" onclick="map.sitegroup_click(evt, 'sitegroup54')" class="sitegroup" id="sitegroup54">
+<rect x="0" y="0" width="667" height="612" rx="10" ry="10" class="sitegroup"/>
+<text x="8" y="20" font-size="16" class="sitegrouplabel" id="sitegroup54">Ytre Enebakk</text>
+</svg>
+<line x1="934" y1="1246" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink16');" onmousedown="map.commlink_mousedown(evt, 'commlink16');" onmouseup="map.commlink_mouseup(evt, 'commlink16');" onmouseover="map.commlink_mouseover(evt, 'commlink16');" onmouseout="map.commlink_mouseout(evt, 'commlink16');" onmousemove="map.commlink_mousemove(evt, 'commlink16');" class="fiber at1g" />
+<line x1="293" y1="316" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink395');" onmousedown="map.commlink_mousedown(evt, 'commlink395');" onmouseup="map.commlink_mouseup(evt, 'commlink395');" onmouseover="map.commlink_mouseover(evt, 'commlink395');" onmouseout="map.commlink_mouseout(evt, 'commlink395');" onmousemove="map.commlink_mousemove(evt, 'commlink395');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink31');" onmousedown="map.commlink_mousedown(evt, 'commlink31');" onmouseup="map.commlink_mouseup(evt, 'commlink31');" onmouseover="map.commlink_mouseover(evt, 'commlink31');" onmouseout="map.commlink_mouseout(evt, 'commlink31');" onmousemove="map.commlink_mousemove(evt, 'commlink31');" class="fiber at10g" />
+<line x1="1667" y1="1644" x2="1865" y2="1350" onclick="map.commlink_click(evt, 'commlink378');" onmousedown="map.commlink_mousedown(evt, 'commlink378');" onmouseup="map.commlink_mouseup(evt, 'commlink378');" onmouseover="map.commlink_mouseover(evt, 'commlink378');" onmouseout="map.commlink_mouseout(evt, 'commlink378');" onmousemove="map.commlink_mousemove(evt, 'commlink378');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1936" y2="1350" onclick="map.commlink_click(evt, 'commlink325');" onmousedown="map.commlink_mousedown(evt, 'commlink325');" onmouseup="map.commlink_mouseup(evt, 'commlink325');" onmouseover="map.commlink_mouseover(evt, 'commlink325');" onmouseout="map.commlink_mouseout(evt, 'commlink325');" onmousemove="map.commlink_mousemove(evt, 'commlink325');" class="fiber at1g" />
+<line x1="254" y1="818" x2="392" y2="1105" onclick="map.commlink_click(evt, 'commlink29');" onmousedown="map.commlink_mousedown(evt, 'commlink29');" onmouseup="map.commlink_mouseup(evt, 'commlink29');" onmouseover="map.commlink_mouseover(evt, 'commlink29');" onmouseout="map.commlink_mouseout(evt, 'commlink29');" onmousemove="map.commlink_mousemove(evt, 'commlink29');" class="fiber at1g" />
+<line x1="1302" y1="2508" x2="1346" y2="2445" onclick="map.commlink_click(evt, 'commlink675');" onmousedown="map.commlink_mousedown(evt, 'commlink675');" onmouseup="map.commlink_mouseup(evt, 'commlink675');" onmouseover="map.commlink_mouseover(evt, 'commlink675');" onmouseout="map.commlink_mouseout(evt, 'commlink675');" onmousemove="map.commlink_mousemove(evt, 'commlink675');" class="fiber at1g" />
+<line x1="254" y1="818" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink153');" onmousedown="map.commlink_mousedown(evt, 'commlink153');" onmouseup="map.commlink_mouseup(evt, 'commlink153');" onmouseover="map.commlink_mouseover(evt, 'commlink153');" onmouseout="map.commlink_mouseout(evt, 'commlink153');" onmousemove="map.commlink_mousemove(evt, 'commlink153');" class="fiber at1g" />
+<line x1="936" y1="1191" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink15');" onmousedown="map.commlink_mousedown(evt, 'commlink15');" onmouseup="map.commlink_mouseup(evt, 'commlink15');" onmouseover="map.commlink_mouseover(evt, 'commlink15');" onmouseout="map.commlink_mouseout(evt, 'commlink15');" onmousemove="map.commlink_mousemove(evt, 'commlink15');" class="fiber at1g" />
+<line x1="914" y1="2764" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink689');" onmousedown="map.commlink_mousedown(evt, 'commlink689');" onmouseup="map.commlink_mouseup(evt, 'commlink689');" onmouseover="map.commlink_mouseover(evt, 'commlink689');" onmouseout="map.commlink_mouseout(evt, 'commlink689');" onmousemove="map.commlink_mousemove(evt, 'commlink689');" class="fiber at1g" />
+<line x1="583" y1="2601" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink340');" onmousedown="map.commlink_mousedown(evt, 'commlink340');" onmouseup="map.commlink_mouseup(evt, 'commlink340');" onmouseover="map.commlink_mouseover(evt, 'commlink340');" onmouseout="map.commlink_mouseout(evt, 'commlink340');" onmousemove="map.commlink_mousemove(evt, 'commlink340');" class="fiber at1g" />
+<line x1="840" y1="3045" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink311');" onmousedown="map.commlink_mousedown(evt, 'commlink311');" onmouseup="map.commlink_mouseup(evt, 'commlink311');" onmouseover="map.commlink_mouseover(evt, 'commlink311');" onmouseout="map.commlink_mouseout(evt, 'commlink311');" onmousemove="map.commlink_mousemove(evt, 'commlink311');" class="fiber at1g" />
+<line x1="479" y1="245" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink389');" onmousedown="map.commlink_mousedown(evt, 'commlink389');" onmouseup="map.commlink_mouseup(evt, 'commlink389');" onmouseover="map.commlink_mouseover(evt, 'commlink389');" onmouseout="map.commlink_mouseout(evt, 'commlink389');" onmousemove="map.commlink_mousemove(evt, 'commlink389');" class="fiber at1g" />
+<line x1="1345" y1="1903" x2="1385" y2="1943" onclick="map.commlink_click(evt, 'commlink727');" onmousedown="map.commlink_mousedown(evt, 'commlink727');" onmouseup="map.commlink_mouseup(evt, 'commlink727');" onmouseover="map.commlink_mouseover(evt, 'commlink727');" onmouseout="map.commlink_mouseout(evt, 'commlink727');" onmousemove="map.commlink_mousemove(evt, 'commlink727');" class="dsl at10m" />
+<rect x="1387" y="1945" width="32" height="13" onclick="map.commlink_click(evt, 'commlink727');" onmousedown="map.commlink_mousedown(evt, 'commlink727');" onmouseup="map.commlink_mouseup(evt, 'commlink727');" onmouseover="map.commlink_mouseover(evt, 'commlink727');" onmouseout="map.commlink_mouseout(evt, 'commlink727');" onmousemove="map.commlink_mousemove(evt, 'commlink727');" class="dsl at10m" />
+<text x="1389" y="1955" font-size="10" class="nameplate">DSL</text>
+<line x1="1374" y1="2269" x2="1465" y2="2391" onclick="map.commlink_click(evt, 'commlink320');" onmousedown="map.commlink_mousedown(evt, 'commlink320');" onmouseup="map.commlink_mouseup(evt, 'commlink320');" onmouseover="map.commlink_mouseover(evt, 'commlink320');" onmouseout="map.commlink_mouseout(evt, 'commlink320');" onmousemove="map.commlink_mousemove(evt, 'commlink320');" class="fiber at1g" />
+<line x1="751" y1="3037" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink739');" onmousedown="map.commlink_mousedown(evt, 'commlink739');" onmouseup="map.commlink_mouseup(evt, 'commlink739');" onmouseover="map.commlink_mouseover(evt, 'commlink739');" onmouseout="map.commlink_mouseout(evt, 'commlink739');" onmousemove="map.commlink_mousemove(evt, 'commlink739');" class="fiber at1g" />
+<line x1="1299" y1="2754" x2="1088" y2="2859" onclick="map.commlink_click(evt, 'commlink674');" onmousedown="map.commlink_mousedown(evt, 'commlink674');" onmouseup="map.commlink_mouseup(evt, 'commlink674');" onmouseover="map.commlink_mouseover(evt, 'commlink674');" onmouseout="map.commlink_mouseout(evt, 'commlink674');" onmousemove="map.commlink_mousemove(evt, 'commlink674');" class="fiber at1g" />
+<line x1="688" y1="2728" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink418');" onmousedown="map.commlink_mousedown(evt, 'commlink418');" onmouseup="map.commlink_mouseup(evt, 'commlink418');" onmouseover="map.commlink_mouseover(evt, 'commlink418');" onmouseout="map.commlink_mouseout(evt, 'commlink418');" onmousemove="map.commlink_mousemove(evt, 'commlink418');" class="fiber at1g" />
+<line x1="1076" y1="2954" x2="1116" y2="2994" onclick="map.commlink_click(evt, 'commlink471');" onmousedown="map.commlink_mousedown(evt, 'commlink471');" onmouseup="map.commlink_mouseup(evt, 'commlink471');" onmouseover="map.commlink_mouseover(evt, 'commlink471');" onmouseout="map.commlink_mouseout(evt, 'commlink471');" onmousemove="map.commlink_mousemove(evt, 'commlink471');" class="dsl at1m" />
+<rect x="1118" y="2996" width="32" height="13" onclick="map.commlink_click(evt, 'commlink471');" onmousedown="map.commlink_mousedown(evt, 'commlink471');" onmouseup="map.commlink_mouseup(evt, 'commlink471');" onmouseover="map.commlink_mouseover(evt, 'commlink471');" onmouseout="map.commlink_mouseout(evt, 'commlink471');" onmousemove="map.commlink_mousemove(evt, 'commlink471');" class="dsl at1m" />
+<text x="1120" y="3006" font-size="10" class="nameplate">DSL</text>
+<line x1="254" y1="818" x2="247" y2="628" onclick="map.commlink_click(evt, 'commlink24');" onmousedown="map.commlink_mousedown(evt, 'commlink24');" onmouseup="map.commlink_mouseup(evt, 'commlink24');" onmouseover="map.commlink_mouseover(evt, 'commlink24');" onmouseout="map.commlink_mouseout(evt, 'commlink24');" onmousemove="map.commlink_mousemove(evt, 'commlink24');" class="fiber at1g" />
+<line x1="263" y1="538" x2="202" y2="555" onclick="map.commlink_click(evt, 'commlink104');" onmousedown="map.commlink_mousedown(evt, 'commlink104');" onmouseup="map.commlink_mouseup(evt, 'commlink104');" onmouseover="map.commlink_mouseover(evt, 'commlink104');" onmouseout="map.commlink_mouseout(evt, 'commlink104');" onmousemove="map.commlink_mousemove(evt, 'commlink104');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1430" y2="1397" onclick="map.commlink_click(evt, 'commlink314');" onmousedown="map.commlink_mousedown(evt, 'commlink314');" onmouseup="map.commlink_mouseup(evt, 'commlink314');" onmouseover="map.commlink_mouseover(evt, 'commlink314');" onmouseout="map.commlink_mouseout(evt, 'commlink314');" onmousemove="map.commlink_mousemove(evt, 'commlink314');" class="fiber at1g" />
+<line x1="254" y1="818" x2="291" y2="697" onclick="map.commlink_click(evt, 'commlink23');" onmousedown="map.commlink_mousedown(evt, 'commlink23');" onmouseup="map.commlink_mouseup(evt, 'commlink23');" onmouseover="map.commlink_mouseover(evt, 'commlink23');" onmouseout="map.commlink_mouseout(evt, 'commlink23');" onmousemove="map.commlink_mousemove(evt, 'commlink23');" class="fiber at1g" />
+<line x1="507" y1="406" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink388');" onmousedown="map.commlink_mousedown(evt, 'commlink388');" onmouseup="map.commlink_mouseup(evt, 'commlink388');" onmouseover="map.commlink_mouseover(evt, 'commlink388');" onmouseout="map.commlink_mouseout(evt, 'commlink388');" onmousemove="map.commlink_mousemove(evt, 'commlink388');" class="fiber at1g" />
+<line x1="1069" y1="1345" x2="1109" y2="1385" onclick="map.commlink_click(evt, 'commlink747');" onmousedown="map.commlink_mousedown(evt, 'commlink747');" onmouseup="map.commlink_mouseup(evt, 'commlink747');" onmouseover="map.commlink_mouseover(evt, 'commlink747');" onmouseout="map.commlink_mouseout(evt, 'commlink747');" onmousemove="map.commlink_mousemove(evt, 'commlink747');" class="dsl at1m" />
+<rect x="1111" y="1387" width="32" height="13" onclick="map.commlink_click(evt, 'commlink747');" onmousedown="map.commlink_mousedown(evt, 'commlink747');" onmouseup="map.commlink_mouseup(evt, 'commlink747');" onmouseover="map.commlink_mouseover(evt, 'commlink747');" onmouseout="map.commlink_mouseout(evt, 'commlink747');" onmousemove="map.commlink_mousemove(evt, 'commlink747');" class="dsl at1m" />
+<text x="1113" y="1397" font-size="10" class="nameplate">DSL</text>
+<line x1="1865" y1="1350" x2="1864" y2="1567" onclick="map.commlink_click(evt, 'commlink326');" onmousedown="map.commlink_mousedown(evt, 'commlink326');" onmouseup="map.commlink_mouseup(evt, 'commlink326');" onmouseover="map.commlink_mouseover(evt, 'commlink326');" onmouseout="map.commlink_mouseout(evt, 'commlink326');" onmousemove="map.commlink_mousemove(evt, 'commlink326');" class="fiber at1g" />
+<line x1="1829" y1="1845" x2="1869" y2="1885" onclick="map.commlink_click(evt, 'commlink555');" onmousedown="map.commlink_mousedown(evt, 'commlink555');" onmouseup="map.commlink_mouseup(evt, 'commlink555');" onmouseover="map.commlink_mouseover(evt, 'commlink555');" onmouseout="map.commlink_mouseout(evt, 'commlink555');" onmousemove="map.commlink_mousemove(evt, 'commlink555');" class="dsl at1g" />
+<rect x="1871" y="1887" width="32" height="13" onclick="map.commlink_click(evt, 'commlink555');" onmousedown="map.commlink_mousedown(evt, 'commlink555');" onmouseup="map.commlink_mouseup(evt, 'commlink555');" onmouseover="map.commlink_mouseover(evt, 'commlink555');" onmouseout="map.commlink_mouseout(evt, 'commlink555');" onmousemove="map.commlink_mousemove(evt, 'commlink555');" class="dsl at1g" />
+<text x="1873" y="1897" font-size="10" class="nameplate">DSL</text>
+<line x1="273" y1="1031" x2="392" y2="1105" onclick="map.commlink_click(evt, 'commlink43');" onmousedown="map.commlink_mousedown(evt, 'commlink43');" onmouseup="map.commlink_mouseup(evt, 'commlink43');" onmouseover="map.commlink_mouseover(evt, 'commlink43');" onmouseout="map.commlink_mouseout(evt, 'commlink43');" onmousemove="map.commlink_mousemove(evt, 'commlink43');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="1587" y2="2469" onclick="map.commlink_click(evt, 'commlink485');" onmousedown="map.commlink_mousedown(evt, 'commlink485');" onmouseup="map.commlink_mouseup(evt, 'commlink485');" onmouseover="map.commlink_mouseover(evt, 'commlink485');" onmouseout="map.commlink_mouseout(evt, 'commlink485');" onmousemove="map.commlink_mousemove(evt, 'commlink485');" class="fiber at1g" />
+<line x1="1589" y1="704" x2="1672" y2="808" onclick="map.commlink_click(evt, 'commlink524');" onmousedown="map.commlink_mousedown(evt, 'commlink524');" onmouseup="map.commlink_mouseup(evt, 'commlink524');" onmouseover="map.commlink_mouseover(evt, 'commlink524');" onmouseout="map.commlink_mouseout(evt, 'commlink524');" onmousemove="map.commlink_mousemove(evt, 'commlink524');" class="fiber at1g" />
+<line x1="742" y1="1270" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink21');" onmousedown="map.commlink_mousedown(evt, 'commlink21');" onmouseup="map.commlink_mouseup(evt, 'commlink21');" onmouseover="map.commlink_mouseover(evt, 'commlink21');" onmouseout="map.commlink_mouseout(evt, 'commlink21');" onmousemove="map.commlink_mousemove(evt, 'commlink21');" class="fiber at1g" />
+<line x1="798" y1="381" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink554');" onmousedown="map.commlink_mousedown(evt, 'commlink554');" onmouseup="map.commlink_mouseup(evt, 'commlink554');" onmouseover="map.commlink_mouseover(evt, 'commlink554');" onmouseout="map.commlink_mouseout(evt, 'commlink554');" onmousemove="map.commlink_mousemove(evt, 'commlink554');" class="fiber at1g" />
+<line x1="1644" y1="2150" x2="1374" y2="2269" onclick="map.commlink_click(evt, 'commlink334');" onmousedown="map.commlink_mousedown(evt, 'commlink334');" onmouseup="map.commlink_mouseup(evt, 'commlink334');" onmouseover="map.commlink_mouseover(evt, 'commlink334');" onmouseout="map.commlink_mouseout(evt, 'commlink334');" onmousemove="map.commlink_mousemove(evt, 'commlink334');" class="fiber at1g" />
+<line x1="724" y1="2876" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink740');" onmousedown="map.commlink_mousedown(evt, 'commlink740');" onmouseup="map.commlink_mouseup(evt, 'commlink740');" onmouseover="map.commlink_mouseover(evt, 'commlink740');" onmouseout="map.commlink_mouseout(evt, 'commlink740');" onmousemove="map.commlink_mousemove(evt, 'commlink740');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1433" y2="1144" onclick="map.commlink_click(evt, 'commlink113');" onmousedown="map.commlink_mousedown(evt, 'commlink113');" onmouseup="map.commlink_mouseup(evt, 'commlink113');" onmouseover="map.commlink_mouseover(evt, 'commlink113');" onmouseout="map.commlink_mouseout(evt, 'commlink113');" onmousemove="map.commlink_mousemove(evt, 'commlink113');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1905" y2="874" onclick="map.commlink_click(evt, 'commlink612');" onmousedown="map.commlink_mousedown(evt, 'commlink612');" onmouseup="map.commlink_mouseup(evt, 'commlink612');" onmouseover="map.commlink_mouseover(evt, 'commlink612');" onmouseout="map.commlink_mouseout(evt, 'commlink612');" onmousemove="map.commlink_mousemove(evt, 'commlink612');" class="fiber at1g" />
+<line x1="925" y1="833" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink295');" onmousedown="map.commlink_mousedown(evt, 'commlink295');" onmouseup="map.commlink_mouseup(evt, 'commlink295');" onmouseover="map.commlink_mouseover(evt, 'commlink295');" onmouseout="map.commlink_mouseout(evt, 'commlink295');" onmousemove="map.commlink_mousemove(evt, 'commlink295');" class="fiber at1g" />
+<line x1="1859" y1="1041" x2="1865" y2="1350" onclick="map.commlink_click(evt, 'commlink579');" onmousedown="map.commlink_mousedown(evt, 'commlink579');" onmouseup="map.commlink_mouseup(evt, 'commlink579');" onmouseover="map.commlink_mouseover(evt, 'commlink579');" onmouseout="map.commlink_mouseout(evt, 'commlink579');" onmousemove="map.commlink_mousemove(evt, 'commlink579');" class="fiber at1g" />
+<line x1="1558" y1="2285" x2="1374" y2="2269" onclick="map.commlink_click(evt, 'commlink474');" onmousedown="map.commlink_mousedown(evt, 'commlink474');" onmouseup="map.commlink_mouseup(evt, 'commlink474');" onmouseover="map.commlink_mouseover(evt, 'commlink474');" onmouseout="map.commlink_mouseout(evt, 'commlink474');" onmousemove="map.commlink_mousemove(evt, 'commlink474');" class="fiber at1g" />
+<line x1="1176" y1="125" x2="2082" y2="866" onclick="map.commlink_click(evt, 'commlink564');" onmousedown="map.commlink_mousedown(evt, 'commlink564');" onmouseup="map.commlink_mouseup(evt, 'commlink564');" onmouseover="map.commlink_mouseover(evt, 'commlink564');" onmouseout="map.commlink_mouseout(evt, 'commlink564');" onmousemove="map.commlink_mousemove(evt, 'commlink564');" class="fiber at10m" />
+<line x1="451" y1="1305" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink12');" onmousedown="map.commlink_mousedown(evt, 'commlink12');" onmouseup="map.commlink_mouseup(evt, 'commlink12');" onmouseover="map.commlink_mouseover(evt, 'commlink12');" onmouseout="map.commlink_mouseout(evt, 'commlink12');" onmousemove="map.commlink_mousemove(evt, 'commlink12');" class="fiber at1g" />
+<line x1="1322" y1="2581" x2="1302" y2="2508" onclick="map.commlink_click(evt, 'commlink688');" onmousedown="map.commlink_mousedown(evt, 'commlink688');" onmouseup="map.commlink_mouseup(evt, 'commlink688');" onmouseover="map.commlink_mouseover(evt, 'commlink688');" onmouseout="map.commlink_mouseout(evt, 'commlink688');" onmousemove="map.commlink_mousemove(evt, 'commlink688');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink312');" onmousedown="map.commlink_mousedown(evt, 'commlink312');" onmouseup="map.commlink_mouseup(evt, 'commlink312');" onmouseover="map.commlink_mouseover(evt, 'commlink312');" onmouseout="map.commlink_mouseout(evt, 'commlink312');" onmousemove="map.commlink_mousemove(evt, 'commlink312');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1830" y2="1110" onclick="map.commlink_click(evt, 'commlink302');" onmousedown="map.commlink_mousedown(evt, 'commlink302');" onmouseup="map.commlink_mouseup(evt, 'commlink302');" onmouseover="map.commlink_mouseover(evt, 'commlink302');" onmouseout="map.commlink_mouseout(evt, 'commlink302');" onmousemove="map.commlink_mousemove(evt, 'commlink302');" class="fiber at1g" />
+<line x1="862" y1="1139" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink405');" onmousedown="map.commlink_mousedown(evt, 'commlink405');" onmouseup="map.commlink_mouseup(evt, 'commlink405');" onmouseover="map.commlink_mouseover(evt, 'commlink405');" onmouseout="map.commlink_mouseout(evt, 'commlink405');" onmousemove="map.commlink_mousemove(evt, 'commlink405');" class="fiber at1g" />
+<line x1="1363" y1="2386" x2="1374" y2="2269" onclick="map.commlink_click(evt, 'commlink673');" onmousedown="map.commlink_mousedown(evt, 'commlink673');" onmouseup="map.commlink_mouseup(evt, 'commlink673');" onmouseover="map.commlink_mouseover(evt, 'commlink673');" onmouseout="map.commlink_mouseout(evt, 'commlink673');" onmousemove="map.commlink_mousemove(evt, 'commlink673');" class="fiber at1g" />
+<line x1="400" y1="412" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink370');" onmousedown="map.commlink_mousedown(evt, 'commlink370');" onmouseup="map.commlink_mouseup(evt, 'commlink370');" onmouseover="map.commlink_mouseover(evt, 'commlink370');" onmouseout="map.commlink_mouseout(evt, 'commlink370');" onmousemove="map.commlink_mousemove(evt, 'commlink370');" class="fiber at1g" />
+<line x1="750" y1="2975" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink309');" onmousedown="map.commlink_mousedown(evt, 'commlink309');" onmouseup="map.commlink_mouseup(evt, 'commlink309');" onmouseover="map.commlink_mouseover(evt, 'commlink309');" onmouseout="map.commlink_mouseout(evt, 'commlink309');" onmousemove="map.commlink_mousemove(evt, 'commlink309');" class="fiber at1g" />
+<line x1="1587" y1="2469" x2="1608" y2="2527" onclick="map.commlink_click(evt, 'commlink188');" onmousedown="map.commlink_mousedown(evt, 'commlink188');" onmouseup="map.commlink_mouseup(evt, 'commlink188');" onmouseover="map.commlink_mouseover(evt, 'commlink188');" onmouseout="map.commlink_mouseout(evt, 'commlink188');" onmousemove="map.commlink_mousemove(evt, 'commlink188');" class="fiber at1g" />
+<line x1="254" y1="818" x2="104" y2="697" onclick="map.commlink_click(evt, 'commlink315');" onmousedown="map.commlink_mousedown(evt, 'commlink315');" onmouseup="map.commlink_mouseup(evt, 'commlink315');" onmouseover="map.commlink_mouseover(evt, 'commlink315');" onmouseout="map.commlink_mouseout(evt, 'commlink315');" onmousemove="map.commlink_mousemove(evt, 'commlink315');" class="fiber at1g" />
+<line x1="575" y1="665" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink402');" onmousedown="map.commlink_mousedown(evt, 'commlink402');" onmouseup="map.commlink_mouseup(evt, 'commlink402');" onmouseover="map.commlink_mouseover(evt, 'commlink402');" onmouseout="map.commlink_mouseout(evt, 'commlink402');" onmousemove="map.commlink_mousemove(evt, 'commlink402');" class="fiber at1g" />
+<line x1="1584" y1="805" x2="1672" y2="808" onclick="map.commlink_click(evt, 'commlink506');" onmousedown="map.commlink_mousedown(evt, 'commlink506');" onmouseup="map.commlink_mouseup(evt, 'commlink506');" onmouseover="map.commlink_mouseover(evt, 'commlink506');" onmouseout="map.commlink_mouseout(evt, 'commlink506');" onmousemove="map.commlink_mousemove(evt, 'commlink506');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1900" y2="1424" onclick="map.commlink_click(evt, 'commlink116');" onmousedown="map.commlink_mousedown(evt, 'commlink116');" onmouseup="map.commlink_mouseup(evt, 'commlink116');" onmouseover="map.commlink_mouseover(evt, 'commlink116');" onmouseout="map.commlink_mouseout(evt, 'commlink116');" onmousemove="map.commlink_mousemove(evt, 'commlink116');" class="fiber at1g" />
+<line x1="643" y1="2580" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink338');" onmousedown="map.commlink_mousedown(evt, 'commlink338');" onmouseup="map.commlink_mouseup(evt, 'commlink338');" onmouseover="map.commlink_mouseover(evt, 'commlink338');" onmouseout="map.commlink_mouseout(evt, 'commlink338');" onmousemove="map.commlink_mousemove(evt, 'commlink338');" class="fiber at1g" />
+<line x1="432" y1="1018" x2="392" y2="1105" onclick="map.commlink_click(evt, 'commlink25');" onmousedown="map.commlink_mousedown(evt, 'commlink25');" onmouseup="map.commlink_mouseup(evt, 'commlink25');" onmouseover="map.commlink_mouseover(evt, 'commlink25');" onmouseout="map.commlink_mouseout(evt, 'commlink25');" onmousemove="map.commlink_mousemove(evt, 'commlink25');" class="fiber at1g" />
+<line x1="1829" y1="986" x2="1830" y2="1110" onclick="map.commlink_click(evt, 'commlink305');" onmousedown="map.commlink_mousedown(evt, 'commlink305');" onmouseup="map.commlink_mouseup(evt, 'commlink305');" onmouseover="map.commlink_mouseover(evt, 'commlink305');" onmouseout="map.commlink_mouseout(evt, 'commlink305');" onmousemove="map.commlink_mousemove(evt, 'commlink305');" class="fiber at1g" />
+<line x1="1932" y1="1528" x2="1900" y2="1424" onclick="map.commlink_click(evt, 'commlink607');" onmousedown="map.commlink_mousedown(evt, 'commlink607');" onmouseup="map.commlink_mouseup(evt, 'commlink607');" onmouseover="map.commlink_mouseover(evt, 'commlink607');" onmouseout="map.commlink_mouseout(evt, 'commlink607');" onmousemove="map.commlink_mousemove(evt, 'commlink607');" class="fiber at1g" />
+<line x1="390" y1="317" x2="445" y2="294" onclick="map.commlink_click(evt, 'commlink122');" onmousedown="map.commlink_mousedown(evt, 'commlink122');" onmouseup="map.commlink_mouseup(evt, 'commlink122');" onmouseover="map.commlink_mouseover(evt, 'commlink122');" onmouseout="map.commlink_mouseout(evt, 'commlink122');" onmousemove="map.commlink_mousemove(evt, 'commlink122');" class="fiber at100m" />
+<line x1="254" y1="818" x2="202" y2="555" onclick="map.commlink_click(evt, 'commlink22');" onmousedown="map.commlink_mousedown(evt, 'commlink22');" onmouseup="map.commlink_mouseup(evt, 'commlink22');" onmouseover="map.commlink_mouseover(evt, 'commlink22');" onmouseout="map.commlink_mouseout(evt, 'commlink22');" onmousemove="map.commlink_mousemove(evt, 'commlink22');" class="fiber at1g" />
+<line x1="336" y1="1306" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink630');" onmousedown="map.commlink_mousedown(evt, 'commlink630');" onmouseup="map.commlink_mouseup(evt, 'commlink630');" onmouseover="map.commlink_mouseover(evt, 'commlink630');" onmouseout="map.commlink_mouseout(evt, 'commlink630');" onmousemove="map.commlink_mousemove(evt, 'commlink630');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink472');" onmousedown="map.commlink_mousedown(evt, 'commlink472');" onmouseup="map.commlink_mouseup(evt, 'commlink472');" onmouseover="map.commlink_mouseover(evt, 'commlink472');" onmouseout="map.commlink_mouseout(evt, 'commlink472');" onmousemove="map.commlink_mousemove(evt, 'commlink472');" class="copper at1g" />
+<line x1="832" y1="689" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink296');" onmousedown="map.commlink_mousedown(evt, 'commlink296');" onmouseup="map.commlink_mouseup(evt, 'commlink296');" onmouseover="map.commlink_mouseover(evt, 'commlink296');" onmouseout="map.commlink_mouseout(evt, 'commlink296');" onmousemove="map.commlink_mousemove(evt, 'commlink296');" class="fiber at1g" />
+<line x1="2095" y1="1571" x2="2093" y2="1654" onclick="map.commlink_click(evt, 'commlink132');" onmousedown="map.commlink_mousedown(evt, 'commlink132');" onmouseup="map.commlink_mouseup(evt, 'commlink132');" onmouseover="map.commlink_mouseover(evt, 'commlink132');" onmouseout="map.commlink_mouseout(evt, 'commlink132');" onmousemove="map.commlink_mousemove(evt, 'commlink132');" class="radio at10m" />
+<line x1="1865" y1="1350" x2="1384" y2="733" onclick="map.commlink_click(evt, 'commlink705');" onmousedown="map.commlink_mousedown(evt, 'commlink705');" onmouseup="map.commlink_mouseup(evt, 'commlink705');" onmouseover="map.commlink_mouseover(evt, 'commlink705');" onmouseout="map.commlink_mouseout(evt, 'commlink705');" onmousemove="map.commlink_mousemove(evt, 'commlink705');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink27');" onmousedown="map.commlink_mousedown(evt, 'commlink27');" onmouseup="map.commlink_mouseup(evt, 'commlink27');" onmouseover="map.commlink_mouseover(evt, 'commlink27');" onmouseout="map.commlink_mouseout(evt, 'commlink27');" onmousemove="map.commlink_mousemove(evt, 'commlink27');" class="fiber at10g" />
+<line x1="843" y1="776" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink298');" onmousedown="map.commlink_mousedown(evt, 'commlink298');" onmouseup="map.commlink_mouseup(evt, 'commlink298');" onmouseover="map.commlink_mouseover(evt, 'commlink298');" onmouseout="map.commlink_mouseout(evt, 'commlink298');" onmousemove="map.commlink_mousemove(evt, 'commlink298');" class="fiber at1g" />
+<line x1="859" y1="1000" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink746');" onmousedown="map.commlink_mousedown(evt, 'commlink746');" onmouseup="map.commlink_mouseup(evt, 'commlink746');" onmouseover="map.commlink_mouseover(evt, 'commlink746');" onmouseout="map.commlink_mouseout(evt, 'commlink746');" onmousemove="map.commlink_mousemove(evt, 'commlink746');" class="copper at1g" />
+<line x1="596" y1="337" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink400');" onmousedown="map.commlink_mousedown(evt, 'commlink400');" onmouseup="map.commlink_mouseup(evt, 'commlink400');" onmouseover="map.commlink_mouseover(evt, 'commlink400');" onmouseout="map.commlink_mouseout(evt, 'commlink400');" onmousemove="map.commlink_mousemove(evt, 'commlink400');" class="fiber at1g" />
+<line x1="706" y1="1188" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink20');" onmousedown="map.commlink_mousedown(evt, 'commlink20');" onmouseup="map.commlink_mouseup(evt, 'commlink20');" onmouseover="map.commlink_mouseover(evt, 'commlink20');" onmouseout="map.commlink_mouseout(evt, 'commlink20');" onmousemove="map.commlink_mousemove(evt, 'commlink20');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1672" y2="808" onclick="map.commlink_click(evt, 'commlink313');" onmousedown="map.commlink_mousedown(evt, 'commlink313');" onmouseup="map.commlink_mouseup(evt, 'commlink313');" onmouseover="map.commlink_mouseover(evt, 'commlink313');" onmouseout="map.commlink_mouseout(evt, 'commlink313');" onmousemove="map.commlink_mousemove(evt, 'commlink313');" class="fiber at1g" />
+<line x1="1430" y1="1397" x2="1519" y2="1460" onclick="map.commlink_click(evt, 'commlink557');" onmousedown="map.commlink_mousedown(evt, 'commlink557');" onmouseup="map.commlink_mouseup(evt, 'commlink557');" onmouseover="map.commlink_mouseover(evt, 'commlink557');" onmouseout="map.commlink_mouseout(evt, 'commlink557');" onmousemove="map.commlink_mousemove(evt, 'commlink557');" class="fiber at1g" />
+<line x1="1775" y1="2711" x2="1815" y2="2751" onclick="map.commlink_click(evt, 'commlink468');" onmousedown="map.commlink_mousedown(evt, 'commlink468');" onmouseup="map.commlink_mouseup(evt, 'commlink468');" onmouseover="map.commlink_mouseover(evt, 'commlink468');" onmouseout="map.commlink_mouseout(evt, 'commlink468');" onmousemove="map.commlink_mousemove(evt, 'commlink468');" class="dsl at1m" />
+<rect x="1817" y="2753" width="32" height="13" onclick="map.commlink_click(evt, 'commlink468');" onmousedown="map.commlink_mousedown(evt, 'commlink468');" onmouseup="map.commlink_mouseup(evt, 'commlink468');" onmouseover="map.commlink_mouseover(evt, 'commlink468');" onmouseout="map.commlink_mouseout(evt, 'commlink468');" onmousemove="map.commlink_mousemove(evt, 'commlink468');" class="dsl at1m" />
+<text x="1819" y="2763" font-size="10" class="nameplate">DSL</text>
+<line x1="1176" y1="125" x2="1216" y2="165" onclick="map.commlink_click(evt, 'commlink672');" onmousedown="map.commlink_mousedown(evt, 'commlink672');" onmouseup="map.commlink_mouseup(evt, 'commlink672');" onmouseover="map.commlink_mouseover(evt, 'commlink672');" onmouseout="map.commlink_mouseout(evt, 'commlink672');" onmousemove="map.commlink_mousemove(evt, 'commlink672');" class="dsl at1m" />
+<rect x="1218" y="167" width="32" height="13" onclick="map.commlink_click(evt, 'commlink672');" onmousedown="map.commlink_mousedown(evt, 'commlink672');" onmouseup="map.commlink_mouseup(evt, 'commlink672');" onmouseover="map.commlink_mouseover(evt, 'commlink672');" onmouseout="map.commlink_mouseout(evt, 'commlink672');" onmousemove="map.commlink_mousemove(evt, 'commlink672');" class="dsl at1m" />
+<text x="1220" y="177" font-size="10" class="nameplate">DSL</text>
+<line x1="451" y1="1379" x2="451" y2="1305" onclick="map.commlink_click(evt, 'commlink106');" onmousedown="map.commlink_mousedown(evt, 'commlink106');" onmouseup="map.commlink_mouseup(evt, 'commlink106');" onmouseover="map.commlink_mouseover(evt, 'commlink106');" onmouseout="map.commlink_mouseout(evt, 'commlink106');" onmousemove="map.commlink_mousemove(evt, 'commlink106');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1485" y2="1348" onclick="map.commlink_click(evt, 'commlink515');" onmousedown="map.commlink_mousedown(evt, 'commlink515');" onmouseup="map.commlink_mouseup(evt, 'commlink515');" onmouseover="map.commlink_mouseover(evt, 'commlink515');" onmouseout="map.commlink_mouseout(evt, 'commlink515');" onmousemove="map.commlink_mousemove(evt, 'commlink515');" class="fiber at1g" />
+<line x1="1558" y1="2285" x2="1506" y2="2178" onclick="map.commlink_click(evt, 'commlink321');" onmousedown="map.commlink_mousedown(evt, 'commlink321');" onmouseup="map.commlink_mouseup(evt, 'commlink321');" onmouseover="map.commlink_mouseover(evt, 'commlink321');" onmouseout="map.commlink_mouseout(evt, 'commlink321');" onmousemove="map.commlink_mousemove(evt, 'commlink321');" class="copper at1g" />
+<line x1="1046" y1="1091" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink17');" onmousedown="map.commlink_mousedown(evt, 'commlink17');" onmouseup="map.commlink_mouseup(evt, 'commlink17');" onmouseover="map.commlink_mouseover(evt, 'commlink17');" onmouseout="map.commlink_mouseout(evt, 'commlink17');" onmousemove="map.commlink_mousemove(evt, 'commlink17');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="1088" y2="2859" onclick="map.commlink_click(evt, 'commlink677');" onmousedown="map.commlink_mousedown(evt, 'commlink677');" onmouseup="map.commlink_mouseup(evt, 'commlink677');" onmouseover="map.commlink_mouseover(evt, 'commlink677');" onmouseout="map.commlink_mouseout(evt, 'commlink677');" onmousemove="map.commlink_mousemove(evt, 'commlink677');" class="fiber at1g" />
+<line x1="1074" y1="1507" x2="1096" y2="1613" onclick="map.commlink_click(evt, 'commlink147');" onmousedown="map.commlink_mousedown(evt, 'commlink147');" onmouseup="map.commlink_mouseup(evt, 'commlink147');" onmouseover="map.commlink_mouseover(evt, 'commlink147');" onmouseout="map.commlink_mouseout(evt, 'commlink147');" onmousemove="map.commlink_mousemove(evt, 'commlink147');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink333');" onmousedown="map.commlink_mousedown(evt, 'commlink333');" onmouseup="map.commlink_mouseup(evt, 'commlink333');" onmouseover="map.commlink_mouseover(evt, 'commlink333');" onmouseout="map.commlink_mouseout(evt, 'commlink333');" onmousemove="map.commlink_mousemove(evt, 'commlink333');" class="fiber at1g" />
+<line x1="1864" y1="1567" x2="1802" y2="1641" onclick="map.commlink_click(evt, 'commlink516');" onmousedown="map.commlink_mousedown(evt, 'commlink516');" onmouseup="map.commlink_mouseup(evt, 'commlink516');" onmouseover="map.commlink_mouseover(evt, 'commlink516');" onmouseout="map.commlink_mouseout(evt, 'commlink516');" onmousemove="map.commlink_mousemove(evt, 'commlink516');" class="fiber at1g" />
+<line x1="1351" y1="1828" x2="1742" y2="1769" onclick="map.commlink_click(evt, 'commlink352');" onmousedown="map.commlink_mousedown(evt, 'commlink352');" onmouseup="map.commlink_mouseup(evt, 'commlink352');" onmouseover="map.commlink_mouseover(evt, 'commlink352');" onmouseout="map.commlink_mouseout(evt, 'commlink352');" onmousemove="map.commlink_mousemove(evt, 'commlink352');" class="fiber at1g" />
+<line x1="254" y1="818" x2="337" y2="819" onclick="map.commlink_click(evt, 'commlink542');" onmousedown="map.commlink_mousedown(evt, 'commlink542');" onmouseup="map.commlink_mouseup(evt, 'commlink542');" onmouseover="map.commlink_mouseover(evt, 'commlink542');" onmouseout="map.commlink_mouseout(evt, 'commlink542');" onmousemove="map.commlink_mousemove(evt, 'commlink542');" class="fiber at1g" />
+<line x1="1743" y1="1887" x2="1742" y2="1769" onclick="map.commlink_click(evt, 'commlink357');" onmousedown="map.commlink_mousedown(evt, 'commlink357');" onmouseup="map.commlink_mouseup(evt, 'commlink357');" onmouseover="map.commlink_mouseover(evt, 'commlink357');" onmouseout="map.commlink_mouseout(evt, 'commlink357');" onmousemove="map.commlink_mousemove(evt, 'commlink357');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="1865" y2="1350" onclick="map.commlink_click(evt, 'commlink117');" onmousedown="map.commlink_mousedown(evt, 'commlink117');" onmouseup="map.commlink_mouseup(evt, 'commlink117');" onmouseover="map.commlink_mouseover(evt, 'commlink117');" onmouseout="map.commlink_mouseout(evt, 'commlink117');" onmousemove="map.commlink_mousemove(evt, 'commlink117');" class="fiber at10g" />
+<line x1="1374" y1="2269" x2="1642" y2="2249" onclick="map.commlink_click(evt, 'commlink336');" onmousedown="map.commlink_mousedown(evt, 'commlink336');" onmouseup="map.commlink_mouseup(evt, 'commlink336');" onmouseover="map.commlink_mouseover(evt, 'commlink336');" onmouseout="map.commlink_mouseout(evt, 'commlink336');" onmousemove="map.commlink_mousemove(evt, 'commlink336');" class="fiber at1g" />
+<line x1="749" y1="836" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink297');" onmousedown="map.commlink_mousedown(evt, 'commlink297');" onmouseup="map.commlink_mouseup(evt, 'commlink297');" onmouseover="map.commlink_mouseover(evt, 'commlink297');" onmouseout="map.commlink_mouseout(evt, 'commlink297');" onmousemove="map.commlink_mousemove(evt, 'commlink297');" class="fiber at1g" />
+<line x1="1627" y1="2670" x2="1302" y2="2508" onclick="map.commlink_click(evt, 'commlink676');" onmousedown="map.commlink_mousedown(evt, 'commlink676');" onmouseup="map.commlink_mouseup(evt, 'commlink676');" onmouseover="map.commlink_mouseover(evt, 'commlink676');" onmouseout="map.commlink_mouseout(evt, 'commlink676');" onmousemove="map.commlink_mousemove(evt, 'commlink676');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1374" y2="2269" onclick="map.commlink_click(evt, 'commlink556');" onmousedown="map.commlink_mousedown(evt, 'commlink556');" onmouseup="map.commlink_mouseup(evt, 'commlink556');" onmouseover="map.commlink_mouseover(evt, 'commlink556');" onmouseout="map.commlink_mouseout(evt, 'commlink556');" onmousemove="map.commlink_mousemove(evt, 'commlink556');" class="fiber at10g" />
+<line x1="1820" y1="2003" x2="1742" y2="1769" onclick="map.commlink_click(evt, 'commlink360');" onmousedown="map.commlink_mousedown(evt, 'commlink360');" onmouseup="map.commlink_mouseup(evt, 'commlink360');" onmouseover="map.commlink_mouseover(evt, 'commlink360');" onmouseout="map.commlink_mouseout(evt, 'commlink360');" onmousemove="map.commlink_mousemove(evt, 'commlink360');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="1398" y2="952" onclick="map.commlink_click(evt, 'commlink514');" onmousedown="map.commlink_mousedown(evt, 'commlink514');" onmouseup="map.commlink_mouseup(evt, 'commlink514');" onmouseover="map.commlink_mouseover(evt, 'commlink514');" onmouseout="map.commlink_mouseout(evt, 'commlink514');" onmousemove="map.commlink_mousemove(evt, 'commlink514');" class="fiber at1g" />
+<line x1="1558" y1="2285" x2="1473" y2="2218" onclick="map.commlink_click(evt, 'commlink592');" onmousedown="map.commlink_mousedown(evt, 'commlink592');" onmouseup="map.commlink_mouseup(evt, 'commlink592');" onmouseover="map.commlink_mouseover(evt, 'commlink592');" onmouseout="map.commlink_mouseout(evt, 'commlink592');" onmousemove="map.commlink_mousemove(evt, 'commlink592');" class="copper at1g" />
+<line x1="1374" y1="2269" x2="1742" y2="1769" onclick="map.commlink_click(evt, 'commlink304');" onmousedown="map.commlink_mousedown(evt, 'commlink304');" onmouseup="map.commlink_mouseup(evt, 'commlink304');" onmouseover="map.commlink_mouseover(evt, 'commlink304');" onmouseout="map.commlink_mouseout(evt, 'commlink304');" onmousemove="map.commlink_mousemove(evt, 'commlink304');" class="fiber at1g" />
+<line x1="492" y1="1185" x2="524" y2="1153" onclick="map.commlink_click(evt, 'commlink476');" onmousedown="map.commlink_mousedown(evt, 'commlink476');" onmouseup="map.commlink_mouseup(evt, 'commlink476');" onmouseover="map.commlink_mouseover(evt, 'commlink476');" onmouseout="map.commlink_mouseout(evt, 'commlink476');" onmousemove="map.commlink_mousemove(evt, 'commlink476');" class="gprs at1m" />
+<rect x="524" y="1140" width="40" height="13" onclick="map.commlink_click(evt, 'commlink476');" onmousedown="map.commlink_mousedown(evt, 'commlink476');" onmouseup="map.commlink_mouseup(evt, 'commlink476');" onmouseover="map.commlink_mouseover(evt, 'commlink476');" onmouseout="map.commlink_mouseout(evt, 'commlink476');" onmousemove="map.commlink_mousemove(evt, 'commlink476');" class="gprs at1m" />
+<text x="527" y="1150" font-size="10" class="nameplate">GPRS</text>
+<line x1="254" y1="818" x2="211" y2="883" onclick="map.commlink_click(evt, 'commlink406');" onmousedown="map.commlink_mousedown(evt, 'commlink406');" onmouseup="map.commlink_mouseup(evt, 'commlink406');" onmouseover="map.commlink_mouseover(evt, 'commlink406');" onmouseout="map.commlink_mouseout(evt, 'commlink406');" onmousemove="map.commlink_mousemove(evt, 'commlink406');" class="fiber at1g" />
+<line x1="390" y1="317" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink396');" onmousedown="map.commlink_mousedown(evt, 'commlink396');" onmouseup="map.commlink_mouseup(evt, 'commlink396');" onmouseover="map.commlink_mouseover(evt, 'commlink396');" onmouseout="map.commlink_mouseout(evt, 'commlink396');" onmousemove="map.commlink_mousemove(evt, 'commlink396');" class="fiber at1g" />
+<line x1="1864" y1="1567" x2="1795" y2="1507" onclick="map.commlink_click(evt, 'commlink499');" onmousedown="map.commlink_mousedown(evt, 'commlink499');" onmouseup="map.commlink_mouseup(evt, 'commlink499');" onmouseover="map.commlink_mouseover(evt, 'commlink499');" onmouseout="map.commlink_mouseout(evt, 'commlink499');" onmousemove="map.commlink_mousemove(evt, 'commlink499');" class="fiber at1g" />
+<line x1="1865" y1="1350" x2="2095" y2="1571" onclick="map.commlink_click(evt, 'commlink393');" onmousedown="map.commlink_mousedown(evt, 'commlink393');" onmouseup="map.commlink_mouseup(evt, 'commlink393');" onmouseover="map.commlink_mouseover(evt, 'commlink393');" onmouseout="map.commlink_mouseout(evt, 'commlink393');" onmousemove="map.commlink_mousemove(evt, 'commlink393');" class="fiber at1g" />
+<line x1="392" y1="1105" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink19');" onmousedown="map.commlink_mousedown(evt, 'commlink19');" onmouseup="map.commlink_mouseup(evt, 'commlink19');" onmouseover="map.commlink_mouseover(evt, 'commlink19');" onmouseout="map.commlink_mouseout(evt, 'commlink19');" onmousemove="map.commlink_mousemove(evt, 'commlink19');" class="fiber at1g" />
+<line x1="1898" y1="2034" x2="1938" y2="2074" onclick="map.commlink_click(evt, 'commlink658');" onmousedown="map.commlink_mousedown(evt, 'commlink658');" onmouseup="map.commlink_mouseup(evt, 'commlink658');" onmouseover="map.commlink_mouseover(evt, 'commlink658');" onmouseout="map.commlink_mouseout(evt, 'commlink658');" onmousemove="map.commlink_mousemove(evt, 'commlink658');" class="dsl at1m" />
+<rect x="1940" y="2076" width="32" height="13" onclick="map.commlink_click(evt, 'commlink658');" onmousedown="map.commlink_mousedown(evt, 'commlink658');" onmouseup="map.commlink_mouseup(evt, 'commlink658');" onmouseover="map.commlink_mouseover(evt, 'commlink658');" onmouseout="map.commlink_mouseout(evt, 'commlink658');" onmousemove="map.commlink_mousemove(evt, 'commlink658');" class="dsl at1m" />
+<text x="1942" y="2086" font-size="10" class="nameplate">DSL</text>
+<line x1="1459" y1="2614" x2="1499" y2="2654" onclick="map.commlink_click(evt, 'commlink470');" onmousedown="map.commlink_mousedown(evt, 'commlink470');" onmouseup="map.commlink_mouseup(evt, 'commlink470');" onmouseover="map.commlink_mouseover(evt, 'commlink470');" onmouseout="map.commlink_mouseout(evt, 'commlink470');" onmousemove="map.commlink_mousemove(evt, 'commlink470');" class="dsl at10m" />
+<rect x="1501" y="2656" width="32" height="13" onclick="map.commlink_click(evt, 'commlink470');" onmousedown="map.commlink_mousedown(evt, 'commlink470');" onmouseup="map.commlink_mouseup(evt, 'commlink470');" onmouseover="map.commlink_mouseover(evt, 'commlink470');" onmouseout="map.commlink_mouseout(evt, 'commlink470');" onmousemove="map.commlink_mousemove(evt, 'commlink470');" class="dsl at10m" />
+<text x="1503" y="2666" font-size="10" class="nameplate">DSL</text>
+<line x1="1558" y1="2285" x2="1617" y2="2376" onclick="map.commlink_click(evt, 'commlink322');" onmousedown="map.commlink_mousedown(evt, 'commlink322');" onmouseup="map.commlink_mouseup(evt, 'commlink322');" onmouseover="map.commlink_mouseover(evt, 'commlink322');" onmouseout="map.commlink_mouseout(evt, 'commlink322');" onmousemove="map.commlink_mousemove(evt, 'commlink322');" class="fiber at1g" />
+<line x1="814" y1="2882" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink682');" onmousedown="map.commlink_mousedown(evt, 'commlink682');" onmouseup="map.commlink_mouseup(evt, 'commlink682');" onmouseover="map.commlink_mouseover(evt, 'commlink682');" onmouseout="map.commlink_mouseout(evt, 'commlink682');" onmousemove="map.commlink_mousemove(evt, 'commlink682');" class="fiber at1g" />
+<line x1="254" y1="818" x2="139" y2="409" onclick="map.commlink_click(evt, 'commlink30');" onmousedown="map.commlink_mousedown(evt, 'commlink30');" onmouseup="map.commlink_mouseup(evt, 'commlink30');" onmouseover="map.commlink_mouseover(evt, 'commlink30');" onmouseout="map.commlink_mouseout(evt, 'commlink30');" onmousemove="map.commlink_mousemove(evt, 'commlink30');" class="fiber at1g" />
+<line x1="485" y1="595" x2="507" y2="406" onclick="map.commlink_click(evt, 'commlink403');" onmousedown="map.commlink_mousedown(evt, 'commlink403');" onmouseup="map.commlink_mouseup(evt, 'commlink403');" onmouseover="map.commlink_mouseover(evt, 'commlink403');" onmouseout="map.commlink_mouseout(evt, 'commlink403');" onmousemove="map.commlink_mousemove(evt, 'commlink403');" class="fiber at1g" />
+<line x1="1074" y1="1507" x2="785" y2="1070" onclick="map.commlink_click(evt, 'commlink28');" onmousedown="map.commlink_mousedown(evt, 'commlink28');" onmouseup="map.commlink_mouseup(evt, 'commlink28');" onmouseover="map.commlink_mouseover(evt, 'commlink28');" onmouseout="map.commlink_mouseout(evt, 'commlink28');" onmousemove="map.commlink_mousemove(evt, 'commlink28');" class="fiber at1g" />
+<line x1="726" y1="2818" x2="930" y2="2835" onclick="map.commlink_click(evt, 'commlink310');" onmousedown="map.commlink_mousedown(evt, 'commlink310');" onmouseup="map.commlink_mouseup(evt, 'commlink310');" onmouseover="map.commlink_mouseover(evt, 'commlink310');" onmouseout="map.commlink_mouseout(evt, 'commlink310');" onmousemove="map.commlink_mousemove(evt, 'commlink310');" class="fiber at1g" />
+<line x1="1096" y1="1613" x2="1742" y2="1769" onclick="map.commlink_click(evt, 'commlink303');" onmousedown="map.commlink_mousedown(evt, 'commlink303');" onmouseup="map.commlink_mouseup(evt, 'commlink303');" onmouseover="map.commlink_mouseover(evt, 'commlink303');" onmouseout="map.commlink_mouseout(evt, 'commlink303');" onmousemove="map.commlink_mousemove(evt, 'commlink303');" class="fiber at1g" />
+<line x1="1380" y1="651" x2="1384" y2="733" onclick="map.commlink_click(evt, 'commlink699');" onmousedown="map.commlink_mousedown(evt, 'commlink699');" onmouseup="map.commlink_mouseup(evt, 'commlink699');" onmouseover="map.commlink_mouseover(evt, 'commlink699');" onmouseout="map.commlink_mouseout(evt, 'commlink699');" onmousemove="map.commlink_mousemove(evt, 'commlink699');" class="fiber at1g" />
+<line x1="254" y1="818" x2="196" y2="700" onclick="map.commlink_click(evt, 'commlink501');" onmousedown="map.commlink_mousedown(evt, 'commlink501');" onmouseup="map.commlink_mouseup(evt, 'commlink501');" onmouseover="map.commlink_mouseover(evt, 'commlink501');" onmouseout="map.commlink_mouseout(evt, 'commlink501');" onmousemove="map.commlink_mousemove(evt, 'commlink501');" class="fiber at1g" />
+<line x1="1469" y1="2698" x2="1302" y2="2508" onclick="map.commlink_click(evt, 'commlink687');" onmousedown="map.commlink_mousedown(evt, 'commlink687');" onmouseup="map.commlink_mouseup(evt, 'commlink687');" onmouseover="map.commlink_mouseover(evt, 'commlink687');" onmouseout="map.commlink_mouseout(evt, 'commlink687');" onmousemove="map.commlink_mousemove(evt, 'commlink687');" class="fiber at1g" />
+<line x1="1374" y1="2269" x2="1302" y2="2508" onclick="map.commlink_click(evt, 'commlink626');" onmousedown="map.commlink_mousedown(evt, 'commlink626');" onmouseup="map.commlink_mouseup(evt, 'commlink626');" onmouseover="map.commlink_mouseover(evt, 'commlink626');" onmouseout="map.commlink_mouseout(evt, 'commlink626');" onmousemove="map.commlink_mousemove(evt, 'commlink626');" class="fiber at1g" />
+<line x1="1762" y1="2143" x2="1642" y2="2249" onclick="map.commlink_click(evt, 'commlink332');" onmousedown="map.commlink_mousedown(evt, 'commlink332');" onmouseup="map.commlink_mouseup(evt, 'commlink332');" onmouseover="map.commlink_mouseover(evt, 'commlink332');" onmouseout="map.commlink_mouseout(evt, 'commlink332');" onmousemove="map.commlink_mousemove(evt, 'commlink332');" class="fiber at1g" />
+<line x1="1558" y1="2285" x2="1529" y2="2385" onclick="map.commlink_click(evt, 'commlink591');" onmousedown="map.commlink_mousedown(evt, 'commlink591');" onmouseup="map.commlink_mouseup(evt, 'commlink591');" onmouseover="map.commlink_mouseover(evt, 'commlink591');" onmouseout="map.commlink_mouseout(evt, 'commlink591');" onmousemove="map.commlink_mousemove(evt, 'commlink591');" class="fiber at1g" />
+<line x1="1829" y1="986" x2="1834" y2="917" onclick="map.commlink_click(evt, 'commlink736');" onmousedown="map.commlink_mousedown(evt, 'commlink736');" onmouseup="map.commlink_mouseup(evt, 'commlink736');" onmouseover="map.commlink_mouseover(evt, 'commlink736');" onmouseout="map.commlink_mouseout(evt, 'commlink736');" onmousemove="map.commlink_mousemove(evt, 'commlink736');" class="fiber at1g" />
+<svg x="618" y="2555" id="site33" onclick="map.site_click(evt, 'site33');" onmousedown="map.site_mousedown(evt, 'site33');" onmouseup="map.site_mouseup(evt, 'site33');" onmousemove="map.site_mousemove(evt, 'site33');" onmouseover="map.site_mouseover(evt, 'site33');" onmouseout="map.site_mouseout(evt, 'site33');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Gaupeveien</text>
+<text x="5" y="63.9" font-size="9">bokollektiv</text>
+</svg>
+<svg x="1433" y="2434" id="site32" onclick="map.site_click(evt, 'site32');" onmousedown="map.site_mousedown(evt, 'site32');" onmouseup="map.site_mouseup(evt, 'site32');" onmousemove="map.site_mousemove(evt, 'site32');" onmouseover="map.site_mouseover(evt, 'site32');" onmouseout="map.site_mouseout(evt, 'site32');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">NAV kontor Enebakk</text>
+</svg>
+<svg x="1405" y="1372" id="site63" onclick="map.site_click(evt, 'site63');" onmousedown="map.site_mousedown(evt, 'site63');" onmouseup="map.site_mouseup(evt, 'site63');" onmousemove="map.site_mousemove(evt, 'site63');" onmouseover="map.site_mouseover(evt, 'site63');" onmouseout="map.site_mouseout(evt, 'site63');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Pålsetunet bo-og</text>
+<text x="5" y="63.9" font-size="9">servicesenter</text>
+</svg>
+<svg x="1071" y="1588" id="site102" onclick="map.site_click(evt, 'site102');" onmousedown="map.site_mousedown(evt, 'site102');" onmouseup="map.site_mouseup(evt, 'site102');" onmousemove="map.site_mousemove(evt, 'site102');" onmouseover="map.site_mouseover(evt, 'site102');" onmouseout="map.site_mouseout(evt, 'site102');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Nordby skole</text>
+</svg>
+<svg x="1481" y="2153" id="site7" onclick="map.site_click(evt, 'site7');" onmousedown="map.site_mousedown(evt, 'site7');" onmouseup="map.site_mouseup(evt, 'site7');" onmousemove="map.site_mousemove(evt, 'site7');" onmouseover="map.site_mouseover(evt, 'site7');" onmouseout="map.site_mouseout(evt, 'site7');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk legesenter</text>
+</svg>
+<svg x="268" y="291" id="site80" onclick="map.site_click(evt, 'site80');" onmousedown="map.site_mousedown(evt, 'site80');" onmouseup="map.site_mouseup(evt, 'site80');" onmousemove="map.site_mousemove(evt, 'site80');" onmouseover="map.site_mouseover(evt, 'site80');" onmouseout="map.site_mouseout(evt, 'site80');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Buholen boliger</text>
+</svg>
+<svg x="1434" y="2589" id="site26" onclick="map.site_click(evt, 'site26');" onmousedown="map.site_mousedown(evt, 'site26');" onmouseup="map.site_mouseup(evt, 'site26');" onmousemove="map.site_mousemove(evt, 'site26');" onmouseover="map.site_mouseover(evt, 'site26');" onmouseout="map.site_mouseout(evt, 'site26');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Kronaveien dagsenter</text>
+</svg>
+<svg x="571" y="312" id="site119" onclick="map.site_click(evt, 'site119');" onmousedown="map.site_mousedown(evt, 'site119');" onmouseup="map.site_mouseup(evt, 'site119');" onmousemove="map.site_mousemove(evt, 'site119');" onmouseover="map.site_mouseover(evt, 'site119');" onmouseout="map.site_mouseout(evt, 'site119');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Torva barnehage</text>
+</svg>
+<svg x="311" y="1281" id="site99" onclick="map.site_click(evt, 'site99');" onmousedown="map.site_mousedown(evt, 'site99');" onmouseup="map.site_mouseup(evt, 'site99');" onmousemove="map.site_mousemove(evt, 'site99');" onmouseover="map.site_mouseover(evt, 'site99');" onmouseout="map.site_mouseout(evt, 'site99');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Marikollen klubbhus</text>
+</svg>
+<svg x="42" y="24" id="site162" onclick="map.site_click(evt, 'site162');" onmousedown="map.site_mousedown(evt, 'site162');" onmouseup="map.site_mouseup(evt, 'site162');" onmousemove="map.site_mousemove(evt, 'site162');" onmouseover="map.site_mouseover(evt, 'site162');" onmouseout="map.site_mouseout(evt, 'site162');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/Ukjent.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Testlokasjon</text>
+</svg>
+<svg x="1907" y="1503" id="site72" onclick="map.site_click(evt, 'site72');" onmousedown="map.site_mousedown(evt, 'site72');" onmouseup="map.site_mouseup(evt, 'site72');" onmousemove="map.site_mousemove(evt, 'site72');" onmouseover="map.site_mouseover(evt, 'site72');" onmouseout="map.site_mouseout(evt, 'site72');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Østersund barnehage</text>
+</svg>
+<svg x="1562" y="2444" id="site16" onclick="map.site_click(evt, 'site16');" onmousedown="map.site_mousedown(evt, 'site16');" onmouseup="map.site_mouseup(evt, 'site16');" onmousemove="map.site_mousemove(evt, 'site16');" onmouseover="map.site_mouseover(evt, 'site16');" onmouseout="map.site_mouseout(evt, 'site16');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Gamle Herredshus</text>
+</svg>
+<svg x="1647" y="783" id="site55" onclick="map.site_click(evt, 'site55');" onmousedown="map.site_mousedown(evt, 'site55');" onmouseup="map.site_mouseup(evt, 'site55');" onmousemove="map.site_mousemove(evt, 'site55');" onmouseover="map.site_mouseover(evt, 'site55');" onmouseout="map.site_mouseout(evt, 'site55');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Garderåsen skole</text>
+</svg>
+<svg x="909" y="1221" id="site84" onclick="map.site_click(evt, 'site84');" onmousedown="map.site_mousedown(evt, 'site84');" onmouseup="map.site_mouseup(evt, 'site84');" onmousemove="map.site_mousemove(evt, 'site84');" onmouseover="map.site_mouseover(evt, 'site84');" onmouseout="map.site_mouseout(evt, 'site84');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Fjerdingby pleie-og</text>
+<text x="5" y="63.9" font-size="9">omsorgssenter</text>
+</svg>
+<svg x="1320" y="1878" id="site161" onclick="map.site_click(evt, 'site161');" onmousedown="map.site_mousedown(evt, 'site161');" onmouseup="map.site_mouseup(evt, 'site161');" onmousemove="map.site_mousemove(evt, 'site161');" onmouseover="map.site_mouseover(evt, 'site161');" onmouseout="map.site_mouseout(evt, 'site161');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Østbyveien</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="266" y="672" id="site95" onclick="map.site_click(evt, 'site95');" onmousedown="map.site_mousedown(evt, 'site95');" onmouseup="map.site_mouseup(evt, 'site95');" onmousemove="map.site_mousemove(evt, 'site95');" onmouseover="map.site_mouseover(evt, 'site95');" onmouseout="map.site_mouseout(evt, 'site95');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Løvenstad skole</text>
+</svg>
+<svg x="1373" y="927" id="site57" onclick="map.site_click(evt, 'site57');" onmousedown="map.site_mousedown(evt, 'site57');" onmouseup="map.site_mouseup(evt, 'site57');" onmousemove="map.site_mousemove(evt, 'site57');" onmouseover="map.site_mouseover(evt, 'site57');" onmouseout="map.site_mouseout(evt, 'site57');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Hovinhøgda skole</text>
+</svg>
+<svg x="1460" y="1323" id="site61" onclick="map.site_click(evt, 'site61');" onmousedown="map.site_mousedown(evt, 'site61');" onmouseup="map.site_mouseup(evt, 'site61');" onmousemove="map.site_mousemove(evt, 'site61');" onmouseover="map.site_mouseover(evt, 'site61');" onmouseout="map.site_mouseout(evt, 'site61');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Aktivitetssenter</text>
+</svg>
+<svg x="818" y="751" id="site115" onclick="map.site_click(evt, 'site115');" onmousedown="map.site_mousedown(evt, 'site115');" onmouseup="map.site_mouseup(evt, 'site115');" onmousemove="map.site_mousemove(evt, 'site115');" onmouseover="map.site_mouseover(evt, 'site115');" onmouseout="map.site_mouseout(evt, 'site115');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sannum barnehage</text>
+</svg>
+<svg x="1750" y="2686" id="site20" onclick="map.site_click(evt, 'site20');" onmousedown="map.site_mousedown(evt, 'site20');" onmouseup="map.site_mouseup(evt, 'site20');" onmousemove="map.site_mousemove(evt, 'site20');" onmouseover="map.site_mouseover(evt, 'site20');" onmouseout="map.site_mouseout(evt, 'site20');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Heier veistasjon</text>
+</svg>
+<svg x="1084" y="98" id="site163" onclick="map.site_click(evt, 'site163');" onmousedown="map.site_mousedown(evt, 'site163');" onmouseup="map.site_mouseup(evt, 'site163');" onmousemove="map.site_mousemove(evt, 'site163');" onmouseover="map.site_mouseover(evt, 'site163');" onmouseout="map.site_mouseout(evt, 'site163');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/BigBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Viken Fiber</text>
+</svg>
+<svg x="717" y="1245" id="site109" onclick="map.site_click(evt, 'site109');" onmousedown="map.site_mousedown(evt, 'site109');" onmouseup="map.site_mouseup(evt, 'site109');" onmousemove="map.site_mousemove(evt, 'site109');" onmouseover="map.site_mouseover(evt, 'site109');" onmouseout="map.site_mouseout(evt, 'site109');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Rælingen</text>
+<text x="5" y="63.9" font-size="9">Opplærings-og</text>
+<text x="5" y="72.9" font-size="9">Arbeidssenter</text>
+</svg>
+<svg x="550" y="640" id="site103" onclick="map.site_click(evt, 'site103');" onmousedown="map.site_mousedown(evt, 'site103');" onmouseup="map.site_mouseup(evt, 'site103');" onmousemove="map.site_mousemove(evt, 'site103');" onmouseover="map.site_mouseover(evt, 'site103');" onmouseout="map.site_mouseout(evt, 'site103');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Norumlia boliger</text>
+</svg>
+<svg x="1602" y="2645" id="site151" onclick="map.site_click(evt, 'site151');" onmousedown="map.site_mousedown(evt, 'site151');" onmouseup="map.site_mouseup(evt, 'site151');" onmousemove="map.site_mousemove(evt, 'site151');" onmouseover="map.site_mouseover(evt, 'site151');" onmouseout="map.site_mouseout(evt, 'site151');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Preståa</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="420" y="269" id="site89" onclick="map.site_click(evt, 'site89');" onmousedown="map.site_mousedown(evt, 'site89');" onmouseup="map.site_mouseup(evt, 'site89');" onmousemove="map.site_mousemove(evt, 'site89');" onmouseover="map.site_mouseover(evt, 'site89');" onmouseout="map.site_mouseout(evt, 'site89');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Heimen barnehage</text>
+</svg>
+<svg x="1277" y="2483" id="site148" onclick="map.site_click(evt, 'site148');" onmousedown="map.site_mousedown(evt, 'site148');" onmouseup="map.site_mouseup(evt, 'site148');" onmousemove="map.site_mousemove(evt, 'site148');" onmouseover="map.site_mouseover(evt, 'site148');" onmouseout="map.site_mouseout(evt, 'site148');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk</text>
+<text x="5" y="63.9" font-size="9">sentralrenseanlegg</text>
+</svg>
+<svg x="1617" y="2224" id="site10" onclick="map.site_click(evt, 'site10');" onmousedown="map.site_mousedown(evt, 'site10');" onmouseup="map.site_mouseup(evt, 'site10');" onmousemove="map.site_mousemove(evt, 'site10');" onmouseover="map.site_mouseover(evt, 'site10');" onmouseout="map.site_mouseout(evt, 'site10');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk ungdomsskole</text>
+</svg>
+<svg x="905" y="2810" id="site31" onclick="map.site_click(evt, 'site31');" onmousedown="map.site_mousedown(evt, 'site31');" onmouseup="map.site_mouseup(evt, 'site31');" onmousemove="map.site_mousemove(evt, 'site31');" onmouseover="map.site_mouseover(evt, 'site31');" onmouseout="map.site_mouseout(evt, 'site31');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Mjær ungdomskole</text>
+</svg>
+<svg x="312" y="794" id="site113" onclick="map.site_click(evt, 'site113');" onmousedown="map.site_mousedown(evt, 'site113');" onmouseup="map.site_mouseup(evt, 'site113');" onmousemove="map.site_mousemove(evt, 'site113');" onmouseover="map.site_mouseover(evt, 'site113');" onmouseout="map.site_mouseout(evt, 'site113');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sandbekkhallen</text>
+</svg>
+<svg x="1274" y="2729" id="site152" onclick="map.site_click(evt, 'site152');" onmousedown="map.site_mousedown(evt, 'site152');" onmouseup="map.site_mouseup(evt, 'site152');" onmousemove="map.site_mousemove(evt, 'site152');" onmouseover="map.site_mouseover(evt, 'site152');" onmouseout="map.site_mouseout(evt, 'site152');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Tømmerbråten</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="558" y="2576" id="site35" onclick="map.site_click(evt, 'site35');" onmousedown="map.site_mousedown(evt, 'site35');" onmouseup="map.site_mouseup(evt, 'site35');" onmousemove="map.site_mousemove(evt, 'site35');" onmouseover="map.site_mouseover(evt, 'site35');" onmouseout="map.site_mouseout(evt, 'site35');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sløssåsveien</text>
+<text x="5" y="63.9" font-size="9">bokollektiv</text>
+</svg>
+<svg x="171" y="675" id="site142" onclick="map.site_click(evt, 'site142');" onmousedown="map.site_mousedown(evt, 'site142');" onmouseup="map.site_mouseup(evt, 'site142');" onmousemove="map.site_mousemove(evt, 'site142');" onmouseover="map.site_mouseover(evt, 'site142');" onmouseout="map.site_mouseout(evt, 'site142');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Løvenstadvegen</text>
+<text x="5" y="63.9" font-size="9">boliger</text>
+</svg>
+<svg x="837" y="1114" id="site78" onclick="map.site_click(evt, 'site78');" onmousedown="map.site_mousedown(evt, 'site78');" onmouseup="map.site_mouseup(evt, 'site78');" onmousemove="map.site_mousemove(evt, 'site78');" onmouseover="map.site_mouseover(evt, 'site78');" onmouseout="map.site_mouseout(evt, 'site78');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Bjørnholthagan</text>
+<text x="5" y="63.9" font-size="9">boliger</text>
+</svg>
+<svg x="482" y="381" id="site107" onclick="map.site_click(evt, 'site107');" onmousedown="map.site_mousedown(evt, 'site107');" onmouseup="map.site_mouseup(evt, 'site107');" onmousemove="map.site_mousemove(evt, 'site107');" onmouseover="map.site_mouseover(evt, 'site107');" onmouseout="map.site_mouseout(evt, 'site107');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Rud skole</text>
+</svg>
+<svg x="1359" y="708" id="site48" onclick="map.site_click(evt, 'site48');" onmousedown="map.site_mousedown(evt, 'site48');" onmouseup="map.site_mouseup(evt, 'site48');" onmousemove="map.site_mousemove(evt, 'site48');" onmouseover="map.site_mouseover(evt, 'site48');" onmouseout="map.site_mouseout(evt, 'site48');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enga avdelingskontor</text>
+<text x="5" y="63.9" font-size="9">kommunalteknisk</text>
+</svg>
+<svg x="79" y="672" id="site87" onclick="map.site_click(evt, 'site87');" onmousedown="map.site_mousedown(evt, 'site87');" onmouseup="map.site_mouseup(evt, 'site87');" onmousemove="map.site_mousemove(evt, 'site87');" onmouseover="map.site_mouseover(evt, 'site87');" onmouseout="map.site_mouseout(evt, 'site87');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">H16 Løvenstad</text>
+<text x="5" y="63.9" font-size="9">høydebasseng</text>
+</svg>
+<svg x="454" y="220" id="site93" onclick="map.site_click(evt, 'site93');" onmousedown="map.site_mousedown(evt, 'site93');" onmouseup="map.site_mouseup(evt, 'site93');" onmousemove="map.site_mousemove(evt, 'site93');" onmouseover="map.site_mouseover(evt, 'site93');" onmouseout="map.site_mouseout(evt, 'site93');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Lilleborg barnehage</text>
+</svg>
+<svg x="900" y="808" id="site77" onclick="map.site_click(evt, 'site77');" onmousedown="map.site_mousedown(evt, 'site77');" onmouseup="map.site_mouseup(evt, 'site77');" onmousemove="map.site_mousemove(evt, 'site77');" onmouseover="map.site_mouseover(evt, 'site77');" onmouseout="map.site_mouseout(evt, 'site77');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Aamodt ungdomshus</text>
+</svg>
+<svg x="900" y="668" id="site106" onclick="map.site_click(evt, 'site106');" onmousedown="map.site_mousedown(evt, 'site106');" onmouseup="map.site_mouseup(evt, 'site106');" onmousemove="map.site_mousemove(evt, 'site106');" onmouseover="map.site_mouseover(evt, 'site106');" onmouseout="map.site_mouseout(evt, 'site106');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">PK02 Aamodttangen</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="1444" y="2673" id="site157" onclick="map.site_click(evt, 'site157');" onmousedown="map.site_mousedown(evt, 'site157');" onmouseup="map.site_mouseup(evt, 'site157');" onmousemove="map.site_mousemove(evt, 'site157');" onmouseover="map.site_mouseover(evt, 'site157');" onmouseout="map.site_mouseout(evt, 'site157');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Saltvedt</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="2057" y="841" id="site65" onclick="map.site_click(evt, 'site65');" onmousedown="map.site_mousedown(evt, 'site65');" onmouseup="map.site_mouseup(evt, 'site65');" onmousemove="map.site_mousemove(evt, 'site65');" onmouseover="map.site_mouseover(evt, 'site65');" onmouseout="map.site_mouseout(evt, 'site65');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Ramstadskogen</text>
+<text x="5" y="63.9" font-size="9">barnehage</text>
+</svg>
+<svg x="1338" y="2361" id="site149" onclick="map.site_click(evt, 'site149');" onmousedown="map.site_mousedown(evt, 'site149');" onmouseup="map.site_mouseup(evt, 'site149');" onmousemove="map.site_mousemove(evt, 'site149');" onmouseover="map.site_mouseover(evt, 'site149');" onmouseout="map.site_mouseout(evt, 'site149');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Krokeng pumpestasjon</text>
+</svg>
+<svg x="663" y="2703" id="site39" onclick="map.site_click(evt, 'site39');" onmousedown="map.site_mousedown(evt, 'site39');" onmouseup="map.site_mouseup(evt, 'site39');" onmousemove="map.site_mousemove(evt, 'site39');" onmouseover="map.site_mouseover(evt, 'site39');" onmouseout="map.site_mouseout(evt, 'site39');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Ytre Enebakk</text>
+<text x="5" y="63.9" font-size="9">barnehage</text>
+</svg>
+<svg x="1770" y="1482" id="site64" onclick="map.site_click(evt, 'site64');" onmousedown="map.site_mousedown(evt, 'site64');" onmouseup="map.site_mouseup(evt, 'site64');" onmousemove="map.site_mousemove(evt, 'site64');" onmouseover="map.site_mouseover(evt, 'site64');" onmouseout="map.site_mouseout(evt, 'site64');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Fet kulturpaviljong</text>
+</svg>
+<svg x="958" y="975" id="site138" onclick="map.site_click(evt, 'site138');" onmousedown="map.site_mousedown(evt, 'site138');" onmouseup="map.site_mouseup(evt, 'site138');" onmousemove="map.site_mousemove(evt, 'site138');" onmouseover="map.site_mouseover(evt, 'site138');" onmouseout="map.site_mouseout(evt, 'site138');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/Ukjent.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Avfallsdeponi</text>
+</svg>
+<svg x="238" y="513" id="site97" onclick="map.site_click(evt, 'site97');" onmousedown="map.site_mousedown(evt, 'site97');" onmouseup="map.site_mouseup(evt, 'site97');" onmousemove="map.site_mousemove(evt, 'site97');" onmouseover="map.site_mouseover(evt, 'site97');" onmouseout="map.site_mouseout(evt, 'site97');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Løvlia barnehage</text>
+</svg>
+<svg x="1777" y="1616" id="site58" onclick="map.site_click(evt, 'site58');" onmousedown="map.site_mousedown(evt, 'site58');" onmouseup="map.site_mouseup(evt, 'site58');" onmousemove="map.site_mousemove(evt, 'site58');" onmouseover="map.site_mouseover(evt, 'site58');" onmouseout="map.site_mouseout(evt, 'site58');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Jahren gamle skole</text>
+</svg>
+<svg x="1718" y="1862" id="site12" onclick="map.site_click(evt, 'site12');" onmousedown="map.site_mousedown(evt, 'site12');" onmouseup="map.site_mouseup(evt, 'site12');" onmousemove="map.site_mousemove(evt, 'site12');" onmouseover="map.site_mouseover(evt, 'site12');" onmouseout="map.site_mouseout(evt, 'site12');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Flateby barnehage</text>
+</svg>
+<svg x="701" y="2793" id="site41" onclick="map.site_click(evt, 'site41');" onmousedown="map.site_mousedown(evt, 'site41');" onmouseup="map.site_mouseup(evt, 'site41');" onmousemove="map.site_mousemove(evt, 'site41');" onmouseover="map.site_mouseover(evt, 'site41');" onmouseout="map.site_mouseout(evt, 'site41');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Ytre Enebakk</text>
+<text x="5" y="63.9" font-size="9">kloakkrenseanlegg</text>
+</svg>
+<svg x="1355" y="626" id="site153" onclick="map.site_click(evt, 'site153');" onmousedown="map.site_mousedown(evt, 'site153');" onmouseup="map.site_mouseup(evt, 'site153');" onmousemove="map.site_mousemove(evt, 'site153');" onmouseover="map.site_mouseover(evt, 'site153');" onmouseout="map.site_mouseout(evt, 'site153');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Tienbråten</text>
+<text x="5" y="63.9" font-size="9">barnehage</text>
+</svg>
+<svg x="1717" y="1744" id="site15" onclick="map.site_click(evt, 'site15');" onmousedown="map.site_mousedown(evt, 'site15');" onmouseup="map.site_mouseup(evt, 'site15');" onmousemove="map.site_mousemove(evt, 'site15');" onmouseover="map.site_mouseover(evt, 'site15');" onmouseout="map.site_mouseout(evt, 'site15');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Flateby</text>
+<text x="5" y="63.9" font-size="9">kloakkrenseanlegg</text>
+</svg>
+<svg x="834" y="975" id="site137" onclick="map.site_click(evt, 'site137');" onmousedown="map.site_mousedown(evt, 'site137');" onmouseup="map.site_mouseup(evt, 'site137');" onmousemove="map.site_mousemove(evt, 'site137');" onmouseover="map.site_mouseover(evt, 'site137');" onmouseout="map.site_mouseout(evt, 'site137');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Rælingen</text>
+<text x="5" y="63.9" font-size="9">videregående skole</text>
+</svg>
+<svg x="724" y="811" id="site81" onclick="map.site_click(evt, 'site81');" onmousedown="map.site_mousedown(evt, 'site81');" onmouseup="map.site_mouseup(evt, 'site81');" onmousemove="map.site_mousemove(evt, 'site81');" onmouseover="map.site_mouseover(evt, 'site81');" onmouseout="map.site_mouseout(evt, 'site81');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Dovrebygget</text>
+</svg>
+<svg x="1840" y="1325" id="site52" onclick="map.site_click(evt, 'site52');" onmousedown="map.site_mousedown(evt, 'site52');" onmouseup="map.site_mouseup(evt, 'site52');" onmousemove="map.site_mousemove(evt, 'site52');" onmouseover="map.site_mouseover(evt, 'site52');" onmouseout="map.site_mouseout(evt, 'site52');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/GovBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Fet rådhus</text>
+</svg>
+<svg x="1911" y="1325" id="site60" onclick="map.site_click(evt, 'site60');" onmousedown="map.site_mousedown(evt, 'site60');" onmouseup="map.site_mouseup(evt, 'site60');" onmousemove="map.site_mousemove(evt, 'site60');" onmouseover="map.site_mouseover(evt, 'site60');" onmouseout="map.site_mouseout(evt, 'site60');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Kringen ungdomsklubb</text>
+</svg>
+<svg x="2056" y="959" id="site56" onclick="map.site_click(evt, 'site56');" onmousedown="map.site_mousedown(evt, 'site56');" onmouseup="map.site_mouseup(evt, 'site56');" onmousemove="map.site_mousemove(evt, 'site56');" onmouseover="map.site_mouseover(evt, 'site56');" onmouseout="map.site_mouseout(evt, 'site56');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Heia VITA AS</text>
+</svg>
+<svg x="426" y="1354" id="site101" onclick="map.site_click(evt, 'site101');" onmousedown="map.site_mousedown(evt, 'site101');" onmouseup="map.site_mouseup(evt, 'site101');" onmousemove="map.site_mousemove(evt, 'site101');" onmouseover="map.site_mouseover(evt, 'site101');" onmouseout="map.site_mouseout(evt, 'site101');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Marikollhallen</text>
+</svg>
+<svg x="1875" y="1399" id="site73" onclick="map.site_click(evt, 'site73');" onmousedown="map.site_mousedown(evt, 'site73');" onmouseup="map.site_mouseup(evt, 'site73');" onmousemove="map.site_mousemove(evt, 'site73');" onmouseover="map.site_mouseover(evt, 'site73');" onmouseout="map.site_mouseout(evt, 'site73');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Østersund</text>
+<text x="5" y="63.9" font-size="9">ungdomsskole</text>
+</svg>
+<svg x="1494" y="1435" id="site66" onclick="map.site_click(evt, 'site66');" onmousedown="map.site_mousedown(evt, 'site66');" onmouseup="map.site_mouseup(evt, 'site66');" onmousemove="map.site_mousemove(evt, 'site66');" onmouseover="map.site_mouseover(evt, 'site66');" onmouseout="map.site_mouseout(evt, 'site66');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">PA1 pumpestasjon</text>
+</svg>
+<svg x="1408" y="1119" id="site45" onclick="map.site_click(evt, 'site45');" onmousedown="map.site_mousedown(evt, 'site45');" onmouseup="map.site_mouseup(evt, 'site45');" onmousemove="map.site_mousemove(evt, 'site45');" onmouseover="map.site_mouseover(evt, 'site45');" onmouseout="map.site_mouseout(evt, 'site45');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Biblioteket</text>
+</svg>
+<svg x="467" y="1160" id="site86" onclick="map.site_click(evt, 'site86');" onmousedown="map.site_mousedown(evt, 'site86');" onmouseup="map.site_mouseup(evt, 'site86');" onmousemove="map.site_mousemove(evt, 'site86');" onmouseover="map.site_mouseover(evt, 'site86');" onmouseout="map.site_mouseout(evt, 'site86');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">H05 Blystadlia</text>
+<text x="5" y="63.9" font-size="9">styringsbasseng</text>
+</svg>
+<svg x="1326" y="1803" id="site19" onclick="map.site_click(evt, 'site19');" onmousedown="map.site_mousedown(evt, 'site19');" onmouseup="map.site_mouseup(evt, 'site19');" onmousemove="map.site_mousemove(evt, 'site19');" onmouseover="map.site_mouseover(evt, 'site19');" onmouseout="map.site_mouseout(evt, 'site19');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Hauglia skole</text>
+</svg>
+<svg x="2068" y="1629" id="site62" onclick="map.site_click(evt, 'site62');" onmousedown="map.site_mousedown(evt, 'site62');" onmouseup="map.site_mouseup(evt, 'site62');" onmousemove="map.site_mousemove(evt, 'site62');" onmouseover="map.site_mouseover(evt, 'site62');" onmouseout="map.site_mouseout(evt, 'site62');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Nygård barnehage</text>
+</svg>
+<svg x="1559" y="780" id="site54" onclick="map.site_click(evt, 'site54');" onmousedown="map.site_mousedown(evt, 'site54');" onmouseup="map.site_mouseup(evt, 'site54');" onmousemove="map.site_mousemove(evt, 'site54');" onmouseover="map.site_mouseover(evt, 'site54');" onmouseout="map.site_mouseout(evt, 'site54');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Garderåsen</text>
+<text x="5" y="63.9" font-size="9">barnehage</text>
+</svg>
+<svg x="1839" y="1542" id="site67" onclick="map.site_click(evt, 'site67');" onmousedown="map.site_mousedown(evt, 'site67');" onmouseup="map.site_mouseup(evt, 'site67');" onmousemove="map.site_mousemove(evt, 'site67');" onmouseover="map.site_mouseover(evt, 'site67');" onmouseout="map.site_mouseout(evt, 'site67');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Riddersand skole</text>
+</svg>
+<svg x="1809" y="892" id="site70" onclick="map.site_click(evt, 'site70');" onmousedown="map.site_mousedown(evt, 'site70');" onmouseup="map.site_mouseup(evt, 'site70');" onmousemove="map.site_mousemove(evt, 'site70');" onmouseover="map.site_mouseover(evt, 'site70');" onmouseout="map.site_mouseout(evt, 'site70');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sørli 2</text>
+</svg>
+<svg x="726" y="3012" id="site139" onclick="map.site_click(evt, 'site139');" onmousedown="map.site_mousedown(evt, 'site139');" onmouseup="map.site_mouseup(evt, 'site139');" onmousemove="map.site_mousemove(evt, 'site139');" onmouseover="map.site_mouseover(evt, 'site139');" onmouseout="map.site_mouseout(evt, 'site139');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Bjerkely</text>
+<text x="5" y="63.9" font-size="9">ungdomsklubb</text>
+</svg>
+<svg x="841" y="3067" id="site2" onclick="map.site_click(evt, 'site2');" onmousedown="map.site_mousedown(evt, 'site2');" onmouseup="map.site_mouseup(evt, 'site2');" onmousemove="map.site_mousemove(evt, 'site2');" onmouseover="map.site_mouseover(evt, 'site2');" onmouseout="map.site_mouseout(evt, 'site2');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Bjerkely (Ytre</text>
+<text x="5" y="63.9" font-size="9">Enebakk skole)</text>
+</svg>
+<svg x="1583" y="2502" id="site17" onclick="map.site_click(evt, 'site17');" onmousedown="map.site_mousedown(evt, 'site17');" onmouseup="map.site_mouseup(evt, 'site17');" onmousemove="map.site_mousemove(evt, 'site17');" onmouseover="map.site_mouseover(evt, 'site17');" onmouseout="map.site_mouseout(evt, 'site17');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Gamle Kirkebygden</text>
+<text x="5" y="63.9" font-size="9">skole</text>
+</svg>
+<svg x="756" y="84" id="site136" onclick="map.site_click(evt, 'site136');" onmousedown="map.site_mousedown(evt, 'site136');" onmouseup="map.site_mouseup(evt, 'site136');" onmousemove="map.site_mousemove(evt, 'site136');" onmouseover="map.site_mouseover(evt, 'site136');" onmouseout="map.site_mouseout(evt, 'site136');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Nedre Romerike</text>
+<text x="5" y="63.9" font-size="9">Distriktsrevisjon</text>
+</svg>
+<svg x="1049" y="1482" id="site116" onclick="map.site_click(evt, 'site116');" onmousedown="map.site_mousedown(evt, 'site116');" onmouseup="map.site_mouseup(evt, 'site116');" onmousemove="map.site_mousemove(evt, 'site116');" onmouseover="map.site_mouseover(evt, 'site116');" onmouseout="map.site_mouseout(evt, 'site116');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Smestad skole</text>
+</svg>
+<svg x="1021" y="1066" id="site88" onclick="map.site_click(evt, 'site88');" onmousedown="map.site_mousedown(evt, 'site88');" onmouseup="map.site_mouseup(evt, 'site88');" onmousemove="map.site_mousemove(evt, 'site88');" onmouseover="map.site_mouseover(evt, 'site88');" onmouseout="map.site_mouseout(evt, 'site88');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Hauger boliger</text>
+</svg>
+<svg x="1440" y="2366" id="site144" onclick="map.site_click(evt, 'site144');" onmousedown="map.site_mousedown(evt, 'site144');" onmouseup="map.site_mouseup(evt, 'site144');" onmousemove="map.site_mousemove(evt, 'site144');" onmouseover="map.site_mouseover(evt, 'site144');" onmouseout="map.site_mouseout(evt, 'site144');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Familiens hus</text>
+</svg>
+<svg x="725" y="2950" id="site30" onclick="map.site_click(evt, 'site30');" onmousedown="map.site_mousedown(evt, 'site30');" onmouseup="map.site_mouseup(evt, 'site30');" onmousemove="map.site_mousemove(evt, 'site30');" onmouseover="map.site_mouseover(evt, 'site30');" onmouseout="map.site_mouseout(evt, 'site30');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Mari menighetskontor</text>
+</svg>
+<svg x="426" y="1280" id="site100" onclick="map.site_click(evt, 'site100');" onmousedown="map.site_mousedown(evt, 'site100');" onmouseup="map.site_mouseup(evt, 'site100');" onmousemove="map.site_mousemove(evt, 'site100');" onmouseover="map.site_mouseover(evt, 'site100');" onmouseout="map.site_mouseout(evt, 'site100');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Marikollen</text>
+<text x="5" y="63.9" font-size="9">ungdomsskole</text>
+</svg>
+<svg x="760" y="1045" id="site110" onclick="map.site_click(evt, 'site110');" onmousedown="map.site_mousedown(evt, 'site110');" onmouseup="map.site_mouseup(evt, 'site110');" onmousemove="map.site_mousemove(evt, 'site110');" onmouseover="map.site_mouseover(evt, 'site110');" onmouseout="map.site_mouseout(evt, 'site110');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/GovBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Rælingen rådhus</text>
+</svg>
+<svg x="248" y="1006" id="site82" onclick="map.site_click(evt, 'site82');" onmousedown="map.site_mousedown(evt, 'site82');" onmouseup="map.site_mouseup(evt, 'site82');" onmousemove="map.site_mousemove(evt, 'site82');" onmouseover="map.site_mouseover(evt, 'site82');" onmouseout="map.site_mouseout(evt, 'site82');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Elgen barnehage</text>
+</svg>
+<svg x="1834" y="1016" id="site147" onclick="map.site_click(evt, 'site147');" onmousedown="map.site_mousedown(evt, 'site147');" onmouseup="map.site_mouseup(evt, 'site147');" onmousemove="map.site_mousemove(evt, 'site147');" onmouseover="map.site_mouseover(evt, 'site147');" onmouseout="map.site_mouseout(evt, 'site147');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Vertexhuset</text>
+</svg>
+<svg x="1619" y="2125" id="site25" onclick="map.site_click(evt, 'site25');" onmousedown="map.site_mousedown(evt, 'site25');" onmouseup="map.site_mouseup(evt, 'site25');" onmousemove="map.site_mousemove(evt, 'site25');" onmouseover="map.site_mouseover(evt, 'site25');" onmouseout="map.site_mouseout(evt, 'site25');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Kirkebygden skole</text>
+</svg>
+<svg x="681" y="1163" id="site120" onclick="map.site_click(evt, 'site120');" onmousedown="map.site_mousedown(evt, 'site120');" onmouseup="map.site_mouseup(evt, 'site120');" onmousemove="map.site_mousemove(evt, 'site120');" onmouseover="map.site_mouseover(evt, 'site120');" onmouseout="map.site_mouseout(evt, 'site120');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Trivselsenteret</text>
+<text x="5" y="63.9" font-size="9">Kirkebyveien</text>
+</svg>
+<svg x="1592" y="2351" id="site28" onclick="map.site_click(evt, 'site28');" onmousedown="map.site_mousedown(evt, 'site28');" onmouseup="map.site_mouseup(evt, 'site28');" onmousemove="map.site_mousemove(evt, 'site28');" onmouseover="map.site_mouseover(evt, 'site28');" onmouseout="map.site_mouseout(evt, 'site28');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk</text>
+<text x="5" y="63.9" font-size="9">menighetskontor</text>
+</svg>
+<svg x="789" y="2857" id="site156" onclick="map.site_click(evt, 'site156');" onmousedown="map.site_mousedown(evt, 'site156');" onmouseup="map.site_mouseup(evt, 'site156');" onmousemove="map.site_mousemove(evt, 'site156');" onmouseover="map.site_mouseover(evt, 'site156');" onmouseout="map.site_mouseout(evt, 'site156');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Mjær pumpestasjon</text>
+</svg>
+<svg x="754" y="5" id="site134" onclick="map.site_click(evt, 'site134');" onmousedown="map.site_mousedown(evt, 'site134');" onmouseup="map.site_mouseup(evt, 'site134');" onmousemove="map.site_mousemove(evt, 'site134');" onmouseover="map.site_mouseover(evt, 'site134');" onmouseout="map.site_mouseout(evt, 'site134');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Nedre Romerike</text>
+<text x="5" y="63.9" font-size="9">Distriktsrevisjon</text>
+</svg>
+<svg x="1044" y="1320" id="site83" onclick="map.site_click(evt, 'site83');" onmousedown="map.site_mousedown(evt, 'site83');" onmouseup="map.site_mouseup(evt, 'site83');" onmousemove="map.site_mousemove(evt, 'site83');" onmouseover="map.site_mouseover(evt, 'site83');" onmouseout="map.site_mouseout(evt, 'site83');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Fjerdingby gravsted</text>
+</svg>
+<svg x="760" y="171" id="site135" onclick="map.site_click(evt, 'site135');" onmousedown="map.site_mousedown(evt, 'site135');" onmouseup="map.site_mouseup(evt, 'site135');" onmousemove="map.site_mousemove(evt, 'site135');" onmouseover="map.site_mouseover(evt, 'site135');" onmouseout="map.site_mouseout(evt, 'site135');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Nedre Romerike</text>
+<text x="5" y="63.9" font-size="9">Distriktsrevisjon</text>
+</svg>
+<svg x="229" y="793" id="site112" onclick="map.site_click(evt, 'site112');" onmousedown="map.site_mousedown(evt, 'site112');" onmouseup="map.site_mouseup(evt, 'site112');" onmousemove="map.site_mousemove(evt, 'site112');" onmouseover="map.site_mouseover(evt, 'site112');" onmouseout="map.site_mouseout(evt, 'site112');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sandbekken</text>
+<text x="5" y="63.9" font-size="9">ungdomsskole</text>
+</svg>
+<svg x="1642" y="1619" id="site59" onclick="map.site_click(evt, 'site59');" onmousedown="map.site_mousedown(evt, 'site59');" onmouseup="map.site_mouseup(evt, 'site59');" onmousemove="map.site_mousemove(evt, 'site59');" onmouseover="map.site_mouseover(evt, 'site59');" onmouseout="map.site_mouseout(evt, 'site59');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Kirken servicehuset</text>
+</svg>
+<svg x="1804" y="961" id="site69" onclick="map.site_click(evt, 'site69');" onmousedown="map.site_mousedown(evt, 'site69');" onmouseup="map.site_mouseup(evt, 'site69');" onmousemove="map.site_mousemove(evt, 'site69');" onmouseover="map.site_mouseover(evt, 'site69');" onmouseout="map.site_mouseout(evt, 'site69');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sørli 1</text>
+</svg>
+<svg x="1804" y="1820" id="site145" onclick="map.site_click(evt, 'site145');" onmousedown="map.site_mousedown(evt, 'site145');" onmouseup="map.site_mouseup(evt, 'site145');" onmousemove="map.site_mousemove(evt, 'site145');" onmouseover="map.site_mouseover(evt, 'site145');" onmouseout="map.site_mouseout(evt, 'site145');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Flateby Ungdomsklubb</text>
+</svg>
+<svg x="1880" y="849" id="site49" onclick="map.site_click(evt, 'site49');" onmousedown="map.site_mousedown(evt, 'site49');" onmouseup="map.site_mouseup(evt, 'site49');" onmousemove="map.site_mousemove(evt, 'site49');" onmouseover="map.site_mouseover(evt, 'site49');" onmouseout="map.site_mouseout(evt, 'site49');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Fallertun</text>
+</svg>
+<svg x="1321" y="2420" id="site150" onclick="map.site_click(evt, 'site150');" onmousedown="map.site_mousedown(evt, 'site150');" onmouseup="map.site_mouseup(evt, 'site150');" onmousemove="map.site_mousemove(evt, 'site150');" onmouseover="map.site_mouseover(evt, 'site150');" onmouseout="map.site_mouseout(evt, 'site150');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Krona pumpestasjon</text>
+</svg>
+<svg x="365" y="292" id="site124" onclick="map.site_click(evt, 'site124');" onmousedown="map.site_mousedown(evt, 'site124');" onmouseup="map.site_mouseup(evt, 'site124');" onmousemove="map.site_mousemove(evt, 'site124');" onmouseover="map.site_mouseover(evt, 'site124');" onmouseout="map.site_mouseout(evt, 'site124');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Øvre Rælingen</text>
+<text x="5" y="63.9" font-size="9">kirke</text>
+</svg>
+<svg x="1856" y="1930" id="site155" onclick="map.site_click(evt, 'site155');" onmousedown="map.site_mousedown(evt, 'site155');" onmouseup="map.site_mouseup(evt, 'site155');" onmousemove="map.site_mousemove(evt, 'site155');" onmouseover="map.site_mouseover(evt, 'site155');" onmouseout="map.site_mouseout(evt, 'site155');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Stranden skole</text>
+<text x="5" y="63.9" font-size="9">Gymsal</text>
+</svg>
+<svg x="1151" y="100" id="site130" onclick="map.site_click(evt, 'site130');" onmousedown="map.site_mousedown(evt, 'site130');" onmouseup="map.site_mouseup(evt, 'site130');" onmousemove="map.site_mousemove(evt, 'site130');" onmouseover="map.site_mouseover(evt, 'site130');" onmouseout="map.site_mouseout(evt, 'site130');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/BigBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Telenor</text>
+</svg>
+<svg x="460" y="570" id="site122" onclick="map.site_click(evt, 'site122');" onmousedown="map.site_mousedown(evt, 'site122');" onmouseup="map.site_mouseup(evt, 'site122');" onmousemove="map.site_mousemove(evt, 'site122');" onmouseover="map.site_mouseover(evt, 'site122');" onmouseout="map.site_mouseout(evt, 'site122');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">TS02 Øgardshøgda</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="1564" y="679" id="site143" onclick="map.site_click(evt, 'site143');" onmousedown="map.site_mousedown(evt, 'site143');" onmouseup="map.site_mouseup(evt, 'site143');" onmousemove="map.site_mousemove(evt, 'site143');" onmouseover="map.site_mouseover(evt, 'site143');" onmouseout="map.site_mouseout(evt, 'site143');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Garderåsen</text>
+<text x="5" y="63.9" font-size="9">Høydebasseng</text>
+</svg>
+<svg x="375" y="387" id="site121" onclick="map.site_click(evt, 'site121');" onmousedown="map.site_mousedown(evt, 'site121');" onmouseup="map.site_mouseup(evt, 'site121');" onmousemove="map.site_mousemove(evt, 'site121');" onmouseover="map.site_mouseover(evt, 'site121');" onmouseout="map.site_mouseout(evt, 'site121');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">TS01 Stormyra</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="367" y="1080" id="site79" onclick="map.site_click(evt, 'site79');" onmousedown="map.site_mousedown(evt, 'site79');" onmouseup="map.site_mouseup(evt, 'site79');" onmousemove="map.site_mousemove(evt, 'site79');" onmouseover="map.site_mouseover(evt, 'site79');" onmouseout="map.site_mouseout(evt, 'site79');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Blystadlia skole</text>
+</svg>
+<svg x="1297" y="2556" id="site158" onclick="map.site_click(evt, 'site158');" onmousedown="map.site_mousedown(evt, 'site158');" onmouseup="map.site_mouseup(evt, 'site158');" onmousemove="map.site_mousemove(evt, 'site158');" onmouseover="map.site_mouseover(evt, 'site158');" onmouseout="map.site_mouseout(evt, 'site158');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Thorud pumpestasjon</text>
+</svg>
+<svg x="815" y="3020" id="site42" onclick="map.site_click(evt, 'site42');" onmousedown="map.site_mousedown(evt, 'site42');" onmouseup="map.site_mouseup(evt, 'site42');" onmousemove="map.site_mousemove(evt, 'site42');" onmouseover="map.site_mouseover(evt, 'site42');" onmouseout="map.site_mouseout(evt, 'site42');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Ytre Enebakk skole</text>
+</svg>
+<svg x="1349" y="2244" id="site22" onclick="map.site_click(evt, 'site22');" onmousedown="map.site_mousedown(evt, 'site22');" onmouseup="map.site_mouseup(evt, 'site22');" onmousemove="map.site_mousemove(evt, 'site22');" onmouseover="map.site_mouseover(evt, 'site22');" onmouseout="map.site_mouseout(evt, 'site22');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk sykehjem,</text>
+<text x="5" y="63.9" font-size="9">avd Ignagard</text>
+</svg>
+<svg x="1873" y="2009" id="site154" onclick="map.site_click(evt, 'site154');" onmousedown="map.site_mousedown(evt, 'site154');" onmouseup="map.site_mouseup(evt, 'site154');" onmousemove="map.site_mousemove(evt, 'site154');" onmouseover="map.site_mouseover(evt, 'site154');" onmouseout="map.site_mouseout(evt, 'site154');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Flatebyhallen</text>
+</svg>
+<svg x="2070" y="1546" id="site46" onclick="map.site_click(evt, 'site46');" onmousedown="map.site_mousedown(evt, 'site46');" onmouseup="map.site_mouseup(evt, 'site46');" onmousemove="map.site_mousemove(evt, 'site46');" onmouseover="map.site_mouseover(evt, 'site46');" onmouseout="map.site_mouseout(evt, 'site46');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Dalen skole</text>
+</svg>
+<svg x="1737" y="2118" id="site23" onclick="map.site_click(evt, 'site23');" onmousedown="map.site_mousedown(evt, 'site23');" onmouseup="map.site_mouseup(evt, 'site23');" onmousemove="map.site_mousemove(evt, 'site23');" onmouseover="map.site_mouseover(evt, 'site23');" onmouseout="map.site_mouseout(evt, 'site23');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Kirkebygden</text>
+<text x="5" y="63.9" font-size="9">barnehage</text>
+</svg>
+<svg x="807" y="664" id="site105" onclick="map.site_click(evt, 'site105');" onmousedown="map.site_mousedown(evt, 'site105');" onmouseup="map.site_mouseup(evt, 'site105');" onmousemove="map.site_mousemove(evt, 'site105');" onmouseover="map.site_mouseover(evt, 'site105');" onmouseout="map.site_mouseout(evt, 'site105');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">PK01 Nyland</text>
+<text x="5" y="63.9" font-size="9">pumpestasjon</text>
+</svg>
+<svg x="222" y="603" id="site96" onclick="map.site_click(evt, 'site96');" onmousedown="map.site_mousedown(evt, 'site96');" onmouseup="map.site_mouseup(evt, 'site96');" onmousemove="map.site_mousemove(evt, 'site96');" onmouseover="map.site_mouseover(evt, 'site96');" onmouseout="map.site_mouseout(evt, 'site96');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/MediumBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Løvenstadtunet</text>
+<text x="5" y="63.9" font-size="9">pleie og</text>
+<text x="5" y="72.9" font-size="9">omsorgssenter</text>
+</svg>
+<svg x="889" y="2739" id="site159" onclick="map.site_click(evt, 'site159');" onmousedown="map.site_mousedown(evt, 'site159');" onmouseup="map.site_mouseup(evt, 'site159');" onmousemove="map.site_mousemove(evt, 'site159');" onmouseover="map.site_mouseover(evt, 'site159');" onmouseout="map.site_mouseout(evt, 'site159');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Mjærhallen</text>
+</svg>
+<svg x="911" y="1166" id="site85" onclick="map.site_click(evt, 'site85');" onmousedown="map.site_mousedown(evt, 'site85');" onmouseup="map.site_mouseup(evt, 'site85');" onmousemove="map.site_mousemove(evt, 'site85');" onmouseover="map.site_mouseover(evt, 'site85');" onmouseout="map.site_mouseout(evt, 'site85');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Fjerdingby skole</text>
+</svg>
+<svg x="1051" y="2929" id="site36" onclick="map.site_click(evt, 'site36');" onmousedown="map.site_mousedown(evt, 'site36');" onmouseup="map.site_mouseup(evt, 'site36');" onmousemove="map.site_mousemove(evt, 'site36');" onmouseover="map.site_mouseover(evt, 'site36');" onmouseout="map.site_mouseout(evt, 'site36');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Solgården dagsenter</text>
+</svg>
+<svg x="177" y="530" id="site94" onclick="map.site_click(evt, 'site94');" onmousedown="map.site_mousedown(evt, 'site94');" onmouseup="map.site_mouseup(evt, 'site94');" onmousemove="map.site_mousemove(evt, 'site94');" onmouseover="map.site_mouseover(evt, 'site94');" onmouseout="map.site_mouseout(evt, 'site94');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Løvenstad barnehage</text>
+</svg>
+<svg x="699" y="2851" id="site160" onclick="map.site_click(evt, 'site160');" onmousedown="map.site_mousedown(evt, 'site160');" onmouseup="map.site_mouseup(evt, 'site160');" onmousemove="map.site_mousemove(evt, 'site160');" onmouseover="map.site_mouseover(evt, 'site160');" onmouseout="map.site_mouseout(evt, 'site160');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Ytre Enebakk</text>
+<text x="5" y="63.9" font-size="9">Brannstasjon</text>
+</svg>
+<svg x="773" y="356" id="site146" onclick="map.site_click(evt, 'site146');" onmousedown="map.site_mousedown(evt, 'site146');" onmouseup="map.site_mouseup(evt, 'site146');" onmousemove="map.site_mousemove(evt, 'site146');" onmouseover="map.site_mouseover(evt, 'site146');" onmouseout="map.site_mouseout(evt, 'site146');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">RA2-PA1</text>
+</svg>
+<svg x="186" y="858" id="site111" onclick="map.site_click(evt, 'site111');" onmousedown="map.site_mousedown(evt, 'site111');" onmouseup="map.site_mouseup(evt, 'site111');" onmousemove="map.site_mousemove(evt, 'site111');" onmouseover="map.site_mouseover(evt, 'site111');" onmouseout="map.site_mouseout(evt, 'site111');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sandbekken klubbhus</text>
+</svg>
+<svg x="1805" y="1085" id="site51" onclick="map.site_click(evt, 'site51');" onmousedown="map.site_mousedown(evt, 'site51');" onmouseup="map.site_mouseup(evt, 'site51');" onmousemove="map.site_mousemove(evt, 'site51');" onmouseover="map.site_mouseover(evt, 'site51');" onmouseout="map.site_mouseout(evt, 'site51');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Fet helsestasjon</text>
+</svg>
+<svg x="1063" y="2834" id="site9" onclick="map.site_click(evt, 'site9');" onmousedown="map.site_mousedown(evt, 'site9');" onmouseup="map.site_mouseup(evt, 'site9');" onmousemove="map.site_mousemove(evt, 'site9');" onmouseover="map.site_mouseover(evt, 'site9');" onmouseout="map.site_mouseout(evt, 'site9');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk sykehjem,</text>
+<text x="5" y="63.9" font-size="9">avd Kopås</text>
+</svg>
+<svg x="1533" y="2260" id="site8" onclick="map.site_click(evt, 'site8');" onmousedown="map.site_mousedown(evt, 'site8');" onmouseup="map.site_mouseup(evt, 'site8');" onmousemove="map.site_mousemove(evt, 'site8');" onmouseover="map.site_mouseover(evt, 'site8');" onmouseout="map.site_mouseout(evt, 'site8');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/GovBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk rådhus</text>
+</svg>
+<svg x="407" y="993" id="site98" onclick="map.site_click(evt, 'site98');" onmousedown="map.site_mousedown(evt, 'site98');" onmouseup="map.site_mouseup(evt, 'site98');" onmousemove="map.site_mousemove(evt, 'site98');" onmouseover="map.site_mouseover(evt, 'site98');" onmouseout="map.site_mouseout(evt, 'site98');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Mårbakken barnehage</text>
+</svg>
+<svg x="1448" y="2193" id="site4" onclick="map.site_click(evt, 'site4');" onmousedown="map.site_mousedown(evt, 'site4');" onmouseup="map.site_mouseup(evt, 'site4');" onmousemove="map.site_mousemove(evt, 'site4');" onmouseover="map.site_mouseover(evt, 'site4');" onmouseout="map.site_mouseout(evt, 'site4');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="dead">
+<animate attributeName="fill-opacity" values="0.2; 0.4;" calcMode="discrete" repeatCount="indefinite" dur="2s" begin="2s" />
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk bibliotek</text>
+</svg>
+<svg x="531" y="2638" id="site34" onclick="map.site_click(evt, 'site34');" onmousedown="map.site_mousedown(evt, 'site34');" onmouseup="map.site_mouseup(evt, 'site34');" onmousemove="map.site_mousemove(evt, 'site34');" onmouseover="map.site_mouseover(evt, 'site34');" onmouseout="map.site_mouseout(evt, 'site34');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="unknown">
+</circle>
+<text x="5" y="54.9" font-size="9">Nylendeveien</text>
+<text x="5" y="63.9" font-size="9">bokollektiv</text>
+</svg>
+<svg x="1795" y="1978" id="site37" onclick="map.site_click(evt, 'site37');" onmousedown="map.site_mousedown(evt, 'site37');" onmouseup="map.site_mouseup(evt, 'site37');" onmousemove="map.site_mousemove(evt, 'site37');" onmouseover="map.site_mouseover(evt, 'site37');" onmouseout="map.site_mouseout(evt, 'site37');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/EduBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Stranden skole</text>
+</svg>
+<svg x="114" y="384" id="site117" onclick="map.site_click(evt, 'site117');" onmousedown="map.site_mousedown(evt, 'site117');" onmouseup="map.site_mouseup(evt, 'site117');" onmousemove="map.site_mousemove(evt, 'site117');" onmouseover="map.site_mouseover(evt, 'site117');" onmouseout="map.site_mouseout(evt, 'site117');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Sætervegen 3</text>
+</svg>
+<svg x="1504" y="2360" id="site5" onclick="map.site_click(evt, 'site5');" onmousedown="map.site_mousedown(evt, 'site5');" onmouseup="map.site_mouseup(evt, 'site5');" onmousemove="map.site_mousemove(evt, 'site5');" onmouseover="map.site_mouseover(evt, 'site5');" onmouseout="map.site_mouseout(evt, 'site5');">
+<image x="5" y="5" width="40" height="40" xlink:href="/static/PNG/SmallBuilding.png" />
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">Enebakk fysioterapi</text>
+</svg>
+[% INCLUDE svg_footer.template %]

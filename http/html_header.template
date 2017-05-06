@@ -1,7 +1,14 @@
-<!-- html_header.template begins -->
-<HTML>
-<HEAD>
-<TITLE>Atlas V</TITLE>
-</HEAD>
-<BODY>
-<!-- html_header.template ends -->
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+     <HTML xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+     <HEAD>
+     <TITLE>Atlas - Kart</title>
+     <META http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <LINK rel="stylesheet" href="static/CSS/common.css" type="text/css" />
+     <LINK rel="stylesheet" href="static/CSS/html.css" type="text/css" />
+     <SCRIPT type="text/javascript" src="static/JS/html.js"></SCRIPT>
+     <SCRIPT type="text/javascript" src="static/JS/ajax.js"></SCRIPT>
+     <SCRIPT type="text/javascript" src="static/JS/popup.js"></SCRIPT>
+     </HEAD>
+     <BODY>

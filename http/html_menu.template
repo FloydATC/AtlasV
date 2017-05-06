@@ -1,0 +1,39 @@
+<TABLE><TR><TD>
+<FORM method="get" action="find.html">
+<TABLE class="menu">
+<TR>
+<TD><A href="javascript:logout();">Logout</A></TD>
+<TD><A href="status.html">Status</A></TD>
+<TD><A href="hosts.html">Verter</A></TD>
+<TD><A href="sites.html">Lokasjoner</A></TD>
+<TD><A href="sitegroups.html">Omr&aring;der</A></TD>
+<TD><A href="commlinks.html">Kommlinker</A></TD>
+<TD><A href="problems.html">Feil</A></TD>
+<TD><A href="world.html">Kart</A></TD>
+<TD><A href="mrtg.cgi">MRTG</A></TD>
+<TD>
+<INPUT type="text" name="q" value="">
+<INPUT type="submit" value="S&oslash;k">
+<INPUT type="hidden" id="context" value="">
+</TD>
+</TR>
+</TABLE>
+</TD><TD>
+<TABLE>
+<TR>
+<TD>Zoom: -<INPUT type="radio" name="scale" value="0.2"
+ onClick="svg_resize(445, 644.4, 0.2);"><INPUT type="radio" name="scale" value="0.3"
+ onClick="svg_resize(667.5, 966.6, 0.3);"><INPUT type="radio" name="scale" value="0.4"
+ onClick="svg_resize(890, 1288.8, 0.4);"><INPUT type="radio" name="scale" value="0.5"
+ onClick="svg_resize(1112.5, 1611, 0.5);"><INPUT type="radio" name="scale" value="0.6"
+ onClick="svg_resize(1335, 1933.2, 0.6);"><INPUT type="radio" name="scale" value="0.7"
+ onClick="svg_resize(1557.5, 2255.4, 0.7);"><INPUT type="radio" name="scale" value="0.8"
+ onClick="svg_resize(1780, 2577.6, 0.8);"><INPUT type="radio" name="scale" value="0.9"
+ onClick="svg_resize(2002.5, 2899.8, 0.9);"><INPUT type="radio" name="scale" value="1.0"
+ checked onClick="svg_resize(2225, 3222, 1.0);">+</TD>
+</TR>
+</TABLE>
+</FORM>
+</TD>
+</TR>
+</TABLE>

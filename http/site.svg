@@ -1,0 +1,20 @@
+[% INCLUDE svg_header.template %]
+<remark value='WAN links' />
+<line x1="81" y1="72" x2="423.682349502495" y2="2042.42350963935" onclick="map.commlink_click(evt, 'commlink389');" onmousedown="map.commlink_mousedown(evt, 'commlink389');" onmouseup="map.commlink_mouseup(evt, 'commlink389');" onmouseover="map.commlink_mouseover(evt, 'commlink389');" onmouseout="map.commlink_mouseout(evt, 'commlink389');" onmousemove="map.commlink_mousemove(evt, 'commlink389');" class="fiber at1g wan" />
+<remark value='Host groups' />
+<svg x="46" y="22" width="135" height="100" onclick="map.hostgroup_click(evt, 'hostgroup72')" class="hostgroup" id="hostgroup72">
+<rect x="0" y="0" width="135" height="100" rx="10" ry="10" class="hostgroup"/>
+<text x="8" y="20" font-size="16" class="hostgrouplabel" id="hostgroup72">Kjeller, Lager under trapp</text>
+</svg>
+<remark value='LAN links' />
+<remark value='Hosts' />
+<svg x="56" y="47" id="host654" onclick="map.host_click(evt, 'host654');" onmousedown="map.host_mousedown(evt, 'host654');" onmouseup="map.host_mouseup(evt, 'host654');" onmousemove="map.host_mousemove(evt, 'host654');" onmouseover="map.host_mouseover(evt, 'host654');" onmouseout="map.host_mouseout(evt, 'host654');">
+<image x="5" y="5" width="40" height="40" xlink:href="Cisco/WS-C2960-24PC-L.png" />
+<text x="30" y="40" font-size="10" class="symbolbg">CE</text>
+<text x="30" y="40" font-size="10" class="symbol">CE</text>
+<circle cx="25px" cy="25px" r="20px" class="alive">
+</circle>
+<text x="5" y="54.9" font-size="9">RALIBA-SW-01</text>
+<text x="5" y="63.9" font-size="9">10.190.10.101</text>
+</svg>
+[% INCLUDE svg_footer.template %]

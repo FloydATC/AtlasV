@@ -11,7 +11,9 @@ use Time::HiRes;
 use Data::Dumper;
 use JSON;
 
-my $json = JSON->new( allow_nonref => 1 );
+
+#my $json = JSON->new( allow_nonref => 1 );
+my $json = JSON->new();
 warn "$0 $$ running\n";
 while (1) {
 

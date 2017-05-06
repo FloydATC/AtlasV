@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+      "http://www.w3.org/TR/2001/REC-SVG-20050904/DTD/svg10.dtd">
+      <!-- Copyright 2009 (c) Ano-Tech Computers -->
+<?xml-stylesheet type="text/css" href="static/CSS/common.css" ?>
+<?xml-stylesheet type="text/css" href="static/CSS/svg.css" ?>
+<svg xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      version="1.0"
+      viewBox="0 0 2225 3222"
+      onclick="map.svg_click(evt);"
+      onmousedown="map.svg_mousedown(evt);"
+      onmouseup="map.svg_mouseup(evt);"
+      onmouseover="map.svg_mouseover(evt);"
+      onmouseout="map.svg_mouseout(evt);"
+      onmousemove="map.svg_mousemove(evt);"
+      style="background: white;">
+<rect x="0" y="0" class="scrollable"      width="100%"
+      height="100%"
+      fill-opacity="1.0"
+ />
+<script type="text/ecmascript" xlink:href="static/JS/svg.js" />

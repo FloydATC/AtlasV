@@ -11,10 +11,12 @@ use Cwd qw( getcwd );
 
 
 my $mime = {
-  html => 'text/html',
-  txt  => 'text/plain',
-  svg  => 'xml/svg',
+  html => 'text/html; charset=utf8',
+  txt  => 'text/plain; charset=utf8',
+  svg  => 'image/svg+xml',
   png  => 'image/png',
+  js   => 'application/javascript',
+  css  => 'text/css',
 };
 
 my @status = ( 200 => 'OK' );
@@ -31,7 +33,6 @@ unless (-e 'http/'.$doc) {
 my $content = '';
 my $header = HTTP::Headers->new(
   Date		=> time2str(time),
-  Cache_Control	=> 'no-cache, no-store, must-revalidate',
   Connection	=> 'keep-alive',
 );
 
@@ -47,18 +48,33 @@ my $vars = {
   req		=> $req,
 };
 
-unless ($template->process($doc, $vars, \$content, binmode => ':utf8')) {
-  @status = ( 500 => 'Server error' );
-  $doc = 'error_500.html';
-  my $error = $template->error();
-  warn "$0 $$ Template: $error\n";
-  $vars->{'error'} = $error;
-  $template->process('error_500.html', $vars, \$content, binmode => ':utf8');
+my $ext = (split(/\./, $doc))[-1];
+#warn "$0 $$ serve $doc (ext=$ext)\n";
+if ($ext eq 'html' || $ext eq 'svg') {
+  #warn "$0 $$ use template\n";
+  $header->header( Cache_Control	=> 'no-cache, no-store, must-revalidate' );
+  unless ($template->process($doc, $vars, \$content, binmode => ':utf8')) {
+    @status = ( 500 => 'Server error' );
+    $doc = 'error_500.html';
+    my $error = $template->error();
+    warn "$0 $$ Template: $error\n";
+    $vars->{'error'} = $error;
+    $template->process('error_500.html', $vars, \$content, binmode => ':utf8');
+  }
+} else {
+  #warn "$0 $$ binary xfer\n";
+  $header->header( Cache_Control	=> 'public, max-age=86400' );
+  $content = $self->read_file('http/'.$doc);
 }
-my $ext = $doc =~ m/\.(\w)$/;
 $header->header( Content_Length => length($content) );
 $header->header( Content_Type => $mime->{$ext} );
 my $res = HTTP::Response->new( @status, $header, $content );
 print 'HTTP/1.1 '.$res->as_string;
+if ($status[0] != 200) {
+  print STDERR "$0 $$ ".$req->uri." ".join(' ',@status)."\n";
+}
 
 exit;
+
+ 
+ 

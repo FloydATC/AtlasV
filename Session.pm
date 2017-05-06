@@ -32,6 +32,21 @@ sub peer {
   return $self->{'peer'} || $self->socket;
 }
 
+
+sub name {
+  my $self = shift;
+  
+  return $self->{'name'} if $self->{'name'};
+  
+  if (ref($self->socket) eq 'GLOB' && $self->{'pid'}) { 
+    $self->{'name'} = 'pid='.$self->{'pid'}; 
+  }  
+  if (ref($self->socket) eq 'IO::Socket::INET' && $self->socket->sockhost()) { 
+    $self->{'name'} = $self->socket->sockhost().':'.$self->socket->sockport().'-'.$self->socket->peerhost().':'.$self->socket->peerport(); 
+  }
+  return $self->{'name'} || $self->socket;
+}
+
 sub echo {
   my $self = shift;
   return $self->{'echo'};

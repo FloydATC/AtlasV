@@ -43,10 +43,10 @@ sub new {
     $self->{'args'} ||= [];
 
     my $proc = ' '.$self->{'cmd'};
-    if (@{$self->{'args'}}) { $proc .= ' '.join(' ', @{$self->{'args'}}); }
+    #if (@{$self->{'args'}}) { $proc .= ' '.join(' ', @{$self->{'args'}}); }
     $0 .= $proc;
     $self->{'pid'} = $$;
-    #warn "$0 $$ spawned as ".$self->peer()."\n";
+    #warn "$0 $$ spawned as ".$self->name()."\n";
     $self->{'socket'}->autoflush();
     STDOUT->autoflush(1);
     STDERR->autoflush(1);
@@ -68,23 +68,34 @@ sub execute {
 
   my $fname = $self->{'cmd'};
   local @ARGV = @{$self->{'args'}};
-  unless (-e $fname) { print STDOUT "!".$fname.": file not found (see 'help' ?)\n"; exit; } 
-  unless (-f $fname) { print STDOUT "!".$fname.": not a plain file\n"; exit; } 
-  unless (-o $fname) { print STDOUT "!".$fname.": not owned by uid=".$<."\n"; exit; } 
-  unless (-r $fname) { print STDOUT "!".$fname.": permission denied\n"; exit; } 
+  unless (-e $fname) { $self->fail($fname, "file not found (see 'help' ?)"); } 
+  unless (-f $fname) { $self->fail($fname, "not a plain file"); } 
+  unless (-o $fname) { $self->fail($fname, "not owned by uid=".$<); } 
+  unless (-r $fname) { $self->fail($fname, "read permission denied"); } 
+  unless (-x $fname) { $self->fail($fname, "execute permission denied"); } 
   my $code = $self->read_file($fname);
+  #warn "$0 $$ loaded $fname (".length($code)." bytes)\n";
   my $sessions = $self->{'sessions'};
   my $session = $self->{'socket'};
   eval $code;
   if ($@) { 
-    print STDOUT "! ".$fname.": ".$@."\n"; 
-    warn "$0 $$ $fname CRASHED: $@\n";
+    $self->fail($fname, "CRASHED with ".$@);
   }
 
   # Do not return to caller
   exit;
 }
 
+
+sub fail {
+  my $self = shift;
+  my $fname = shift;
+  my $message = shift;
+  chomp $message;
+  print STDOUT "! ".$fname." failed: ".$message."\n" if $self->{'type'} eq 'line';
+  print STDERR "$0 $$ ".$fname." failed: ".$message."\n";
+  exit;
+}
 
 sub read_file {
   my $self = shift;

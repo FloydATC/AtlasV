@@ -1,0 +1,189 @@
+
+body		{
+	font-family: 		Verdana, sans-serif;
+	color: 			black;
+	font-size: 		8pt;
+	background-color: 	white;
+	margin: 		0px;
+}
+
+h3		{
+	margin-left:		20px;
+}
+
+.menu		{
+	width: 			600px;
+}
+
+.menu td 	{
+	vertical-align:		middle;
+}
+
+.legal		{
+	font-size: 		6pt;
+	color: 			gray;
+}
+
+hr		{
+	size: 			1px;
+	color: 			black;
+	margin-top: 		0px;
+	margin-bottom: 		0px;
+}
+
+tr.option:hover	{
+	background-color: 	white;
+}
+
+tr.alert	{
+	color:			red;
+}
+
+tr.notice	{
+	color:			gray;
+}
+
+tr.warn	{
+	color:			gray;
+}
+
+tr.oper_up.speed_10M	{
+	color:			red;
+}
+
+tr.admin_down	{
+	text-decoration: line-through;
+}
+
+tr.oper_down	{
+	color:			gray;
+	font-style: 		italic;
+}
+
+
+
+th		{
+	padding-left:		4px;
+	padding-right:		4px;
+}
+
+td		{
+	padding-left:		4px;
+	padding-right:		4px;
+}
+
+.dead		{
+	color: 			red;
+}
+
+.warning	{
+	color: 			#FF9900;
+}
+
+.alive		{
+	color: 			#008000;
+}
+
+.invalid	{
+	color: 			gray;
+}
+
+.disabled	{
+	color: 			gray;
+}
+
+.unknown	{
+	color: 			black;
+}
+
+
+a	{
+	color: 			inherit;
+}
+
+
+a:link	{
+	text-decoration: 	none;
+}
+
+a:visited	{
+	text-decoration: 	none;
+}
+
+a:hover	{
+	text-decoration: 	underline;
+}
+
+a:active	{
+	text-decoration: 	none;
+}
+
+
+table.popup		{
+
+	background-color: 	#F0F0F0;
+	border: 		1px outset black;
+	position: 		absolute;
+	border-spacing:		0px; 
+	padding: 		2px; 
+	min-width:		300px;
+}
+
+.popup td	{
+	padding:		2px;
+}
+
+thead		{
+	background-color: 	#E0E0E0;
+	border: 		1px gray solid;
+}
+
+th		{
+	text-align: 		left;
+	vertical-align: 	top;
+	white-space: 		nowrap;
+}
+
+td		{
+	vertical-align: 	top;
+	white-space: 		nowrap;
+}
+
+hr		{
+	height: 		1px;
+	color: 			gray;
+	background-color: 	gray;
+	border: 		0px;
+}
+
+object.graph	{
+	margin-left:		8px;
+}
+
+table.info	{
+	margin-left:		8px;
+	border: 		1px solid gray;
+	border-collapse: 	collapse;
+}
+
+table.info th	{
+	background-color:	lightgray;
+	padding-left: 		1em;
+	padding-right: 		1em;
+}
+
+table.info td	{
+	padding-left: 		1em;
+	padding-right: 		1em;
+}
+
+table.info tr:hover {
+	background-color:       #F0F0F0;
+}
+
+pre.config	{
+	margin-left:		4em;
+	margin-right:		2em;
+	background-color:	#E0E0E0;
+	color:			#202020;
+}

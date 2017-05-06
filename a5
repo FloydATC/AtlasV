@@ -15,12 +15,14 @@ use Session::Async;
 use Time::HiRes qw( sleep );
 use DBI;
 use JSON;
+use NetAddr::IP::Util; # Included here for dependency checking only
 use AtlasV;
 
 $SIG{CHLD} = 'IGNORE';	# Let perl reap dead processes
 $SIG{PIPE} = 'IGNORE';  # Ignore peers that close connections prematurely
 
-my $json = JSON->new( allow_nonref => 1 );
+#my $json = JSON->new( allow_nonref => 1 );
+my $json = JSON->new();
 
 my $http = IO::Socket::INET->new(
   Listen	=> 20,
@@ -50,6 +52,9 @@ my @db = (
   } 
 );
 my $dbh = DBI->connect(@db);
+unless ($dbh) {
+  confess "Error: ".$DBI::errstr;
+}
 $dbh->{'mysql_auto_reconnect'} = 1;
 
 my $atlas = AtlasV->new();
@@ -71,11 +76,11 @@ while (1) {
   # Accept connections
   while (my $socket = $http->accept()) {
     $sessions->{$socket} = Session->new( socket => $socket, select => $select, type => 'http_client', dbh => $dbh );
-    #print "$0 $$ HTTP connection from ".$sessions->{$socket}->peer()."\n";
+    #print "$0 $$ HTTP connection from ".$sessions->{$socket}->name()."\n";
   }
   while (my $socket = $line->accept()) {
     $sessions->{$socket} = Session->new( socket => $socket, select => $select, type => 'line', dbh => $dbh );
-    #print "$0 $$ LINE connection from ".$sessions->{$socket}->peer()."\n";
+    #print "$0 $$ LINE connection from ".$sessions->{$socket}->name()."\n";
   }
 
   # Read from sockets
