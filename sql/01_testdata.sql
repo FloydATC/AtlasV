@@ -33,3 +33,5 @@ INSERT INTO commlinks (host1,host2) VALUES (7,8);
 
 INSERT INTO commlinks (host1,host2) VALUES (1,5);
 INSERT INTO commlinks (host1,host2) VALUES (1,7);
+
+INSERT INTO users (username,realm,password) VALUES ('andlun','AtlasV@man-monitor-02.oikt.net','73bf3fcd2b3861bde5f8a4999786a12f');

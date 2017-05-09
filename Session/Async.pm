@@ -5,6 +5,7 @@ use warnings;
 use parent 'Session';
 use Session;
 use Carp;
+use JSON;
 
 
 sub new {
@@ -15,6 +16,7 @@ sub new {
   bless($self, $class);
   my $pid = open(my $socket, "-|"); # pipe4, http://docstore.mik.ua/orelly/perl/cookbook/ch16_11.html
   unless (defined $pid) { confess "$0 $$ forking open() failed: $!"; }
+  $self->{'json'} = JSON->new();
   if ($pid) {
     # Parent
     $socket->autoflush(0);

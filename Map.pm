@@ -11,7 +11,8 @@ use Data::Dumper::Concise;
 sub new {
   my $class = shift;
   my $self = { @_ };
-  confess "Parameter 'session' missing/invalid ref=(".ref($self->{'session'}).")" unless ref($self->{'session'}) eq 'Session::Async';
+  confess "Parameter 'req' missing/invalid" unless ref($self->{'req'}) eq 'HTTP::Request';
+  confess "Parameter 'session' missing/invalid" unless ref($self->{'session'}) eq 'Session::Async';
   $self->{'json'} = JSON->new();
   bless($self, $class);
   return $self; 
@@ -308,7 +309,11 @@ sub query {
       last;
     }
     #warn "$0 $$ decode line=".$line."\n";
-    if ($line =~ /^\@(.+)/) { $cols = $self->{'json'}->decode($1); next; }
+    if ($line =~ /^\@(.+)/) { 
+      my $encoded = $1 || '[]';
+      $cols = $self->{'json'}->decode($encoded); 
+      next; 
+    }
     my $row = $self->{'json'}->decode($line);
     my %hash = ();
     @hash{@{$cols}} = @{$row}; 

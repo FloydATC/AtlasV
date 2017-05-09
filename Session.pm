@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use Carp;
 use POSIX;
+use JSON;
 use HTTP::Request;
 use Data::Dumper::Concise;
 
@@ -15,6 +16,7 @@ sub new {
   $self->socket->blocking(0);
   binmode $self->socket,  ':raw';
   $self->select->add($self->socket); 
+  $self->{'json'} = JSON->new();
   return $self;
 }
 
@@ -56,6 +58,14 @@ sub echo {
 sub socket {
   my $self = shift;
   return $self->{'socket'};
+}
+
+
+sub realm {
+  my $self = shift;
+  my $hostname = `hostname`;
+  chomp $hostname;
+  return $self->{'realm'} || 'AtlasV@'.$hostname;
 }
 
 
@@ -206,9 +216,91 @@ sub get_http_request {
 # Check "Authorization:" header, load user session and return 1 if valid
 sub auth_check {
   my $self = shift;
-  # Note: add stale=TRUE if nonce was expired/rejected
   my $req = shift;
-  warn "$0 $$ authorization response = ".Dumper($req->header('authorization'))."\n";
+
+  my $realm = $self->realm();
+  my $socket = $self->socket();
+  
+  #warn "$0 $$ auth_check request = ".Dumper($req);
+  # Extract Authorization request header from client, if any
+  my $client = {};
+  if ($req->header('authorization')) {
+    foreach my $kv (split(/\,*\s/, $req->header('authorization'))) {
+      #warn "$0 $$ auth_check kv: $kv\n";
+      my ($key, $value) = split(/=/, $kv, 2);
+      next unless $value;
+      $value =~ s/^\"(.*)\"$/$1/; # Remove double quotes, if any
+      $client->{lc($key)} = $value;
+    }
+  }
+
+  # Check for complete request
+  #warn "$0 $$ authorization request = ".Dumper($client)."\n";
+  unless (exists $client->{'username'}) { return 0; }
+  unless (exists $client->{'realm'}) { return 0; }
+  unless (exists $client->{'nonce'}) { return 0; }
+  unless (exists $client->{'uri'}) { return 0; }
+  unless (exists $client->{'response'}) { return 0; }
+  unless (exists $client->{'opaque'}) { return 0; }
+  unless (exists $client->{'nc'}) { return 0; }
+  unless (exists $client->{'cnonce'}) { return 0; }
+
+  # Request is complete, now verify it
+  #warn "$0 $$ authorization request appears to be complete\n";
+
+  # Fetch HA1 from SQL table 'users'
+  $client->{'username'} =~ s/\W//g;
+  my $pwentries = $self->query("
+    SELECT *
+    FROM users
+    WHERE username = '".$client->{'username'}."'
+  ");
+  unless (@{$pwentries}) {
+    warn "$0 $$ username \"".$client->{'username'}."\" rejected\n";
+    return 0;
+  }
+  my $pwentry = shift @{$pwentries};
+  my $ha1 = $pwentry->{'password'} || '';
+  #warn "$0 $$ fetched pwentry ".Dumper($pwentry);
+  #warn "$0 $$ HA1=$ha1\n";
+
+  # Make HA2 from request method + uri
+  #warn "$0 $$ request = ".Dumper($req);
+  my $ha2 = Digest::MD5::md5_hex($req->method.':'.$req->uri);
+  #warn "$0 $$ HA2=$ha2\n";
+  
+
+  # Validate "opaque" key exists and is not expired
+  $client->{'opaque'} =~ s/\W//g;
+  print $socket "key realm=$realm opaque=".$client->{'opaque'}."\n";
+  my $opaque = <$socket>;
+  chomp $opaque;
+  if ($opaque ne $client->{'opaque'}) {
+    warn "$0 $$ opaque/key ".$client->{'opaque'}." rejected\n";
+    return 0;
+  }
+
+  
+  # Validate "nonce" value exists, is not expired and is associated with opaque/key
+  $client->{'nonce'} =~ s/\W//g;
+  print $socket "nonce realm=$realm nonce=".$client->{'nonce'}." nc=".$client->{'nc'}." opaque=".$client->{'opaque'}."\n";
+  my $nonce = <$socket>;
+  chomp $nonce;
+  if ($nonce ne $client->{'nonce'}) {
+    warn "$0 $$ nonce ".$client->{'nonce'}." rejected\n";
+    return 0;
+  }
+  
+  
+  # Assemble final check string and validate response
+  my $final = $ha1.':'.$nonce.':'.$client->{'nc'}.':'.$client->{'cnonce'}.':'.$client->{'qop'}.':'.$ha2;
+  my $correct = Digest::MD5::md5_hex($final);
+  if ($client->{'response'} eq $correct) {
+    return 1; # PASS
+  }
+      
+  warn "$0 $$ incorrect response ".$client->{'response'}." (should be ".$correct.")\n";
+
   return 0;
 } 
 
@@ -217,26 +309,72 @@ sub auth_challenge {
   my $self = shift;
   my $req = shift;
   
-  my $realm = 'AtlasV';
+  my $realm = $self->realm();
   my $socket = $self->socket();
   
-  my $opaque_in = ''; # TODO: extract from request, if any
+  # Extract Authorization request header from client, if any
+  my $client = {};
+  if ($req->header('authorization')) {
+    foreach my $kv (split(/\,*\s/, $req->header('authorization'))) {
+      #warn "$0 $$ auth_check kv: $kv\n";
+      my ($key, $value) = split(/=/, $kv, 2);
+      next unless $value;
+      $value =~ s/^\"(.*)\"$/$1/; # Remove double quotes, if any
+      $client->{lc($key)} = $value;
+    }
+  }
   
   # Generate (or reuse) "opaque" as the key of authenticated user, if any
-  print $socket "key realm=$realm opaque=$opaque_in\n";
+  $client->{'opaque'} =~ s/\W//g if $client->{'opaque'};
+  print $socket "key realm=$realm opaque=".($client->{'opaque'}||'')."\n";
   my $opaque = <$socket>;
+  chomp $opaque;
   
   # Generate a new "nonce" value and tie it to the opaque value
   print $socket "nonce realm=$realm opaque=$opaque\n";
   my $nonce = <$socket>;
+  chomp $nonce;
   
-  if ($opaque_in && $opaque_in ne $opaque) {
+  if ($client->{'opaque'} && $client->{'opaque'} ne $opaque) {
     return ( WWW_Authenticate => "Digest realm=\"$realm\", qop=\"auth,auth-int\", nonce=\"$nonce\", opaque=\"$opaque\", stale=TRUE" );
   } else {
     return ( WWW_Authenticate => "Digest realm=\"$realm\", qop=\"auth,auth-int\", nonce=\"$nonce\", opaque=\"$opaque\"" );
   }
 }
 
+
+sub query {
+  my $self = shift;
+  my $query = shift;
+  
+  my $socket = $self->socket;
+  $query =~ s/\n/ /g;
+  print $socket $query."\n";
+  my $cols = [];
+  my @records = ();
+  while (my $line = <$socket>) {
+    chomp $line;
+    last unless $line; # Empty line = end of response
+    next if $line =~ /^#/; # Comment/message
+    if ($line =~ /^\!/) {
+      # Error
+      warn "$0 $$ $line\n";
+      last;
+    }
+    #warn "$0 $$ decode line=".$line."\n";
+    if ($line =~ /^\@(.*)/) {
+      my $encoded = $1 || '[]';
+      $cols = $self->{'json'}->decode($encoded);
+      next; 
+    }
+    my $row = $self->{'json'}->decode($line);
+    my %hash = ();
+    @hash{@{$cols}} = @{$row};
+    push @records, \%hash;
+    #warn "$0 $$ hash=".Dumper(\%hash);
+  } 
+  return \@records;
+}
 
 
 return 1;

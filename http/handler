@@ -20,32 +20,45 @@ my $mime = {
   css  => 'text/css',
 };
 
-my @status = ( 200 => 'OK' );
 
+my @status = ( 200 => 'OK' );
 my $req = shift @ARGV;
 my $doc = $req->uri->path;
 if ($doc eq '/') { $doc = 'index.html'; }
 $doc =~ s/\.{2,}/\./g;
 $doc =~ s/^[\/\.]+//g;
+# Verify that file exists
 unless (-e 'http/'.$doc) { 
   $doc = 'error_404.html'; 
   @status = ( 404 => 'Not found' );
 }
+# Verify that file is world readable
+my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat('http/'.$doc);
+unless ($mode & 0004) { 
+  warn "$0 $$ $doc mode=$mode\n";
+  $doc = 'error_403.html'; 
+  @status = ( 403 => 'Forbidden' );
+}
 
-my $content = '';
+my $content = ''; # Whatever we end up serving will go here
 my $header = HTTP::Headers->new(
   Date		=> time2str(time),
-  Connection	=> 'keep-alive',
+  Connection	=> 'keep-alive', 
+  # We should probably check the request headers before setting connection:keep-alive 
+  # BUT we have no easy way to signal connection:close yet because 'handler' only has 
+  # a TCP connection to the a5 core, and the client has a non-blocking socket so
+  # that socket can't be closed until the output buffer has been flushed. Hmm.
 );
 
-# Check authorization
+# Check authorization 
 warn "$0 $$ session = $self\n";
 unless ($self->auth_check($req)) {
   @status = (401 => 'Unauthorized');
   $doc = 'error_401.html';
-  $header->header($self->auth_challenge());
+  $header->header($self->auth_challenge($req));
 } 
 
+# Template::Toolkit parameter settings
 my $tt = {
   INCLUDE_PATH	=> 'http',
   INTERPOLATE	=> 1,
@@ -54,9 +67,10 @@ my $tt = {
   EVAL_PERL	=> 1,
 };
 my $template = Template->new($tt);
+
+# The following vars will be available to Template::Toolkit
 my $vars = {
-  req		=> $req,
-  map		=> Map->new( session => $self ),
+  map		=> Map->new( req => $req, session => $self ),
 };
 
 my $ext = (split(/\./, $doc))[-1];
@@ -77,10 +91,14 @@ if ($ext eq 'html' || $ext eq 'svg') {
   $header->header( Cache_Control	=> 'public, max-age=86400' );
   $content = $self->read_file('http/'.$doc);
 }
+
+# Finalize headers and send the response back to a5 via the STDOUT pipe
 $header->header( Content_Length => length($content) );
 $header->header( Content_Type => $mime->{$ext} );
 my $res = HTTP::Response->new( @status, $header, $content );
 print 'HTTP/1.1 '.$res->as_string;
+
+# Log message to the console for now
 if ($status[0] != 200) {
   print STDERR "$0 $$ ".$req->uri." ".join(' ',@status)."\n";
 }

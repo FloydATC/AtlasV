@@ -66,6 +66,7 @@ my $select = IO::Select->new();
 my $nonce = {}; # Volatile nonce registry for Digest HTTP authentication
 my $key = {}; # Volatile key registry for authenticated users
 
+print "Atlas V launched\n";
 my $pcapd = Session::Async->new( cmd => 'pcapd', args => [], select => $select, type => 'line', dbh => $dbh );
 $sessions->{$pcapd->socket} = $pcapd;
 
@@ -76,7 +77,6 @@ my $snmpd = Session::Async->new( cmd => 'snmpd', args => [], select => $select, 
 $sessions->{$pcapd->socket} = $snmpd;
 
 
-print "Atlas V launched\n";
 while (1) {
   # Accept connections
   while (my $socket = $http->accept()) {
@@ -271,45 +271,19 @@ sub cmd_sql {
 
 
 # EXPERIMENTAL
-sub cmd_nonce {
-  my $session = shift;
-  my @args = @_;
-  my %opt = ();
-  foreach my $arg (@args) {
-    if ($arg =~ /^(.+?)\=(\.+)$/) { $opt{lc($1)} = lc($2); }
-  }
-  if ($opt{'nonce'}) {
-    # Try to validate
-    my $n = $nonce->{$opt{'nonce'}};
-    if ($n->{'expires'} < time && $n->{'nc'} < $opt{'nc'} && $n->{'realm'} eq $opt{'realm'} && $n->{'opaque'} eq $opt{'opaque'}) {
-      # Not expired and counter is good
-      $n->{'nc'} = $opt{'nc'};
-      $session->send($opt{'nonce'}."\n");
-      return;
-    } else {
-      # Expire nonce
-      delete $nonce->{$opt{'nonce'}};
-    }
-  }
-  my $n = Digest::MD5::md5_hex($opt{'opaque'}.'-'.$$.'-'.time.'-'.$opt{'realm'}.'-'.$0);
-  $nonce->{$n} = { expires => (time + 3600), nc => 0, realm => $opt{'realm'} };
-  $session->send($n."\n");
-  return;
-}
-
-
-# EXPERIMENTAL
 sub cmd_key {
   my $session = shift;
   my @args = @_;
   my %opt = ();
   foreach my $arg (@args) {
-    if ($arg =~ /^(.+?)\=(\.+)$/) { $opt{lc($1)} = lc($2); }
+    my ($key, $value) = split(/\=/, $arg, 2);
+    $opt{lc($key)} = $value;
   }
   if ($opt{'opaque'}) {
     # Try to validate
     my $k = $key->{$opt{'opaque'}};
-    if ($k->{'expires'} < time) {
+    #warn "$0 $$ cmd_key ".join(' ',@args)." ".time." => ".Dumper($k);
+    if ($k && $k->{'expires'} > time) {
       # Not expired
       $k->{'expires'} = (time + 3600);
       $session->send($opt{'opaque'}."\n");
@@ -319,10 +293,45 @@ sub cmd_key {
       delete $key->{$opt{'opaque'}};
     }
   }
-  my $k = Digest::MD5::md5_hex($session->socket.'-'.$$.'-'.time.'-'.$opt{'realm'}.'-'.$0);
-  $key->{$k} = { expires => (time + 3600), realm => $opt{'realm'} };
+  my $k = Digest::MD5::md5_hex($session->socket.':'.$$.':'.time.':'.$session->realm.':'.$0);
+  $key->{$k} = { expires => (time + 3600) };
   $session->send($k."\n");
   return;
 }
+
+
+
+# EXPERIMENTAL
+sub cmd_nonce {
+  my $session = shift;
+  my @args = @_;
+  my %opt = ();
+  foreach my $arg (@args) {
+    my ($key, $value) = split(/\=/, $arg, 2);
+    $opt{lc($key)} = $value;
+  }
+  $opt{'nc'} = hex($opt{'nc'}) if $opt{'nc'};
+  if ($opt{'nonce'}) {
+    # Try to validate
+    my $n = $nonce->{$opt{'nonce'}};
+    #warn "$0 $$ cmd_nonce ".join(' ',@args)." ".time." => ".Dumper($n, \%opt);
+    if ($n && $n->{'expires'} > time && $n->{'opaque'} eq $opt{'opaque'}) {
+      # Not expired, and opaque key matches
+      if ($n->{'nc'} == 0 || $opt{'nc'} > $n->{'nc'}) {
+        $n->{'nc'} = $opt{'nc'} || 0;
+        $session->send($opt{'nonce'}."\n");
+        return;
+      }
+    } else {
+      # Expire nonce
+      delete $nonce->{$opt{'nonce'}};
+    }
+  }
+  my $n = Digest::MD5::md5_hex(($opt{'nonce'}||'@').':'.$opt{'opaque'}.':'.$$.':'.time.':'.$session->realm.':'.$0);
+  $nonce->{$n} = { expires => (time + 3600), nc => 0, opaque => $opt{'opaque'} };
+  $session->send($n."\n");
+  return;
+}
+
 
 
