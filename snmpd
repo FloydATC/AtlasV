@@ -1,0 +1,57 @@
+#!/usr/bin/perl
+
+# NOTE! This script is designed to be executed within Atlas V only!
+
+# Periodically scan hosts for interface status, vlans and MAC addresses. Backup config every 24 hours.
+# Detect loops and other disrepancies.
+
+use strict;
+use warnings;
+use Net::SNMP;
+use Time::HiRes;
+use Data::Dumper;
+use JSON;
+
+
+#my $json = JSON->new( allow_nonref => 1 );
+my $json = JSON->new();
+warn "$0 $$ running\n";
+while (1) {
+
+      
+  # Fetch list of ip addresses to ping
+  print $session "SELECT id,ip FROM hosts WHERE scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)\n";
+  my @records = query_result($session);
+  # ...
+
+  
+
+  sleep 2;
+
+}
+
+
+sub query_result {
+  my $session = shift;
+  my $cols = [];
+  my @records = ();
+  while (my $line = <$session>) {
+    chomp $line;
+    last unless $line; # Empty line = end of response
+    next if $line =~ /^#/; # Comment/message
+    if ($line =~ /^\!/) {
+      # Error
+      warn "$0 $$ $line\n";
+      last;
+    }
+    #warn "$0 $$ decode line=".$line."\n";
+    if ($line =~ /^\@(.+)/) { $cols = $json->decode($1); next; }
+    my $row = $json->decode($line);
+    my %hash = ();
+    @hash{@{$cols}} = @{$row}; 
+    push @records, \%hash;
+    #warn "$0 $$ hash=".Dumper(\%hash);
+  } 
+  return @records;
+}
+

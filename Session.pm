@@ -5,6 +5,7 @@ use warnings;
 use Carp;
 use POSIX;
 use HTTP::Request;
+use Data::Dumper::Concise;
 
 
 sub new {
@@ -199,6 +200,41 @@ sub get_http_request {
 
   # If we got this far, the buffer contains a complete request
   return HTTP::Request->parse($buffer);
+}
+
+
+# Check "Authorization:" header, load user session and return 1 if valid
+sub auth_check {
+  my $self = shift;
+  # Note: add stale=TRUE if nonce was expired/rejected
+  my $req = shift;
+  warn "$0 $$ authorization response = ".Dumper($req->header('authorization'))."\n";
+  return 0;
+} 
+
+# Return a HTTP Digest authentication challenge header - Note: BLOCKING
+sub auth_challenge {
+  my $self = shift;
+  my $req = shift;
+  
+  my $realm = 'AtlasV';
+  my $socket = $self->socket();
+  
+  my $opaque_in = ''; # TODO: extract from request, if any
+  
+  # Generate (or reuse) "opaque" as the key of authenticated user, if any
+  print $socket "key realm=$realm opaque=$opaque_in\n";
+  my $opaque = <$socket>;
+  
+  # Generate a new "nonce" value and tie it to the opaque value
+  print $socket "nonce realm=$realm opaque=$opaque\n";
+  my $nonce = <$socket>;
+  
+  if ($opaque_in && $opaque_in ne $opaque) {
+    return ( WWW_Authenticate => "Digest realm=\"$realm\", qop=\"auth,auth-int\", nonce=\"$nonce\", opaque=\"$opaque\", stale=TRUE" );
+  } else {
+    return ( WWW_Authenticate => "Digest realm=\"$realm\", qop=\"auth,auth-int\", nonce=\"$nonce\", opaque=\"$opaque\"" );
+  }
 }
 
 

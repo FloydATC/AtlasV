@@ -7,6 +7,7 @@ use HTTP::Headers;
 use HTTP::Response;
 use HTTP::Date;
 use Template;
+use Map;
 use Cwd qw( getcwd );
 
 
@@ -20,6 +21,7 @@ my $mime = {
 };
 
 my @status = ( 200 => 'OK' );
+
 my $req = shift @ARGV;
 my $doc = $req->uri->path;
 if ($doc eq '/') { $doc = 'index.html'; }
@@ -36,6 +38,14 @@ my $header = HTTP::Headers->new(
   Connection	=> 'keep-alive',
 );
 
+# Check authorization
+warn "$0 $$ session = $self\n";
+unless ($self->auth_check($req)) {
+  @status = (401 => 'Unauthorized');
+  $doc = 'error_401.html';
+  $header->header($self->auth_challenge());
+} 
+
 my $tt = {
   INCLUDE_PATH	=> 'http',
   INTERPOLATE	=> 1,
@@ -46,6 +56,7 @@ my $tt = {
 my $template = Template->new($tt);
 my $vars = {
   req		=> $req,
+  map		=> Map->new( session => $self ),
 };
 
 my $ext = (split(/\./, $doc))[-1];

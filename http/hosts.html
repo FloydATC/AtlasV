@@ -2,5 +2,13 @@
 [% INCLUDE html_menu.template %]
 <H3>hosts.html</H3>
 
-<p>Welcome to Atlas V</p>
+<TABLE>
+[% FOREACH host IN map.hosts %]
+<TR>
+<TD><A href="host.html?id=[% host.id %]">[% host.name %]</A></TD><TD>[% host.ip %]</TD>
+</TR>
+[% END %]
+</TABLE>
+
+
 [% INCLUDE html_footer.template %]

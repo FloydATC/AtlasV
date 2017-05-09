@@ -12,7 +12,18 @@ line:hover	{
 	stroke-opacity:	0.3;
 }
 
-line.wan	{
+path	{
+	cursor: 	pointer;
+	fill:		none;
+	stroke:		black;
+	stroke-width:	1px;
+}
+
+path:hover	{
+	stroke-opacity:	0.3;
+}
+
+path.wan	{
 	stroke-opacity: 0.15;
 }
 

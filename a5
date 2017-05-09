@@ -12,7 +12,8 @@ use HTTP::Headers;
 use HTTP::Date;
 use Session;
 use Session::Async;
-use Time::HiRes qw( sleep );
+use Time::HiRes qw( sleep time );
+use Digest::MD5 qw( md5_hex );
 use DBI;
 use JSON;
 use NetAddr::IP::Util; # Included here for dependency checking only
@@ -62,13 +63,17 @@ my $atlas = AtlasV->new();
 
 my $sessions = {};
 my $select = IO::Select->new();
+my $nonce = {}; # Volatile nonce registry for Digest HTTP authentication
+my $key = {}; # Volatile key registry for authenticated users
 
+my $pcapd = Session::Async->new( cmd => 'pcapd', args => [], select => $select, type => 'line', dbh => $dbh );
+$sessions->{$pcapd->socket} = $pcapd;
 
 my $pingd = Session::Async->new( cmd => 'pingd', args => [], select => $select, type => 'line', dbh => $dbh );
 $sessions->{$pingd->socket} = $pingd;
 
-my $pcapd = Session::Async->new( cmd => 'pcapd', args => [], select => $select, type => 'line', dbh => $dbh );
-$sessions->{$pcapd->socket} = $pcapd;
+my $snmpd = Session::Async->new( cmd => 'snmpd', args => [], select => $select, type => 'line', dbh => $dbh );
+$sessions->{$pcapd->socket} = $snmpd;
 
 
 print "Atlas V launched\n";
@@ -172,6 +177,8 @@ sub handle_line_request {
     $cmd = lc(shift @args);
     $cmd = 'help'; @args = ('show');
   }
+  if ($cmd eq 'nonce') { cmd_nonce($session, @args); return; } 
+  if ($cmd eq 'key') { cmd_key($session, @args); return; } 
   if ($cmd eq 'quit' || $line eq 'exit') { cmd_quit($session); return; }
   if ($cmd eq 'restart') { cmd_restart($session); return; }
   if ($cmd eq 'shutdown') { cmd_shutdown($session); return; }
@@ -261,5 +268,61 @@ sub cmd_sql {
   return;
 }
 
+
+
+# EXPERIMENTAL
+sub cmd_nonce {
+  my $session = shift;
+  my @args = @_;
+  my %opt = ();
+  foreach my $arg (@args) {
+    if ($arg =~ /^(.+?)\=(\.+)$/) { $opt{lc($1)} = lc($2); }
+  }
+  if ($opt{'nonce'}) {
+    # Try to validate
+    my $n = $nonce->{$opt{'nonce'}};
+    if ($n->{'expires'} < time && $n->{'nc'} < $opt{'nc'} && $n->{'realm'} eq $opt{'realm'} && $n->{'opaque'} eq $opt{'opaque'}) {
+      # Not expired and counter is good
+      $n->{'nc'} = $opt{'nc'};
+      $session->send($opt{'nonce'}."\n");
+      return;
+    } else {
+      # Expire nonce
+      delete $nonce->{$opt{'nonce'}};
+    }
+  }
+  my $n = Digest::MD5::md5_hex($opt{'opaque'}.'-'.$$.'-'.time.'-'.$opt{'realm'}.'-'.$0);
+  $nonce->{$n} = { expires => (time + 3600), nc => 0, realm => $opt{'realm'} };
+  $session->send($n."\n");
+  return;
+}
+
+
+# EXPERIMENTAL
+sub cmd_key {
+  my $session = shift;
+  my @args = @_;
+  my %opt = ();
+  foreach my $arg (@args) {
+    if ($arg =~ /^(.+?)\=(\.+)$/) { $opt{lc($1)} = lc($2); }
+  }
+  if ($opt{'opaque'}) {
+    # Try to validate
+    my $k = $key->{$opt{'opaque'}};
+    if ($k->{'expires'} < time) {
+      # Not expired
+      $k->{'expires'} = (time + 3600);
+      $session->send($opt{'opaque'}."\n");
+      return;
+    } else {
+      # Expire key
+      delete $key->{$opt{'opaque'}};
+    }
+  }
+  my $k = Digest::MD5::md5_hex($session->socket.'-'.$$.'-'.time.'-'.$opt{'realm'}.'-'.$0);
+  $key->{$k} = { expires => (time + 3600), realm => $opt{'realm'} };
+  $session->send($k."\n");
+  return;
+}
 
 
