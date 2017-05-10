@@ -5,6 +5,8 @@ package Map;
 use strict;
 use warnings;
 use Carp;
+use URI;
+use URI::QueryParam;
 use JSON;
 use Data::Dumper::Concise;
 
@@ -18,6 +20,26 @@ sub new {
   return $self; 
 }
 
+sub req {
+  my $self = shift;
+  return $self->{'req'};
+}
+
+sub id {
+  my $self = shift;
+  return $self->req->uri->query_param('id') || 0;
+}
+
+sub site_by_id {
+  my $self = shift;
+  my $site_id = shift;
+  my $records = $self->query("
+    SELECT * 
+    FROM sites
+    WHERE id = ".int($site_id)."
+  ");
+  return $records->[0];
+}
 
 sub sites {
   my $self = shift;
@@ -28,7 +50,7 @@ sub sites {
     # Raw coordinates must be padded
     my $x = $record->{'x'} || 100; 
     my $y = $record->{'y'} || 100;
-    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" id=\"site$id\" onclick=\"map.site_click(evt, 'site$id');\" onmousedown=\"map.site_mousedown(evt, 'site$id');\" onmouseup=\"map.site_mouseup(evt, 'site$id');\" onmousemove=\"map.site_mousemove(evt, 'site$id');\" onmouseover=\"map.site_mouseover(evt, 'site$id');\" onmouseout=\"map.site_mouseout(evt, 'site$id');\">\n";
+    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" id=\"site$id\" onclick=\"map.site_click(evt, $id);\" onmousedown=\"map.site_mousedown(evt, $id);\" onmouseup=\"map.site_mouseup(evt, $id);\" onmousemove=\"map.site_mousemove(evt, $id);\" onmouseover=\"map.site_mouseover(evt, $id);\" onmouseout=\"map.site_mouseout(evt, $id);\">\n";
     $record->{'svg'} .= "<image x=\"5\" y=\"5\" width=\"40\" height=\"40\" xlink:href=\"/static/PNG/Ukjent.png\" />\n";
     $record->{'svg'} .= "<circle cx=\"25px\" cy=\"25px\" r=\"20px\" class=\"alive\">\n";
     $record->{'svg'} .= "</circle>\n";
@@ -38,6 +60,22 @@ sub sites {
   }
   return $records;
 } 
+
+
+sub sitegroups_by_site {
+  my $self = shift;
+  my $site_id = shift;
+  warn "$0 $$ sitegroups_by_site($site_id)\n";
+  my $records = $self->query("
+    SELECT
+      sitegroups.id,
+      sitegroups.name
+    FROM sitegroupmembers
+    LEFT JOIN sitegroups ON (sitegroups.id = sitegroupmembers.sitegroup)
+    WHERE sitegroupmembers.site = ".int($site_id)."
+  ");
+  return $records;
+}
 
 
 sub sitegroups {
@@ -72,6 +110,17 @@ sub sitegroups {
 }
 
 
+sub host_by_id {
+  my $self = shift;
+  my $host_id = shift;
+  my $records = $self->query("
+    SELECT * 
+    FROM hosts
+    WHERE id = ".int($host_id)."
+  ");
+  return $records->[0];
+}
+
 sub hosts {
   my $self = shift;
   my $records = $self->query('SELECT * FROM hosts');
@@ -90,7 +139,7 @@ sub hosts_by_site {
     # Raw coordinates must be padded
     my $x = $record->{'x'} || 100; 
     my $y = $record->{'y'} || 100;
-    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" id=\"host$id\" onclick=\"map.host_click(evt, 'host$id');\" onmousedown=\"map.host_mousedown(evt, 'host$id');\" onmouseup=\"map.host_mouseup(evt, 'host$id');\" onmousemove=\"map.host_mousemove(evt, 'host$id');\" onmouseover=\"map.host_mouseover(evt, 'host$id');\" onmouseout=\"map.host_mouseout(evt, 'host$id');\">\n";
+    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" id=\"host$id\" onclick=\"map.host_click(evt, $id);\" onmousedown=\"map.host_mousedown(evt, $id);\" onmouseup=\"map.host_mouseup(evt, $id);\" onmousemove=\"map.host_mousemove(evt, $id);\" onmouseover=\"map.host_mouseover(evt, $id);\" onmouseout=\"map.host_mouseout(evt, $id);\">\n";
     $record->{'svg'} .= "<image x=\"5\" y=\"5\" width=\"40\" height=\"40\" xlink:href=\"/static/PNG/Ukjent.png\" />\n";
     $record->{'svg'} .= "<text x=\"30\" y=\"40\" font-size=\"10\" class=\"symbolbg\">XX</text>\n";
     $record->{'svg'} .= "<text x=\"30\" y=\"40\" font-size=\"10\" class=\"symbol\">XX</text>\n";

@@ -1,26 +1,32 @@
+[% SET host = map.host_by_id(map.id) %]
+[% SET site = map.site_by_host(host.id) %]
 <TABLE class='popup'>
 <THEAD>
 <TR>
-<TH colspan="2"><A href="host.html?id=72" class="unknown">FOC1409X1EB</A></TH>
-<TH style='text-align: right;'></TH>
+<TH colspan="2"><A href="host.html?id=[% host.id %]" class="unknown">[% host.name %]</A></TH>
+<TH style='text-align: right;'>[% host.ip %]</TH>
 </TR>
 </THEAD>
 <TR>
 <TD>Lokasjon:</TD>
-<TD colspan="2"><A href="site.html?id=110" class="alive">R&aelig;lingen r&aring;dhus</A></TD>
+<TD colspan="2"><A href="site.html?id=[% site.id %]" class="alive">[% site.name %]</A></TD>
 </TR>
 <TR>
 <TD>Rom:</TD>
-<TD colspan="2">Fløy B, Kjeller, Lager 006</TD>
+<TD colspan="2">
+[% FOREACH hostgroup IN map.hostgroups_by_host(host.id) %]
+[% hostgroup.name %]<BR>
+[% END %]
+</TD>
 </TR>
 <TR>
 <TD>Type:</TD>
-<TD colspan="2">Cisco, WS-C2960-24TT-L</TD>
+<TD colspan="2">[% host.meta.make %]:[% host.meta.model %]</TD>
 </TR>
 <TR>
 <TD>Rolle:</TD>
 <TD colspan="2">
-<SELECT name="role" onChange="javascript:host_role(72, this.value)">
+<SELECT name="role" onChange="javascript:host_role([% host.id %], this.value)">
 <OPTION value=""></OPTION>
 <OPTION selected value="c">Customer</OPTION>
 <OPTION  value="ce">Customer Edge</OPTION>
@@ -31,7 +37,7 @@
 </TR>
 <TR>
 <TD>Kommentar:</TD>                                                                                                                         
-<TD colspan="2"><INPUT type="text" name="comment" value="" size="40" onChange="javascript:host_comment(72, this.value)"></TD>               
+<TD colspan="2"><INPUT type="text" name="comment" value="" size="40" onChange="javascript:host_comment([% host.id %], this.value)"></TD>               
 </TR>                                                                                                                                       
 <TR>                                                                                                                                        
 <TD colspan="3"><HR></TD>                                                                                                                   
@@ -41,27 +47,27 @@
 </TR>                                                                                                                                       
 <TR class="option">                                                                                                                         
 <TD colspan="3"></TD>                                                                                                                       
-</TR>                                                                                                                                       |
-<TR class="option">                                                                                                                         |
-<TD colspan="3"></TD>                                                                                                                       |
-</TR>                                                                                                                                       |
-<TR class="option">                                                                                                                         |
-<TD colspan="3"><A href="http://10.80.8.251/rrd/cgi/net-switch.cgi?switch=FOC1409X1EB&port=&period=&report=traffic&generate=Generate+report"|
- target="_blank">Trafikkdata</A></TD>                                                                                                       |
-</TR>                                                                                                                                       |
-<TR>                                                                                                                                        |
-<TD colspan="3"><HR></TD>                                                                                                                   |
-</TR>                                                                                                                                       |
-<TR class="option">                                                                                                                         |
-<TD colspan="3"><A href="javascript:host_disabled(72, 1);">Merk som 'ikke aktiv'</A></TD>                                                   |
-</TR>                                                                                                                                       |
-<TR class="option">                                                                                                                         |
-<TD colspan="3"><A href="javascript:snmp_probe(72, 0);">Henter SNMP-data (klikk for &aring; sl&aring; av)</A></TD>                          |
-</TR>                                                                                                                                       |
-<TR class="option">                                                                                                                         |
-<TD colspan="3"><A href="javascript:begin_drag_object('host72');">Flytt...</A></TD>                                                         |
-</TR>                                                                                                                                       |
-<TR class="option">                                                                                                                         |
-<TD colspan="3"><A href="javascript:cancel();">Avbryt</A></TD>                                                                              |
-</TR>                                                                                                                                       |
-</TABLE>                                                                                                                                    |
+</TR>                                                                                                                                       
+<TR class="option">                                                                                                                         
+<TD colspan="3"></TD>                                                                                                                       
+</TR>                                                                                                                                       
+<TR class="option">                                                                                                                         
+<TD colspan="3"><A href="http://10.80.8.251/rrd/cgi/net-switch.cgi?switch=FOC1409X1EB&port=&period=&report=traffic&generate=Generate+report"
+ target="_blank">Trafikkdata</A></TD>                                                                                                       
+</TR>                                                                                                                                       
+<TR>                                                                                                                                        
+<TD colspan="3"><HR></TD>                                                                                                                   
+</TR>                                                                                                                                       
+<TR class="option">                                                                                                                         
+<TD colspan="3"><A href="javascript:host_disabled([% host.id %], 1);">Merk som 'ikke aktiv'</A></TD>                                                   
+</TR>                                                                                                                                       
+<TR class="option">                                                                                                                         
+<TD colspan="3"><A href="javascript:snmp_probe([% host.id %], 0);">Henter SNMP-data (klikk for &aring; sl&aring; av)</A></TD>                          
+</TR>                                                                                                                                       
+<TR class="option">                                                                                                                         
+<TD colspan="3"><A href="javascript:begin_drag_object('host[% host.id %]');">Flytt...</A></TD>                                                         
+</TR>                                                                                                                                       
+<TR class="option">                                                                                                                         
+<TD colspan="3"><A href="javascript:cancel();">Avbryt</A></TD>                                                                              
+</TR>                                                                                                                                       
+</TABLE>                                                                                                                                    

@@ -444,7 +444,7 @@ function popup_create(event, id, type) {
   var posx = svg().offsetLeft + event.clientX - 4;
   var posy = svg().offsetTop + event.clientY - 4;
 
-  create_popup('popup/'+type+'.html?context='+id, posx, posy);
+  create_popup('popup/'+type+'.html?id='+id, posx, posy);
 }
 
 

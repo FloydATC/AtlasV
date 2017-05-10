@@ -1,26 +1,26 @@
 [% INCLUDE svg_header.template %]
-
+[% SET site = map.site_by_id(map.id) %]
 
 <remark value='WAN links' />
-[% FOREACH commlink IN map.wanlinks_by_site(1) %]
+[% FOREACH commlink IN map.wanlinks_by_site(site.id) %]
 [% commlink.svg %]
 [% END %]
 
 
 <remark value='Hostgroups' />
-[% FOREACH hostgroup IN map.hostgroups_by_site(1) %]
+[% FOREACH hostgroup IN map.hostgroups_by_site(site.id) %]
 [% hostgroup.svg %]
 [% END %]
 
 
 <remark value='LAN links' />
-[% FOREACH commlink IN map.lanlinks_by_site(1) %]
+[% FOREACH commlink IN map.lanlinks_by_site(site.id) %]
 [% commlink.svg %]
 [% END %]
 
 
 <remark value='Hosts' />
-[% FOREACH host IN map.hosts_by_site(1) %]
+[% FOREACH host IN map.hosts_by_site(site.id) %]
 [% host.svg %]
 [% END %]
 

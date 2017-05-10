@@ -254,6 +254,7 @@ sub auth_check {
     SELECT *
     FROM users
     WHERE username = '".$client->{'username'}."'
+    AND realm = '".$realm."'
   ");
   unless (@{$pwentries}) {
     warn "$0 $$ username \"".$client->{'username'}."\" rejected\n";
@@ -276,7 +277,7 @@ sub auth_check {
   my $opaque = <$socket>;
   chomp $opaque;
   if ($opaque ne $client->{'opaque'}) {
-    warn "$0 $$ opaque/key ".$client->{'opaque'}." rejected\n";
+    #warn "$0 $$ opaque/key ".$client->{'opaque'}." rejected\n";
     return 0;
   }
 
@@ -287,7 +288,7 @@ sub auth_check {
   my $nonce = <$socket>;
   chomp $nonce;
   if ($nonce ne $client->{'nonce'}) {
-    warn "$0 $$ nonce ".$client->{'nonce'}." rejected\n";
+    #warn "$0 $$ nonce ".$client->{'nonce'}." rejected\n";
     return 0;
   }
   
@@ -335,9 +336,11 @@ sub auth_challenge {
   my $nonce = <$socket>;
   chomp $nonce;
   
-  if ($client->{'opaque'} && $client->{'opaque'} ne $opaque) {
+  if ($client->{'nonce'}) {
+    #warn "$0 $$ issued new nonce (stale=TRUE)\n";
     return ( WWW_Authenticate => "Digest realm=\"$realm\", qop=\"auth,auth-int\", nonce=\"$nonce\", opaque=\"$opaque\", stale=TRUE" );
   } else {
+    #warn "$0 $$ issued new nonce\n";
     return ( WWW_Authenticate => "Digest realm=\"$realm\", qop=\"auth,auth-int\", nonce=\"$nonce\", opaque=\"$opaque\"" );
   }
 }

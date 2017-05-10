@@ -51,7 +51,7 @@ my $header = HTTP::Headers->new(
 );
 
 # Check authorization 
-warn "$0 $$ session = $self\n";
+#warn "$0 $$ session = $self\n";
 unless ($self->auth_check($req)) {
   @status = (401 => 'Unauthorized');
   $doc = 'error_401.html';
@@ -99,10 +99,10 @@ my $res = HTTP::Response->new( @status, $header, $content );
 print 'HTTP/1.1 '.$res->as_string;
 
 # Log message to the console for now
-if ($status[0] != 200) {
+if ($status[0] != 200 && $status[0] != 401) {
   print STDERR "$0 $$ ".$req->uri." ".join(' ',@status)."\n";
 }
-
+#print STDERR "$0 $$ request=".Dumper($req);
 exit;
 
  

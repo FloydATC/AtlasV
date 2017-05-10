@@ -321,6 +321,8 @@ sub cmd_nonce {
         $n->{'nc'} = $opt{'nc'} || 0;
         $session->send($opt{'nonce'}."\n");
         return;
+      } else {
+        #warn "$0 $$ nc=".$opt{'nc'}." not higher than ".$n->{'nc'}.", nonce rejected\n";
       }
     } else {
       # Expire nonce
