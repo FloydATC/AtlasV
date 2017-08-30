@@ -1,0 +1,25 @@
+
+1. Use the Apache tool "htdigest" to generate a hash, replacing the username and realm:
+
+$ htdigest -c delete.me AtlasV@ikt-atlas-01.ansatt.oikt.net andlun
+Adding password for andlun in realm AtlasV@ikt-atlas-01.ansatt.oikt.net.
+New password: 
+Re-type new password: 
+
+
+2. Show the contents of the password file you just created:
+
+$ cat delete.me
+andlun:AtlasV@ikt-atlas-01.ansatt.oikt.net:9c4e...85ad
+
+
+3. Append an SQL query to "sql\01_testdata.sql", replacing the username, realm and hash:
+
+INSERT INTO users (username,realm,password) VALUES ('andlun','AtlasV@ikt-atlas-01.ansatt.oikt.net','9c4e...85ad');
+
+
+4. Delete the temporary file
+
+$ rm delete.me
+
+
