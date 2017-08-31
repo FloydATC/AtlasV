@@ -62,14 +62,27 @@ sub sites {
 } 
 
 
+sub sitegroup_by_id {
+  my $self = shift;
+  my $sitegroup_id = shift;
+  warn "$0 $$ Map.pm: sitegroup_by_id($sitegroup_id)\n";
+  my $records = $self->query("
+    SELECT
+      sitegroups.*
+    FROM sitegroups
+    WHERE sitegroups.id = ".int($sitegroup_id)."
+  ");
+  return $records->[0];
+}
+
+
 sub sitegroups_by_site {
   my $self = shift;
   my $site_id = shift;
-  warn "$0 $$ Map.pm: sitegroups_by_site($site_id)\n";
+  #warn "$0 $$ Map.pm: sitegroups_by_site($site_id)\n";
   my $records = $self->query("
     SELECT
-      sitegroups.id,
-      sitegroups.name
+      sitegroups.*,
     FROM sitegroupmembers
     LEFT JOIN sitegroups ON (sitegroups.id = sitegroupmembers.sitegroup)
     WHERE sitegroupmembers.site = ".int($site_id)."
@@ -101,7 +114,7 @@ sub sitegroups {
     my $y = $record->{'y1'} - 30;
     my $w = ($record->{'x2'} - $record->{'x1'}) + 110;
     my $h = ($record->{'y2'} - $record->{'y1'}) + 110;
-    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" width=\"$w\" height=\"$h\" onclick=\"map.sitegroup_click(evt, 'sitegroup$id')\" class=\"sitegroup\" id=\"sitegroup$id\">\n";
+    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" width=\"$w\" height=\"$h\" onclick=\"map.sitegroup_click(evt, '$id')\" class=\"sitegroup\" id=\"sitegroup$id\">\n";
     $record->{'svg'} .= "<rect x=\"0\" y=\"0\" width=\"$w\" height=\"$h\" rx=\"10\" ry=\"10\" class=\"sitegroup\"/>\n";
     $record->{'svg'} .= "<text x=\"8\" y=\"20\" font-size=\"16\" class=\"sitegrouplabel\" id=\"sitegroup$id\">$name</text>\n";
     $record->{'svg'} .= "</svg>\n";
@@ -153,6 +166,20 @@ sub hosts_by_site {
 } 
 
 
+sub hostgroup_by_id {
+  my $self = shift;
+  my $hostgroup_id = shift;
+  warn "$0 $$ Map.pm: hostgroup_by_id($hostgroup_id)\n";
+  my $records = $self->query("
+    SELECT
+      hostgroups.*
+    FROM hostgroups
+    WHERE hostgroups.id = ".int($hostgroup_id)."
+  ");
+  return $records->[0];
+}
+
+
 sub hostgroups_by_site {
   my $self = shift;
   my $site_id = shift;
@@ -167,6 +194,7 @@ sub hostgroups_by_site {
     FROM hosts
     INNER JOIN hostgroupmembers ON (hostgroupmembers.host = hosts.id)
     LEFT JOIN hostgroups ON (hostgroups.id = hostgroupmembers.hostgroup)
+    WHERE hostgroups.site = $site_id
     GROUP BY hostgroups.id
   ");
   foreach my $record (@{$records}) {
@@ -177,7 +205,7 @@ sub hostgroups_by_site {
     my $y = $record->{'y1'} - 30;
     my $w = ($record->{'x2'} - $record->{'x1'}) + 110;
     my $h = ($record->{'y2'} - $record->{'y1'}) + 110;
-    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" width=\"$w\" height=\"$h\" onclick=\"map.hostgroup_click(evt, 'hostgroup$id')\" class=\"hostgroup\" id=\"hostgroup$id\">\n";
+    $record->{'svg'} .= "<svg x=\"$x\" y=\"$y\" width=\"$w\" height=\"$h\" onclick=\"map.hostgroup_click(evt, '$id')\" class=\"hostgroup\" id=\"hostgroup$id\">\n";
     $record->{'svg'} .= "<rect x=\"0\" y=\"0\" width=\"$w\" height=\"$h\" rx=\"10\" ry=\"10\" class=\"hostgroup\"/>\n";
     $record->{'svg'} .= "<text x=\"8\" y=\"20\" font-size=\"16\" class=\"hostgrouplabel\" id=\"hostgroup$id\">$name</text>\n";
     $record->{'svg'} .= "</svg>\n";
@@ -337,6 +365,7 @@ sub lanlinks_by_site {
   }
   return $records;
 }
+
 
 
 sub query {

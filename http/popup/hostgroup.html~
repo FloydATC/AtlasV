@@ -1,9 +1,7 @@
-[% SET hostgroup = map.hostgroup_by_id(map.id) %]
-DEBUG: map.id = [% map.id %]
 <TABLE class='popup'>
 <THEAD>
 <TR>
-<TH colspan="2"><A href="hostgroup.html?id=[% hostgroup.id %]" class="alive">[% hostgroup.name %]</A></TH>
+<TH colspan="2"><A href="hostgroup.html?id=72" class="alive">Kjeller, Lager under trapp</A></TH>
 <TH style='text-align: right;'>Omr&aring;de</TH>
 </TR>
 </THEAD>
@@ -27,7 +25,7 @@ DEBUG: map.id = [% map.id %]
 <TD colspan="3"><HR></TD>
 </TR>
 <TR class="option">
-<TD colspan="3"><A href="javascript:begin_drag_object('hostgroup[% hostgroup.id %]');">Flytt gruppe...</A></TD>
+<TD colspan="3"><A href="javascript:begin_drag_object('hostgroup72');">Flytt gruppe...</A></TD>
 </TR>
 <TR class="option">
 <TD colspan="3"><A href="javascript:cancel();">Avbryt</A></TD>

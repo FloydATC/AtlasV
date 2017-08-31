@@ -1,4 +1,5 @@
 [% SET sitegroup = map.sitegroup_by_id(map.id) %]
+DEBUG: map.id = [% map.id %]<P>
 <TABLE class='popup'>
 <THEAD>
 <TR>
@@ -16,7 +17,7 @@
 <TD colspan="3"><HR></TD>
 </TR>
 <TR class="option">
-<TD colspan="3"><A href="javascript:begin_drag_object('sitegroup[% sitegroup.id %]');">Flytt gruppe...</A></TD>
+<TD colspan="3"><A href="javascript:begin_drag_object('[% sitegroup.id %]');">Flytt gruppe...</A></TD>
 </TR>
 <TR class="option">
 <TD colspan="3"><A href="javascript:cancel();">Avbryt</A></TD>

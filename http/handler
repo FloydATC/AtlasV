@@ -6,13 +6,18 @@ use Data::Dumper::Concise;
 use HTTP::Headers;
 use HTTP::Response;
 use HTTP::Date;
+use URI;
+use URI::QueryParam;
 use Template;
 use Map;
 use Cwd qw( getcwd );
 
+# NOTE: In this context, $self is a Session::Async object
+my $socket = $self->{'socket'};
 
 my $mime = {
   html => 'text/html; charset=utf8',
+  ajax => 'text/plain; charset=utf8',
   txt  => 'text/plain; charset=utf8',
   svg  => 'image/svg+xml',
   png  => 'image/png',
@@ -27,17 +32,22 @@ my $doc = $req->uri->path;
 if ($doc eq '/') { $doc = 'index.html'; }
 $doc =~ s/\.{2,}/\./g;
 $doc =~ s/^[\/\.]+//g;
-# Verify that file exists
-unless (-e 'http/'.$doc) { 
-  $doc = 'error_404.html'; 
-  @status = ( 404 => 'Not found' );
-}
-# Verify that file is world readable
-my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat('http/'.$doc);
-unless ($mode & 0004) { 
-  warn "$0 $$ $doc mode=$mode\n";
-  $doc = 'error_403.html'; 
-  @status = ( 403 => 'Forbidden' );
+my $ext = (split(/\./, $doc))[-1];
+
+# Check file (except ajax requests, which are not files)
+unless ($ext eq 'ajax') {
+  # Verify that file exists
+  unless (-e 'http/'.$doc) { 
+    $doc = 'error_404.html'; 
+    @status = ( 404 => 'Not found' );
+  }
+  # Verify that file is world readable
+  my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat('http/'.$doc);
+  unless ($mode & 0004) { 
+    warn "$0 $$ $doc mode=$mode\n";
+    $doc = 'error_403.html'; 
+    @status = ( 403 => 'Forbidden' );
+  }
 }
 
 my $content = ''; # Whatever we end up serving will go here
@@ -68,14 +78,17 @@ my $tt = {
 };
 my $template = Template->new($tt);
 
+# Map object interface
+my $map = Map->new( req => $req, session => $self );
+
 # The following vars will be available to Template::Toolkit
 my $vars = {
-  map		=> Map->new( req => $req, session => $self ),
+  map		=> $map,
 };
 
-my $ext = (split(/\./, $doc))[-1];
 #warn "$0 $$ serve $doc (ext=$ext)\n";
 if ($ext eq 'html' || $ext eq 'svg') {
+  # Process and serve a template
   #warn "$0 $$ use template\n";
   $header->header( Cache_Control	=> 'no-cache, no-store, must-revalidate' );
   unless ($template->process($doc, $vars, \$content, binmode => ':utf8')) {
@@ -86,7 +99,62 @@ if ($ext eq 'html' || $ext eq 'svg') {
     $vars->{'error'} = $error;
     $template->process('error_500.html', $vars, \$content, binmode => ':utf8');
   }
+} elsif ($ext eq 'ajax') {
+  # Serve AJAX request as a virtual document
+  $header->header( Cache_Control        => 'no-cache, no-store, must-revalidate' );
+  $content = 'WARNING! Unhandled request: '.Dumper($req);
+  warn "$0 $$ Ajax: handle $doc\n";
+  #warn "$0 $$ Ajax: request=".Dumper($req)."\n";
+  #warn "$0 $$ Ajax: self=".Dumper($self)."\n";
+  #warn "$0 $$ Ajax: map=".Dumper($map)."\n";
+
+  my $uri = URI->new('?'.$req->content, 'http'); # We can now use URI::QueryParam methods on $uri
+
+  if ($doc eq 'move.ajax' &&  $uri->query_param('id') && $uri->query_param('id') =~ /^([a-z]+)([0-9]+)$/) {
+    my ($otype, $oid) = ($1, $2);
+    my $relx = int($uri->query_param('relx') * 1);
+    my $rely = int($uri->query_param('rely') * 1);
+    warn "otype = $otype, oid = $oid, relx = $relx, rely = $rely\n";
+    # TODO: perform update
+    # SQL statements really belong in the Map object -> Must establish exact needs before designing the API
+    if ($otype eq 'site' && $oid && defined $relx && defined $rely) {
+      $map->query("
+        UPDATE sites 
+        SET x = x + $relx, y = y + $rely 
+        WHERE id = $oid
+      ");
+      $content = "OK\n";
+    }
+    if ($otype eq 'sitegroup' && $oid && defined $relx && defined $rely) {
+      $map->query("
+        UPDATE sites 
+        LEFT OUTER JOIN sitegroupmembers ON (sites.id = sitegroupmembers.site)
+        SET sites.x = sites.x + $relx, sites.y = sites.y + $rely 
+        WHERE sitegroupmembers.sitegroup = $oid
+      ");
+      $content = "OK\n";
+    }
+    if ($otype eq 'host' && $oid && defined $relx && defined $rely) {
+      $map->query("
+        UPDATE hosts 
+        SET x = x + $relx, y = y + $rely 
+        WHERE id = $oid
+      ");
+      $content = "OK\n";
+    }
+    if ($otype eq 'hostgroup' && $oid && defined $relx && defined $rely) {
+      $map->query("
+        UPDATE hosts 
+        LEFT OUTER JOIN hostgroupmembers ON (hosts.id = hostgroupmembers.host)
+        SET hosts.x = hosts.x + $relx, hosts.y = hosts.y + $rely 
+        WHERE hostgroupmembers.hostgroup = $oid
+      ");
+      $content = "OK\n";
+    }
+  }
+  
 } else {
+  # Serve static file (JS, CSS, bitmap etc.)
   #warn "$0 $$ binary xfer\n";
   $header->header( Cache_Control	=> 'public, max-age=86400' );
   $content = $self->read_file('http/'.$doc);
@@ -100,7 +168,7 @@ print 'HTTP/1.1 '.$res->as_string;
 
 # Log message to the console for now
 if ($status[0] != 200 && $status[0] != 401) {
-  print STDERR "$0 $$ ".$req->uri." ".join(' ',@status)."\n";
+  print STDERR "$0 $$ Map.pm: ".$req->uri." ".join(' ',@status)."\n";
 }
 #print STDERR "$0 $$ request=".Dumper($req);
 exit;

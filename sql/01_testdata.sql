@@ -17,6 +17,15 @@ INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.251',1,'A-02',100,200);
 INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.250',1,'A-03',100,300);
 INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.249',1,'A-04',200,300);
 
+INSERT INTO hostgroups (name,site) VALUES ('Test hostgroup 1',1);
+INSERT INTO hostgroups (name,site) VALUES ('Test hostgroup 2',1);
+
+INSERT INTO hostgroupmembers (host,hostgroup) VALUES (1,1); 
+INSERT INTO hostgroupmembers (host,hostgroup) VALUES (2,1); 
+INSERT INTO hostgroupmembers (host,hostgroup) VALUES (3,2); 
+INSERT INTO hostgroupmembers (host,hostgroup) VALUES (4,2); 
+
+
 INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.248',2,'B-01',100,200);
 INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.247',2,'B-02',200,200);
 

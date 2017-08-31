@@ -464,7 +464,10 @@ function begin_drag_object(id) {
 //  popup_destroy();
   close_popups();
   svg_cancelTimer();
-  dragged_object = svgdoc().getElementById(id); 
+  dragged_object = svgdoc().getElementById(id);
+  if (dragged_object == null) { 
+    alert('Internal error: getElementById(\''+id+'\') returned null');
+  }
   dragged_originalx = dragged_object.getAttribute('x');
   dragged_originaly = dragged_object.getAttribute('y');
 }

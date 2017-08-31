@@ -2,8 +2,21 @@
 
 # NOTE! This script is designed to be executed within Atlas V only!
 
-# Periodically scan hosts for interface status, vlans and MAC addresses. Backup config every 24 hours.
-# Detect loops and other disrepancies.
+# Periodically scan hosts.
+
+# Switches: 
+#	Check interface status, vlans and MAC addresses. 
+#	Backup config every 24 hours. 
+#	Detect loops and other disrepancies.
+
+# Routers:
+#	Check interface status and routing information.
+#	Backup config every 24 hours.
+#	Detect possible problems.
+
+# UPS:
+#	Check bypass and battery status
+
 
 use strict;
 use warnings;

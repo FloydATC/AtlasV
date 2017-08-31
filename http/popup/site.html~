@@ -1,0 +1,43 @@
+[% SET site = map.site_by_id(map.id) %]
+DEBUG: map.id = [% map.id %]<P>
+<TABLE class='popup'>
+<THEAD>
+<TR><TH colspan='2'><A href="site.html?id=[% site.id %]" class="alive">[% site.name%]</A></TH><TH style='text-align: right;'>[% site.code %]</TH></TR>
+</THEAD>
+<TR><TD>Omr&aring;de:</TD><TD colspan='2'>
+[% FOREACH sitegroup IN map.sitegroups_by_site(site.id) %]
+<A href="sitegroup.html?id=[% sitegroup.id %]" class="alive">[% sitegroup.name %]</A>
+[% END %]
+</TD></TR>
+<TR><TD colspan='3'><HR></TD></TR>
+<TR class="option"><TD colspan='3'><A href="http://intranett.oikt.ansatt.oikt.net/content/view/full/239">Dokumentasjon</A></TD></TR>
+<TR>
+<TD>Type:</TD>
+<TD colspan="2">
+<SELECT name="role" onChange="javascript:site_type([% site.id %], this.value)">
+<OPTION value=""></OPTION>
+<OPTION  value="1">R&aring;dhus</OPTION>
+<OPTION  value="2">Skole</OPTION>
+<OPTION  value="3">Stor</OPTION>
+<OPTION selected value="4">Liten</OPTION>
+<OPTION  value="5">Radio</OPTION>
+<OPTION  value="6">Mellomstor</OPTION>
+</SELECT>
+</TD>
+</TR>
+<TR>
+<TD>Kommentar:</TD>
+<TD colspan="2"><INPUT type="text" name="comment" value="" size="40" onChange="javascript:site_comment([% site.id %], this.value)"></TD>
+</TR>
+<TR><TD colspan='3'><HR></TD></TR>
+[% FOREACH host IN map.hosts_by_site(site.id) %]
+<TR class="option"><TD><A href="host.html?id=[% host.id %]" class="alive">[% host.name %]</A></TD><TD>[% host.ip %]</TD><TD>Cisco:WS-C2960-24PC-L</TD></TR>
+[% END %]
+<TR><TD colspan='3'><HR></TD></TR>
+<TR class="option">
+<TD colspan='3'><A href="javascript:begin_drag_object('site[% site.id %]');">Flytt...</A></TD>
+</TR>
+<TR class="option">
+<TD colspan='3'><A href="javascript:cancel();">Avbryt</A></TD>
+</TR>
+</TABLE>
