@@ -1,7 +1,7 @@
 package Map;
 
 # This module serves as an interface between the web templates and the AtlasV core
-
+ 
 use strict;
 use warnings;
 use Carp;
@@ -65,7 +65,7 @@ sub sites {
 sub sitegroups_by_site {
   my $self = shift;
   my $site_id = shift;
-  warn "$0 $$ sitegroups_by_site($site_id)\n";
+  warn "$0 $$ Map.pm: sitegroups_by_site($site_id)\n";
   my $records = $self->query("
     SELECT
       sitegroups.id,
@@ -210,10 +210,10 @@ sub wanlinks {
     my $y1 = $record->{'s1_y'} + 25;
     my $x2 = $record->{'s2_x'} + 25;
     my $y2 = $record->{'s2_y'} + 25;
-    # Calculate a bezier control point 10 pixels left off the middle of points 1 and 2
+    # Calculate a bezier control point 25 pixels left off the middle of points 1 and 2
     my $vx = $x2-$x1; my $vy = $y2-$y1;                                     # Vector from point 1 to point 2
     ($vx, $vy) = ($vy, -$vx);                                               # Rotate 90 degrees counter-clockwise
-    my $len = sqrt($vx*$vx+$vy*$vy) || 1; $vx=$vx*25/$len; $vy=$vy*25/$len; # Normalize length to 10
+    my $len = sqrt($vx*$vx+$vy*$vy) || 1; $vx=$vx*25/$len; $vy=$vy*25/$len; # Normalize length to 25
     my $qx = $vx + ($x1+$x2)/2; my $qy = $vy + ($y1+$y2)/2;                 # Place vector between points 1 and 2
 
     $record->{'svg'} .= "<path d=\"M$x1,$y1 Q$qx,$qy $x2,$y2\" class=\"commlink\" id=\"commlink$id\" onclick=\"map.commlink_click(evt, 'commlink$id')\" onmousedown=\"map.commlink_mousedown(evt, 'commlink$id');\" onmouseup=\"map.commlink_mouseup(evt, 'commlink$id');\" onmouseover=\"map.commlink_mouseover(evt, 'commlink$id');\" onmouseout=\"map.commlink_mouseout(evt, 'commlink$id');\" onmousemove=\"map.commlink_mousemove(evt, 'commlink$id');\" />\n";
@@ -278,10 +278,10 @@ sub wanlinks_by_site {
       $x2 = $x1 + $dx; 
       $y2 = $y1 + $dy; 
     }
-    # Calculate a bezier control point 10 pixels left off the middle of points 1 and 2
+    # Calculate a bezier control point 25 pixels left off the middle of points 1 and 2
     my $vx = $x2-$x1; my $vy = $y2-$y1;                                     # Vector from point 1 to point 2
     ($vx, $vy) = ($vy, -$vx);                                               # Rotate 90 degrees counter-clockwise
-    my $len = sqrt($vx*$vx+$vy*$vy) || 1; $vx=$vx*25/$len; $vy=$vy*25/$len; # Normalize length to 10
+    my $len = sqrt($vx*$vx+$vy*$vy) || 1; $vx=$vx*25/$len; $vy=$vy*25/$len; # Normalize length to 25
     my $qx = $vx + ($x1+$x2)/2; my $qy = $vy + ($y1+$y2)/2;                 # Place vector between points 1 and 2
 
     $record->{'svg'} .= "<path d=\"M$x1,$y1 Q$qx,$qy $x2,$y2\" class=\"commlink wan\" id=\"commlink$id\" onclick=\"map.commlink_click(evt, 'commlink$id')\" onmousedown=\"map.commlink_mousedown(evt, 'commlink$id');\" onmouseup=\"map.commlink_mouseup(evt, 'commlink$id');\" onmouseover=\"map.commlink_mouseover(evt, 'commlink$id');\" onmouseout=\"map.commlink_mouseout(evt, 'commlink$id');\" onmousemove=\"map.commlink_mousemove(evt, 'commlink$id');\" />\n";
@@ -354,7 +354,7 @@ sub query {
     next if $line =~ /^#/; # Comment/message
     if ($line =~ /^\!/) {
       # Error
-      warn "$0 $$ $line\n";
+      warn "$0 $$ Map.pm: $line\n";
       last;
     }
     #warn "$0 $$ decode line=".$line."\n";
