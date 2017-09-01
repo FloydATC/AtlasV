@@ -41,6 +41,18 @@ sub site_by_id {
   return $records->[0];
 }
 
+sub sites_by_sitegroup {
+  my $self = shift;
+  my $sitegroup_id = shift;
+  my $records = $self->query("
+    SELECT sites.* 
+    FROM sitegroupmembers
+    LEFT JOIN sites ON (sites.id = sitegroupmembers.sitegroup)
+    WHERE sitegroupmembers.sitegroup = ".int($sitegroup_id)."
+  ");
+  return $records;
+}
+
 sub sites {
   my $self = shift;
   my $records = $self->query('SELECT * FROM sites');
@@ -65,7 +77,7 @@ sub sites {
 sub sitegroup_by_id {
   my $self = shift;
   my $sitegroup_id = shift;
-  warn "$0 $$ Map.pm: sitegroup_by_id($sitegroup_id)\n";
+  #warn "$0 $$ Map.pm: sitegroup_by_id($sitegroup_id)\n";
   my $records = $self->query("
     SELECT
       sitegroups.*
@@ -82,7 +94,7 @@ sub sitegroups_by_site {
   #warn "$0 $$ Map.pm: sitegroups_by_site($site_id)\n";
   my $records = $self->query("
     SELECT
-      sitegroups.*,
+      sitegroups.*
     FROM sitegroupmembers
     LEFT JOIN sitegroups ON (sitegroups.id = sitegroupmembers.sitegroup)
     WHERE sitegroupmembers.site = ".int($site_id)."
@@ -169,7 +181,7 @@ sub hosts_by_site {
 sub hostgroup_by_id {
   my $self = shift;
   my $hostgroup_id = shift;
-  warn "$0 $$ Map.pm: hostgroup_by_id($hostgroup_id)\n";
+  #warn "$0 $$ Map.pm: hostgroup_by_id($hostgroup_id)\n";
   my $records = $self->query("
     SELECT
       hostgroups.*
@@ -366,6 +378,48 @@ sub lanlinks_by_site {
   return $records;
 }
 
+
+sub move {
+  my $self = shift;
+  my ($type, $id, $relx, $rely) = @_;
+  
+  if ($type eq 'site' && $id && defined $relx && defined $rely) {
+    $self->query("
+      UPDATE sites 
+      SET x = x + $relx, y = y + $rely 
+      WHERE id = $id
+    ");
+    return "OK\n";  
+  }
+  if ($type eq 'sitegroup' && $id && defined $relx && defined $rely) {
+    $self->query("
+      UPDATE sites 
+      LEFT OUTER JOIN sitegroupmembers ON (sites.id = sitegroupmembers.site)
+      SET sites.x = sites.x + $relx, sites.y = sites.y + $rely 
+      WHERE sitegroupmembers.sitegroup = $id
+    ");
+    return "OK\n";
+  }
+  if ($type eq 'host' && $id && defined $relx && defined $rely) {
+    $self->query("
+      UPDATE hosts 
+      SET x = x + $relx, y = y + $rely 
+      WHERE id = $id
+    ");
+    return "OK\n";
+  }
+  if ($type eq 'hostgroup' && $id && defined $relx && defined $rely) {
+    $self->query("
+      UPDATE hosts 
+      LEFT OUTER JOIN hostgroupmembers ON (hosts.id = hostgroupmembers.host)
+      SET hosts.x = hosts.x + $relx, hosts.y = hosts.y + $rely 
+      WHERE hostgroupmembers.hostgroup = $id
+    ");
+    return "OK\n";
+  }
+  warn "$0 $$ Map.pm: Unhandled move(\"$type\", $id, $relx, $rely)\n";
+  return "ERROR\n";
+}
 
 
 sub query {
