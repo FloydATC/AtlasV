@@ -2,5 +2,14 @@
 [% INCLUDE html_menu.template %]
 <H3>sitegroup.html</H3>
 
-<p>Welcome to Atlas V</p>
+<TABLE>
+[% FOREACH site IN map.sites_by_sitegroup(map.id) %]
+<TR>
+<TD><A href="site.html?id=[% site.id %]">[% site.name %]</A></TD>
+</TR>
+[% END %]
+</TABLE>
+
+
+
 [% INCLUDE html_footer.template %]
