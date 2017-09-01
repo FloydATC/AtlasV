@@ -221,7 +221,7 @@ sub auth_check {
   my $realm = $self->realm();
   my $socket = $self->socket();
   
-  warn "$0 $$ auth_check request = ".Dumper($req);
+  #warn "$0 $$ auth_check request = ".Dumper($req);
   # Extract Authorization request header from client, if any
   my $client = {};
   if ($req->header('authorization')) {
