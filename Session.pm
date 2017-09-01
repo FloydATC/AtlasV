@@ -221,7 +221,7 @@ sub auth_check {
   my $realm = $self->realm();
   my $socket = $self->socket();
   
-  #warn "$0 $$ auth_check request = ".Dumper($req);
+  warn "$0 $$ auth_check request = ".Dumper($req);
   # Extract Authorization request header from client, if any
   my $client = {};
   if ($req->header('authorization')) {
@@ -246,7 +246,7 @@ sub auth_check {
   unless (exists $client->{'cnonce'}) { return 0; }
 
   # Request is complete, now verify it
-  #warn "$0 $$ authorization request appears to be complete\n";
+  #warn "$0 $$ authorization request from ".$client->{'username'}." appears to be complete\n";
 
   # Fetch HA1 from SQL table 'users'
   $client->{'username'} =~ s/\W//g;
@@ -324,6 +324,7 @@ sub auth_challenge {
       $client->{lc($key)} = $value;
     }
   }
+  if ($client->{'username'} eq '#null') { $client = {}; } # Firefox workaround
   
   # Generate (or reuse) "opaque" as the key of authenticated user, if any
   $client->{'opaque'} =~ s/\W//g if $client->{'opaque'};
