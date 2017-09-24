@@ -214,6 +214,8 @@ sub get_http_request {
 
 
 # Check "Authorization:" header, load user session and return 1 if valid
+# Return -1 if username or password is incorrect (user interaction is needed)
+# Return 0 if there was a problem with the opaque/key/nonce and a new challenge is needed
 sub auth_check {
   my $self = shift;
   my $req = shift;
