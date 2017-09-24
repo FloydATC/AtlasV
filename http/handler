@@ -11,6 +11,7 @@ use URI::QueryParam;
 use Template;
 use Map;
 use Cwd qw( getcwd );
+use XML::Simple;
 
 # NOTE: In this context, $self is a Session::Async object
 my $socket = $self->{'socket'};
@@ -32,10 +33,10 @@ my $doc = $req->uri->path;
 if ($doc eq '/') { $doc = 'index.html'; }
 $doc =~ s/\.{2,}/\./g;
 $doc =~ s/^[\/\.]+//g;
-my $ext = (split(/\./, $doc))[-1];
+my ($surname, $ext) = (split(/\./, $doc));
 
-# Check file (except ajax requests, which are not files)
-unless ($ext eq 'ajax') {
+# Check file (except ajax and xml requests, which are not files)
+unless ($ext eq 'ajax' || $ext eq 'xml') {
   # Verify that file exists
   unless (-e 'http/'.$doc) { 
     $doc = 'error_404.html'; 
@@ -119,6 +120,22 @@ if ($ext eq 'html' || $ext eq 'svg') {
     $content = $map->move($type, $id, $relx, $rely );
   }
   
+} elsif ($ext eq 'xml') {
+  # Serve XML request as a virtual object by looking up the $map object with parameter 'id' 
+  # e.g. host_by_id.xml?id=123 --> $map->host_by_id(123) --> XML::Simple
+  # WARNING! Map.pm may contain dangerous methods, be careful!
+  die if $surname eq 'new'; # Danger
+  die if $surname eq 'query'; # Danger
+   
+  my $xs = XML::Simple->new( AttrIndent => 1, KeepRoot => 1, SuppressEmpty => undef, NoAttr => 1 );
+  my $data = $map->$surname($req->uri->query_param('id'));
+  if (ref($data) eq 'ARRAY') {
+    # Multiple objects
+    $content = $xs->XMLout( { $surname => { 'object' => $data } } ); 
+  } else {
+    # Single object
+    $content = $xs->XMLout( { $surname => $data } ); 
+  }
 } else {
   # Serve static file (JS, CSS, bitmap etc.)
   #warn "$0 $$ binary xfer\n";

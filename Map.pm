@@ -1,6 +1,8 @@
 package Map;
 
 # This module serves as an interface between the web templates and the AtlasV core
+# WARNING! Methods are exposed by http/handler XML interface so make sure to sanitize any parameters
+# and filter out any potentially harmful methods.
  
 use strict;
 use warnings;
@@ -382,6 +384,11 @@ sub lanlinks_by_site {
 sub move {
   my $self = shift;
   my ($type, $id, $relx, $rely) = @_;
+  
+  # Sanitize inputs
+  $id = int($id);
+  $relx = int($relx);
+  $rely = int($rely);
   
   if ($type eq 'site' && $id && defined $relx && defined $rely) {
     $self->query("
