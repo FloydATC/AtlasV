@@ -257,8 +257,8 @@ sub auth_check {
     AND realm = '".$realm."'
   ");
   unless (@{$pwentries}) {
-    warn "$0 $$ username \"".$client->{'username'}."\" rejected\n";
-    return 0;
+    #warn "$0 $$ auth_check() username \"".$client->{'username'}."\" rejected\n";
+    return -1; # This has no chance of ever working
   }
   my $pwentry = shift @{$pwentries};
   my $ha1 = $pwentry->{'password'} || '';
@@ -277,8 +277,8 @@ sub auth_check {
   my $opaque = <$socket>;
   chomp $opaque;
   if ($opaque ne $client->{'opaque'}) {
-    #warn "$0 $$ opaque/key ".$client->{'opaque'}." rejected\n";
-    return 0;
+    #warn "$0 $$ auth_check() opaque/key ".$client->{'opaque'}." rejected\n";
+    return 0; # Try again
   }
 
   
@@ -288,8 +288,8 @@ sub auth_check {
   my $nonce = <$socket>;
   chomp $nonce;
   if ($nonce ne $client->{'nonce'}) {
-    #warn "$0 $$ nonce ".$client->{'nonce'}." rejected\n";
-    return 0;
+    #warn "$0 $$ auth_check() nonce ".$client->{'nonce'}." rejected\n";
+    return 0; # Try again
   }
   
   
@@ -300,9 +300,9 @@ sub auth_check {
     return 1; # PASS
   }
       
-  warn "$0 $$ incorrect response ".$client->{'response'}." (should be ".$correct.")\n";
+  #warn "$0 $$ incorrect response ".$client->{'response'}." (should be ".$correct.")\n";
 
-  return 0;
+  return -1; # The password is incorrect, no chance of ever working
 } 
 
 # Return a HTTP Digest authentication challenge header - Note: BLOCKING
@@ -324,7 +324,8 @@ sub auth_challenge {
       $client->{lc($key)} = $value;
     }
   }
-  if ($client->{'username'} eq '#null') { $client = {}; } # Firefox workaround
+  #warn $client->{'username'};
+  #if ($client->{'username'} eq '#null') { $client = {}; } # Firefox workaround
   
   # Generate (or reuse) "opaque" as the key of authenticated user, if any
   $client->{'opaque'} =~ s/\W//g if $client->{'opaque'};

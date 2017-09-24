@@ -62,7 +62,13 @@ my $header = HTTP::Headers->new(
 
 # Check authorization 
 #warn "$0 $$ session = $self\n";
-unless ($self->auth_check($req)) {
+my $result = $self->auth_check($req); # 1 ok, 0 missing, -1 failed
+if ($result == -1) {
+  # Invalid/rejected credentials
+  #warn "INVALID/REJECTED credentials, removing authorization header\n";
+  $req->headers->remove_header('authorization'); 
+}
+unless ($result == 1) {
   @status = (401 => 'Unauthorized');
   $doc = 'error_401.html';
   $header->header($self->auth_challenge($req));
