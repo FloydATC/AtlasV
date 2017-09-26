@@ -252,7 +252,7 @@ sub cmd_sql {
     $session->send("\n");
     return;
   }
-  my $cols = $sth->{'NAME_lc'}; 
+  my $cols = $sth->{'NAME_lc'}; # DBI returns column names in lowercase
   if ($cols) { 
     $session->send("@".$json->encode($cols)."\n");
     my $count = 0;
@@ -270,7 +270,8 @@ sub cmd_sql {
 
 
 
-# EXPERIMENTAL
+# HTTP Digest authentication backend: Validate existing opaque key or issue a new one
+# This allows all http/handler threads to share authentication information
 sub cmd_key {
   my $session = shift;
   my @args = @_;
@@ -284,7 +285,7 @@ sub cmd_key {
     my $k = $key->{$opt{'opaque'}};
     #warn "$0 $$ cmd_key ".join(' ',@args)." ".time." => ".Dumper($k);
     if ($k && $k->{'expires'} > time) {
-      # Not expired
+      # Not expired; reset timer and return the same opaque key
       $k->{'expires'} = (time + 3600);
       $session->send($opt{'opaque'}."\n");
       return;
@@ -293,6 +294,7 @@ sub cmd_key {
       delete $key->{$opt{'opaque'}};
     }
   }
+  # No valid opaque key found, issue a new one (to expire in 1 hour)
   my $k = Digest::MD5::md5_hex($session->socket.':'.$$.':'.time.':'.$session->realm.':'.$0);
   $key->{$k} = { expires => (time + 3600) };
   $session->send($k."\n");
@@ -301,7 +303,8 @@ sub cmd_key {
 
 
 
-# EXPERIMENTAL
+# HTTP Digest authentication backend: Validate existing nonce key or issue a new one
+# This allows all http/handler threads to share authentication information
 sub cmd_nonce {
   my $session = shift;
   my @args = @_;
@@ -316,12 +319,13 @@ sub cmd_nonce {
     my $n = $nonce->{$opt{'nonce'}};
     #warn "$0 $$ cmd_nonce ".join(' ',@args)." ".time." => ".Dumper($n, \%opt);
     if ($n && $n->{'expires'} > time && $n->{'opaque'} eq $opt{'opaque'}) {
-      # Not expired, and opaque key matches
+      # Nonce has not expired and opaque key matches
       if ($n->{'nc'} == 0 || $opt{'nc'} > $n->{'nc'}) {
         $n->{'nc'} = $opt{'nc'} || 0;
         $session->send($opt{'nonce'}."\n");
         return;
       } else {
+        # Possible replay or DoS attack. Do NOT invalidate, just proceed with issuing a new opaque key.
         #warn "$0 $$ nc=".$opt{'nc'}." not higher than ".$n->{'nc'}.", nonce rejected\n";
       }
     } else {
@@ -329,6 +333,7 @@ sub cmd_nonce {
       delete $nonce->{$opt{'nonce'}};
     }
   }
+  # No valid nonce found, issue a new one (to expire in 1 hour)
   my $n = Digest::MD5::md5_hex(($opt{'nonce'}||'@').':'.$opt{'opaque'}.':'.$$.':'.time.':'.$session->realm.':'.$0);
   $nonce->{$n} = { expires => (time + 3600), nc => 0, opaque => $opt{'opaque'} };
   $session->send($n."\n");
