@@ -51,6 +51,7 @@ DROP TABLE IF EXISTS `sites`;
 CREATE TABLE `sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `up` float DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
   `x` int(11) DEFAULT 100,
   `y` int(11) DEFAULT 100,
@@ -83,6 +84,7 @@ CREATE TABLE `hosts` (
   `x` int(11) DEFAULT 100,
   `y` int(11) DEFAULT 100,
   `up` float DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
   `alive` datetime DEFAULT NULL,
   `checked` datetime DEFAULT NULL,
   `scanned` datetime DEFAULT NULL,
@@ -141,6 +143,7 @@ DROP TABLE IF EXISTS `hostgroups`;
 CREATE TABLE `hostgroups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `up` float DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
   `site` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -168,6 +171,8 @@ DROP TABLE IF EXISTS `commlinks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `commlinks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `up` float DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
   `host1` int(11) NOT NULL,
   `host2` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -196,6 +201,7 @@ DROP TABLE IF EXISTS `interfaces`;
 CREATE TABLE `interfaces` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `up` float DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
   `description` varchar(64) DEFAULT NULL,
   `host` int(11) NOT NULL,
@@ -304,6 +310,7 @@ DROP TABLE IF EXISTS `sitegroups`;
 CREATE TABLE `sitegroups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `up` float DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
