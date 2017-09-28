@@ -37,6 +37,10 @@ while (1) {
 
   sleep 2;
 
+  # If a host did not respond after 10 seconds of pinging, declare it dead
+  print $session "UPDATE hosts SET up=0 WHERE (up = 1 OR up IS NULL) AND (alive IS NULL AND checked IS NOT NULL AND (checked-alive > 10 OR alive IS NULL))\n";
+  query_result($session);
+
 }
 
 
