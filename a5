@@ -239,21 +239,25 @@ sub cmd_sql {
   my $query = shift;
 
   my $dbh = $session->dbh;
-  #warn "$0 $$ $query\n";
+  #my $debug = 1 if $query =~ /UPDATE/;
+  #warn "$0 $$ sql $query\n" if $debug;
   my $sth = $dbh->prepare($query);
   if ($dbh->errstr) {
+    #warn "$0 $$ sql prepare failed\n" if $debug;
     $session->send("! ".$dbh->errstr."\n");
     $session->send("\n");
     return;
   } 
   my $res = $sth->execute();
   if ($dbh->errstr) {
+    #warn "$0 $$ sql execute failed\n" if $debug;
     $session->send("! ".$dbh->errstr."\n");
     $session->send("\n");
     return;
   }
   my $cols = $sth->{'NAME_lc'}; # DBI returns column names in lowercase
   if ($cols) { 
+    #warn "$0 $$ sql sending column names and data\n" if $debug;
     $session->send("@".$json->encode($cols)."\n");
     my $count = 0;
     while (my $row = $sth->fetchrow_arrayref()) {
@@ -261,9 +265,11 @@ sub cmd_sql {
       $session->send($json->encode($row)."\n");
     }
   } else {
+    #warn "$0 $$ sql sending result\n" if $debug;
     $session->send("# result=".$res."\n");
   }
   $sth->finish;
+  #warn "$0 $$ sql finished\n" if $debug;
   $session->send("\n");
   return;
 }

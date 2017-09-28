@@ -10,9 +10,11 @@ use Net::Pcap;
 use Data::Dumper;
 use NetAddr::IP::Util qw( inet_ntoa );
 use Time::HiRes;
+use JSON;
 
 my $TTL = 60;
 my $address = {};
+my $json = JSON->new();
 warn "$0 $$ running\n";
 while (1) {
   # Get device
@@ -54,6 +56,7 @@ sub process_packet {
     # Payload is an IP packet
     my $payload = substr($packet, 14);
     my $src_ip = inet_ntoa(substr($payload, 12, 4));
+    #warn "$0 $$ packet from $src_ip\n";
     #my $dst_ip = inet_ntoa(substr($payload, 16, 4));
     #print "$src_ip > $dst_ip\n";
     $src_ip = is_valid($src_ip) ? $src_ip : '';
@@ -61,8 +64,13 @@ sub process_packet {
 
     my $now = time;
     unless ($src_ip eq '' || ($address->{$src_ip} && $address->{$src_ip} + $TTL > $now)) {
-      print "UPDATE hosts SET up=1 WHERE ip='".$src_ip."'\n";
-       $address->{$src_ip} = $now;
+      #warn "$0 $$ db update ip=$src_ip\n";
+      print $session "UPDATE hosts SET up=1, alive=NOW() WHERE ip='".$src_ip."'\n";
+      query_result($session);
+      #warn "$0 $$ alive\n";
+      $address->{$src_ip} = $now;
+    } else {
+      #warn "$0 $$ NO DB UPDATE (".$address->{$src_ip}.")\n";
     }
     #print hexdump($packet);    
   }
@@ -87,4 +95,30 @@ sub is_valid {
   return 0 if $ip eq '127.0.0.1';
   return 0 if $ip eq '255.255.255.255';
   return 1;
+}
+
+sub query_result {
+  my $session = shift;
+  my $cols = [];
+  my @records = ();
+  #warn "$0 $$ query_result() begin\n";
+  while (my $line = <$session>) {
+    chomp $line;
+    #warn "$0 $$ query_result() got [$line]\n";
+    last unless $line; # Empty line = end of response
+    next if $line =~ /^#/; # Comment/message
+    if ($line =~ /^\!/) {
+      # Error
+      #warn "$0 $$ $line\n";
+      last;
+    }
+    #warn "$0 $$ decode line=".$line."\n";
+    if ($line =~ /^\@(.+)/) { $cols = $json->decode($1); next; }
+    my $row = $json->decode($line);
+    my %hash = ();
+    @hash{@{$cols}} = @{$row}; 
+    push @records, \%hash;
+    #warn "$0 $$ hash=".Dumper(\%hash);
+  } 
+  return @records;
 }
