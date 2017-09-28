@@ -33,11 +33,18 @@ while (1) {
 
       
   # Fetch list of ip addresses to ping
-  print $session "SELECT id,ip FROM hosts WHERE scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)\n";
+  print $session "SELECT id,ip FROM hosts WHERE scanned IS NULL OR scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)\n";
   my @records = query_result($session);
-  # ...
 
-  
+  foreach my $record (@records) {
+    warn "$0 $$ scan host id=".$record->{'id'}." ip=".$record->{'ip'}."\n";
+
+    # Scan host
+    # ...
+
+    print $session "UPDATE hosts SET scanned=NOW() WHERE id=".int($record->{'id'})."\n";
+    query_result($session);
+  }
 
   sleep 2;
 
