@@ -83,11 +83,15 @@ CREATE TABLE `hosts` (
   `x` int(11) DEFAULT 100,
   `y` int(11) DEFAULT 100,
   `up` float DEFAULT NULL,
+  `alive` datetime DEFAULT NULL,
   `checked` datetime DEFAULT NULL,
   `scanned` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `site` (`site`),
+  KEY `alive` (`alive`),
+  KEY `checked` (`checked`),
+  KEY `scanned` (`scanned`),
   CONSTRAINT `hosts_ibfk_1` FOREIGN KEY (`site`) REFERENCES `sites` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
