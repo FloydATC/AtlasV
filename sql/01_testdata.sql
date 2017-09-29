@@ -1,8 +1,8 @@
 
-INSERT INTO hostclasses (id,name) VALUES (1, 'Switch');
-INSERT INTO hostclasses (id,name) VALUES (2, 'Router');
-INSERT INTO hostclasses (id,name) VALUES (3, 'UPS');
-INSERT INTO hostclasses (id,name) VALUES (4, 'Server');
+INSERT INTO siteclasses (id,name) VALUES (1, 'Leaf');
+INSERT INTO siteclasses (id,name) VALUES (2, 'Branch');
+INSERT INTO siteclasses (id,name) VALUES (3, 'Priority');
+INSERT INTO siteclasses (id,name) VALUES (4, 'Core');
 
 INSERT INTO sites (id,name,x,y) VALUES (1,'Test site A',100,100);
 INSERT INTO sites (id,name,x,y) VALUES (2,'Test site B',200,100);
@@ -16,6 +16,11 @@ INSERT INTO sitegroupmembers (site,sitegroup) VALUES (1,1);
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (2,1); 
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (3,2); 
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (4,2); 
+
+INSERT INTO hostclasses (id,name) VALUES (1, 'Switch');
+INSERT INTO hostclasses (id,name) VALUES (2, 'Router');
+INSERT INTO hostclasses (id,name) VALUES (3, 'UPS');
+INSERT INTO hostclasses (id,name) VALUES (4, 'Server');
 
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (1,'10.1.1.252',1,'A-01',100,100);
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (2,'10.1.1.251',1,'A-02',100,200);

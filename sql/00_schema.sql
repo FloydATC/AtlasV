@@ -16,6 +16,21 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `siteclasses`
+--
+
+DROP TABLE IF EXISTS `siteclasses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `siteclasses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `sites`
 --
 
@@ -27,10 +42,12 @@ CREATE TABLE `sites` (
   `up` float DEFAULT NULL,
   `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
+  `class` int(11) DEFAULT '1',
   `x` int(11) DEFAULT '100',
   `y` int(11) DEFAULT '100',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `name` (`name`),
+  CONSTRAINT `sites_ibfk_1` FOREIGN KEY (`class`) REFERENCES `siteclasses` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
