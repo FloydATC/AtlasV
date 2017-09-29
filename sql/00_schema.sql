@@ -16,32 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) NOT NULL,
-  `realm` varchar(64) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username_realm` (`username`,`realm`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `sites`
 --
 
@@ -53,21 +27,47 @@ CREATE TABLE `sites` (
   `up` float DEFAULT NULL,
   `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
-  `x` int(11) DEFAULT 100,
-  `y` int(11) DEFAULT 100,
+  `x` int(11) DEFAULT '100',
+  `y` int(11) DEFAULT '100',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER site_up_change BEFORE UPDATE ON sites FOR EACH ROW
+BEGIN
+  IF OLD.up <> NEW.up THEN
+    SET NEW.since = NOW();
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `hostclasses`
+--
+
+DROP TABLE IF EXISTS `hostclasses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hostclasses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sites`
---
-
-LOCK TABLES `sites` WRITE;
-/*!40000 ALTER TABLE `sites` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sites` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `hosts`
@@ -81,9 +81,10 @@ CREATE TABLE `hosts` (
   `ip` varchar(16) DEFAULT NULL,
   `site` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `disabled` boolean DEFAULT FALSE,
-  `x` int(11) DEFAULT 100,
-  `y` int(11) DEFAULT 100,
+  `disabled` tinyint(1) DEFAULT '0',
+  `class` int(11) DEFAULT '1',
+  `x` int(11) DEFAULT '100',
+  `y` int(11) DEFAULT '100',
   `up` float DEFAULT NULL,
   `since` datetime DEFAULT NULL,
   `alive` datetime DEFAULT NULL,
@@ -97,18 +98,30 @@ CREATE TABLE `hosts` (
   KEY `alive` (`alive`),
   KEY `checked` (`checked`),
   KEY `scanned` (`scanned`),
-  CONSTRAINT `hosts_ibfk_1` FOREIGN KEY (`site`) REFERENCES `sites` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `hosts_ibfk_1` FOREIGN KEY (`site`) REFERENCES `sites` (`id`),
+  CONSTRAINT `hosts_ibfk_2` FOREIGN KEY (`class`) REFERENCES `hostclasses` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hosts`
---
-
-LOCK TABLES `hosts` WRITE;
-/*!40000 ALTER TABLE `hosts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hosts` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER host_up_change BEFORE UPDATE ON hosts FOR EACH ROW
+BEGIN
+  IF OLD.up <> NEW.up THEN
+    SET NEW.since = NOW();
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `hostgroupmembers`
@@ -122,19 +135,10 @@ CREATE TABLE `hostgroupmembers` (
   `hostgroup` int(11) NOT NULL,
   UNIQUE KEY `host_hostgroup` (`host`,`hostgroup`),
   KEY `hostgroup` (`hostgroup`),
-  CONSTRAINT `hostgroupmembers_ibfk_1` FOREIGN KEY (`host`) REFERENCES `hosts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `hostgroupmembers_ibfk_2` FOREIGN KEY (`hostgroup`) REFERENCES `hostgroups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `hostgroupmembers_ibfk_1` FOREIGN KEY (`host`) REFERENCES `hosts` (`id`),
+  CONSTRAINT `hostgroupmembers_ibfk_2` FOREIGN KEY (`hostgroup`) REFERENCES `hostgroups` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hostgroupmembers`
---
-
-LOCK TABLES `hostgroupmembers` WRITE;
-/*!40000 ALTER TABLE `hostgroupmembers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hostgroupmembers` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `hostgroups`
@@ -152,47 +156,29 @@ CREATE TABLE `hostgroups` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_site` (`name`,`site`),
   KEY `site` (`site`),
-  CONSTRAINT `hostgroups_ibfk_1` FOREIGN KEY (`site`) REFERENCES `sites` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `hostgroups_ibfk_1` FOREIGN KEY (`site`) REFERENCES `sites` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hostgroups`
---
-
-LOCK TABLES `hostgroups` WRITE;
-/*!40000 ALTER TABLE `hostgroups` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hostgroups` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `commlinks`
---
-
-DROP TABLE IF EXISTS `commlinks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `commlinks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `up` float DEFAULT NULL,
-  `since` datetime DEFAULT NULL,
-  `host1` int(11) NOT NULL,
-  `host2` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `host1_host2` (`host1`,`host2`),
-  CONSTRAINT `commlinks_ibfk_1` FOREIGN KEY (`host1`) REFERENCES `hosts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `commlinks_ibfk_2` FOREIGN KEY (`host2`) REFERENCES `hosts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `commlinks`
---
-
-LOCK TABLES `commlinks` WRITE;
-/*!40000 ALTER TABLE `commlinks` DISABLE KEYS */;
-/*!40000 ALTER TABLE `commlinks` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER hostgroup_up_change BEFORE UPDATE ON hostgroups FOR EACH ROW
+BEGIN
+  IF OLD.up <> NEW.up THEN
+    SET NEW.since = NOW();
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `interfaces`
@@ -210,18 +196,29 @@ CREATE TABLE `interfaces` (
   `host` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `host` (`host`),
-  CONSTRAINT `interfaces_ibfk_1` FOREIGN KEY (`host`) REFERENCES `hosts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `interfaces_ibfk_1` FOREIGN KEY (`host`) REFERENCES `hosts` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `interfaces`
---
-
-LOCK TABLES `interfaces` WRITE;
-/*!40000 ALTER TABLE `interfaces` DISABLE KEYS */;
-/*!40000 ALTER TABLE `interfaces` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER interface_up_change BEFORE UPDATE ON interfaces FOR EACH ROW
+BEGIN
+  IF OLD.up <> NEW.up THEN
+    SET NEW.since = NOW();
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `macs`
@@ -239,15 +236,6 @@ CREATE TABLE `macs` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `macs`
---
-
-LOCK TABLES `macs` WRITE;
-/*!40000 ALTER TABLE `macs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `macs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `macsightings`
 --
 
@@ -262,20 +250,11 @@ CREATE TABLE `macsightings` (
   KEY `mac` (`mac`),
   KEY `vlan` (`vlan`),
   KEY `interface` (`interface`),
-  CONSTRAINT `macsightings_ibfk_1` FOREIGN KEY (`mac`) REFERENCES `macs` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `macsightings_ibfk_2` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `macsightings_ibfk_3` FOREIGN KEY (`interface`) REFERENCES `interfaces` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `macsightings_ibfk_1` FOREIGN KEY (`mac`) REFERENCES `macs` (`id`),
+  CONSTRAINT `macsightings_ibfk_2` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`),
+  CONSTRAINT `macsightings_ibfk_3` FOREIGN KEY (`interface`) REFERENCES `interfaces` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `macsightings`
---
-
-LOCK TABLES `macsightings` WRITE;
-/*!40000 ALTER TABLE `macsightings` DISABLE KEYS */;
-/*!40000 ALTER TABLE `macsightings` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `sitegroupmembers`
@@ -289,19 +268,10 @@ CREATE TABLE `sitegroupmembers` (
   `sitegroup` int(11) NOT NULL,
   UNIQUE KEY `site_sitegroup` (`site`,`sitegroup`),
   KEY `sitegroup` (`sitegroup`),
-  CONSTRAINT `sitegroupmembers_ibfk_1` FOREIGN KEY (`site`) REFERENCES `sites` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `sitegroupmembers_ibfk_2` FOREIGN KEY (`sitegroup`) REFERENCES `sitegroups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `sitegroupmembers_ibfk_1` FOREIGN KEY (`site`) REFERENCES `sites` (`id`),
+  CONSTRAINT `sitegroupmembers_ibfk_2` FOREIGN KEY (`sitegroup`) REFERENCES `sitegroups` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `sitegroupmembers`
---
-
-LOCK TABLES `sitegroupmembers` WRITE;
-/*!40000 ALTER TABLE `sitegroupmembers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sitegroupmembers` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `sitegroups`
@@ -317,17 +287,45 @@ CREATE TABLE `sitegroups` (
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER sitegroup_up_change BEFORE UPDATE ON sitegroups FOR EACH ROW
+BEGIN
+  IF OLD.up <> NEW.up THEN
+    SET NEW.since = NOW();
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Dumping data for table `sitegroups`
+-- Table structure for table `users`
 --
 
-LOCK TABLES `sitegroups` WRITE;
-/*!40000 ALTER TABLE `sitegroups` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sitegroups` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) NOT NULL,
+  `realm` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_realm` (`username`,`realm`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `vlans`
@@ -345,15 +343,6 @@ CREATE TABLE `vlans` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `vlans`
---
-
-LOCK TABLES `vlans` WRITE;
-/*!40000 ALTER TABLE `vlans` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vlans` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `vlansightings`
 --
 
@@ -367,19 +356,10 @@ CREATE TABLE `vlansightings` (
   KEY `vlan` (`vlan`),
   KEY `interface` (`interface`),
   KEY `recorded` (`recorded`),
-  CONSTRAINT `vlansightings_ibfk_1` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `vlansightings_ibfk_2` FOREIGN KEY (`interface`) REFERENCES `interfaces` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `vlansightings_ibfk_1` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`),
+  CONSTRAINT `vlansightings_ibfk_2` FOREIGN KEY (`interface`) REFERENCES `interfaces` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vlansightings`
---
-
-LOCK TABLES `vlansightings` WRITE;
-/*!40000 ALTER TABLE `vlansightings` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vlansightings` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -390,4 +370,48 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-08 14:17:52
+
+--
+-- Table structure for table `commlinks`
+--
+
+DROP TABLE IF EXISTS `commlinks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `commlinks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `up` float DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
+  `host1` int(11) NOT NULL,
+  `host2` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `host1_host2` (`host1`,`host2`),
+  KEY `commlinks_ibfk_2` (`host2`),
+  CONSTRAINT `commlinks_ibfk_1` FOREIGN KEY (`host1`) REFERENCES `hosts` (`id`),
+  CONSTRAINT `commlinks_ibfk_2` FOREIGN KEY (`host2`) REFERENCES `hosts` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER commlink_up_change BEFORE UPDATE ON commlinks FOR EACH ROW
+BEGIN
+  IF OLD.up <> NEW.up THEN
+    SET NEW.since = NOW();
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+
+
+-- Dump completed on 2017-09-29  9:06:50

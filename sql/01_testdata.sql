@@ -1,24 +1,29 @@
 
-INSERT INTO sites (name,x,y) VALUES ('Test site A',100,100);
-INSERT INTO sites (name,x,y) VALUES ('Test site B',200,100);
-INSERT INTO sites (name,x,y) VALUES ('Test site C',300,100);
-INSERT INTO sites (name,x,y) VALUES ('Test site D',300,200);
+INSERT INTO hostclasses (id,name) VALUES (1, 'Switch');
+INSERT INTO hostclasses (id,name) VALUES (2, 'Router');
+INSERT INTO hostclasses (id,name) VALUES (3, 'UPS');
+INSERT INTO hostclasses (id,name) VALUES (4, 'Server');
 
-INSERT INTO sitegroups (name) VALUES ('Test sitegroup 1');
-INSERT INTO sitegroups (name) VALUES ('Test sitegroup 2');
+INSERT INTO sites (id,name,x,y) VALUES (1,'Test site A',100,100);
+INSERT INTO sites (id,name,x,y) VALUES (2,'Test site B',200,100);
+INSERT INTO sites (id,name,x,y) VALUES (3,'Test site C',300,100);
+INSERT INTO sites (id,name,x,y) VALUES (4,'Test site D',300,200);
+
+INSERT INTO sitegroups (id,name) VALUES (1,'Test sitegroup 1');
+INSERT INTO sitegroups (id,name) VALUES (2,'Test sitegroup 2');
 
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (1,1); 
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (2,1); 
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (3,2); 
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (4,2); 
 
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.252',1,'A-01',100,100);
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.251',1,'A-02',100,200);
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.250',1,'A-03',100,300);
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.249',1,'A-04',200,300);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (1,'10.1.1.252',1,'A-01',100,100);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (2,'10.1.1.251',1,'A-02',100,200);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (3,'10.1.1.250',1,'A-03',100,300);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (4,'10.1.1.249',1,'A-04',200,300);
 
-INSERT INTO hostgroups (name,site) VALUES ('Test hostgroup 1',1);
-INSERT INTO hostgroups (name,site) VALUES ('Test hostgroup 2',1);
+INSERT INTO hostgroups (id,name,site) VALUES (1,'Test hostgroup 1',1);
+INSERT INTO hostgroups (id,name,site) VALUES (2,'Test hostgroup 2',1);
 
 INSERT INTO hostgroupmembers (host,hostgroup) VALUES (1,1); 
 INSERT INTO hostgroupmembers (host,hostgroup) VALUES (2,1); 
@@ -26,11 +31,10 @@ INSERT INTO hostgroupmembers (host,hostgroup) VALUES (3,2);
 INSERT INTO hostgroupmembers (host,hostgroup) VALUES (4,2); 
 
 
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.248',2,'B-01',100,200);
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.247',2,'B-02',200,200);
-
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.246',3,'C-01',100,200);
-INSERT INTO hosts (ip,site,name,x,y) VALUES ('10.1.1.245',3,'C-02',200,200);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (5,'10.1.1.248',2,'B-01',100,200);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (6,'10.1.1.247',2,'B-02',200,200);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (7,'10.1.1.246',3,'C-01',100,200);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (8,'10.1.1.245',3,'C-02',200,200);
 
 INSERT INTO commlinks (host1,host2) VALUES (1,2);
 INSERT INTO commlinks (host1,host2) VALUES (1,3);
