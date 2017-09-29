@@ -65,7 +65,7 @@ sub process_packet {
     my $now = time;
     unless ($src_ip eq '' || ($address->{$src_ip} && $address->{$src_ip} + $TTL > $now)) {
       #warn "$0 $$ db update ip=$src_ip\n";
-      print $session "UPDATE hosts SET up=1, alive=NOW() WHERE ip='".$src_ip."'\n";
+      print $session "UPDATE hosts SET up=1, alive=NOW() WHERE disabled=false AND ip='".$src_ip."'\n";
       query_result($session);
       #warn "$0 $$ alive\n";
       $address->{$src_ip} = $now;

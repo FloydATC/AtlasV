@@ -33,7 +33,7 @@ while (1) {
 
       
   # Fetch list of ip addresses to ping
-  print $session "SELECT id,ip FROM hosts WHERE scanned IS NULL OR scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)\n";
+  print $session "SELECT id,ip FROM hosts WHERE disabled = false AND scanned IS NULL OR scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)\n";
   my @records = query_result($session);
 
   foreach my $record (@records) {

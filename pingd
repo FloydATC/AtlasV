@@ -18,15 +18,15 @@ warn "$0 $$ running\n";
 while (1) {
 
       
-  # Fetch list of ip addresses to ping
-  print $session "SELECT id,ip FROM hosts WHERE (alive IS NULL OR alive < DATE_SUB(NOW(), INTERVAL 2 MINUTE)) AND (checked IS NULL OR checked < DATE_SUB(NOW(), INTERVAL 2 MINUTE))\n";
+  # Fetch list of ip addresses to ping (not disabled AND not active in 2 mins AND not pinged in 2 mins)
+  print $session "SELECT id,ip FROM hosts WHERE disabled=false AND (alive IS NULL OR alive < DATE_SUB(NOW(), INTERVAL 2 MINUTE)) AND (checked IS NULL OR checked < DATE_SUB(NOW(), INTERVAL 2 MINUTE))\n";
   my @records = query_result($session);
   
   my $p = Net::Ping->new('icmp');
   $p->hires();
   my @ids = ();
   foreach my $record (@records) {
-    #warn "$0 $$ ping host id=".$record->{'id'}." ip=".$record->{'ip'}."\n";
+    warn "$0 $$ ping host id=".$record->{'id'}." ip=".$record->{'ip'}."\n";
     for (1 .. 3) {
       $p->ping($record->{'ip'}, 0.1);
     }
@@ -38,7 +38,7 @@ while (1) {
   sleep 2;
 
   # If a host did not respond after 10 seconds of pinging, declare it dead
-  print $session "UPDATE hosts SET up=0 WHERE (up = 1 OR up IS NULL) AND (alive IS NULL AND checked IS NOT NULL AND (checked-alive > 10 OR alive IS NULL))\n";
+  print $session "UPDATE hosts SET up=0 WHERE disabled=false AND (up=1 OR up IS NULL) AND (alive IS NULL AND checked IS NOT NULL AND (checked-alive > 10 OR alive IS NULL))\n";
   query_result($session);
 
 }
