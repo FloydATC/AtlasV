@@ -19,6 +19,8 @@ use JSON;
 use NetAddr::IP::Util; # Included here for dependency checking only
 use AtlasV;
 
+die "$0 must run as root\n" unless $< == 0;
+
 $SIG{CHLD} = 'IGNORE';	# Let perl reap dead processes
 $SIG{PIPE} = 'IGNORE';  # Ignore peers that close connections prematurely
 
