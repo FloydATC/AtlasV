@@ -24,7 +24,8 @@
 
 use strict;
 use warnings;
-use Net::SNMP;
+#use Net::SNMP;
+use SNMP::Effective;
 use Time::HiRes;
 use Data::Dumper;
 use JSON;
@@ -35,22 +36,105 @@ my $json = JSON->new();
 warn "$0 $$ running\n";
 while (1) {
 
-      
-  # Fetch list of ip addresses to ping
+  # Fetch list of hosts to scan
   print $session "SELECT id,ip FROM hosts WHERE disabled = false AND scanned IS NULL OR scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)\n";
-  my @records = query_result($session);
+  my @hosts = query_result($session);
+  my %host_ip_by_id = map { $_->{'id'} => $_->{'ip'} } @hosts; 
+  my %host_id_by_ip = map { $_->{'ip'} => $_->{'id'} } @hosts;
 
-  foreach my $record (@records) {
-    #warn "$0 $$ scan host id=".$record->{'id'}." ip=".$record->{'ip'}."\n";
+  # Fetch SNMP OIDs to try
+  print $session "SELECT name,oid FROM snmp_oids\n";
+  my @oids = query_result($session);
+  my %snmp_name_by_oid = map { $_->{'oid'} => $_->{'name'} } @oids;
+  my %snmp_oid_by_name = map { $_->{'name'} => $_->{'oid'} } @oids;
+  
+  my $snmp = SNMP::Effective->new(
+    MaxSessions   => 32,
+    MasterTimeout => 240,
+    DestHost      => [ values %host_ip_by_id ],
+    Arg           => {
+      Community   => 'public',
+      Version     => 1,
+      RemotePort  => 161,
+      Timeout     => '1000000', # microseconds
+      Retries     => 3,
+      RetryNoSuch => 0,
+    },
+    Callback      => sub { 
+      my $host = shift;
+      my $error = shift;
+      
+      if ($error) { 
+        warn "$host: $error\n"; 
+        return;
+      }
+      
+      # Process SNMP data returned by $host
+      my $host_id = $host_id_by_ip{$host};
+      foreach my $prefix (sort by_dots keys %{$host->data}) {
+        my $snmp_name = $snmp_name_by_oid{$prefix};
+        $host->data->{$snmp_name} = $host->data->{$prefix};
+        # DEBUG
+        next unless $snmp_name eq 'ifName';
+        foreach my $suffix (sort by_dots keys %{$host->data->{$snmp_name}}) {
+          my $value = $host->data->{$snmp_name}->{$suffix};
+#          warn "host=$host_id, snmp_name=$snmp_name, suffix=$suffix, value=$value\n";
+        }
+      }
 
-    # Scan host
-    # ...
+      # Extract ARP table data (ifIndex.a.b.c.d = CCCCCC)
+      foreach my $suffix (sort by_dots keys %{$host->data->{'ipNetToMediaPhysAddress'}}) {
+        my ($ifindex, @octets) = split(/\./, $suffix, 5);
+        my $ifname = $host->data->{'ifName'}->{$ifindex};
+        my $inet = join('.', @octets);
+        # Convert the six ASCII characters to MAC address format e.g "01:23:45:67:89:ab"
+        my $mac = join(':', map { unpack('h*', $_) } split(//, $host->data->{'ipNetToMediaPhysAddress'}->{$suffix}) );
+#        warn "$host> ARP $inet via $ifname at $mac\n";
+      }
+      
+      # Extract MAC forwarding data (n.n.n.n.n.n = port)
+      foreach my $suffix (sort by_dots keys %{$host->data->{'dot1dTpFdbPort'}}) {
+        my $mac = mac_from_dots($suffix);
+        my $port = $host->data->{'dot1dTpFdbPort'}->{$suffix};
+        my $ifindex = $host->data->{'dot1dBasePortIfIndex'}->{$port};
+        my $ifname = $host->data->{'ifName'}->{$ifindex};
+        my $ifvlan = $host->data->{'ifVlan'}->{$ifindex} || 0; # undef = no vlan, e.g trunk
+#        warn "$host> MAC $mac ifname=$ifname ifvlan=$ifvlan\n";
+      }
 
-    print $session "UPDATE hosts SET scanned=NOW() WHERE id=".int($record->{'id'})."\n";
-    query_result($session);
-  }
+      # Extract port information (ifIndex = ifIndex)
+      foreach my $ifindex (sort by_dots keys %{$host->data->{'ifIndex'}}) {
+        my $ifname = $host->data->{'ifName'}->{$ifindex};
+        my $ifvlan = $host->data->{'ifVlan'}->{$ifindex} || 0; # undef = no vlan, e.g trunk
+        my $ifspeed = $host->data->{'ifHighSpeed'}->{$ifindex};
+        my $ifalias = $host->data->{'ifAlias'}->{$ifindex};
+        my $ifadmin = $host->data->{'ifAdminStatus'}->{$ifindex};
+        my $ifoper = $host->data->{'ifOperStatus'}->{$ifindex};
+#        warn "$host> PORT $ifname speed=$ifspeed vlan=$ifvlan alias=$ifalias admin=$ifadmin oper=$ifoper\n";
+      }
+              
+    },
+    walk          => [ values %snmp_oid_by_name ],
+  );
 
-  sleep 2;
+  $snmp->execute();
+  
+  
+#  foreach my $record (@records) {
+#    #warn "$0 $$ scan host id=".$record->{'id'}." ip=".$record->{'ip'}."\n";
+#
+#    # Scan host
+#    # ...
+#
+#    print $session "UPDATE hosts SET scanned=NOW() WHERE id=".int($record->{'id'})."\n";
+#    query_result($session);
+#  }
+
+  my $now = time;
+  my $interval = 60;
+  my $delta = $interval - ($now % $interval);
+  warn "Time: $now -> will sleep $delta seconds\n";
+  sleep ($delta);
 
 }
 
@@ -79,3 +163,31 @@ sub query_result {
   return @records;
 }
 
+
+# Usage: sort by_dots ARRAY
+# ARRAY must contain strings of numbers separated by dots, eg. IP addresses or SNMP OIDs
+sub by_dots {
+
+  # Split by dots
+  my @a = split(/\./, $a);
+  my @b = split(/\./, $b);
+  
+  # Compare numerically until a difference is found
+  while (@a || @b) {
+    my $n1 = shift @a || 0;
+    my $n2 = shift @b || 0;
+    return -1 if ($n1 < $n2);
+    return  1 if ($n1 > $n2);  
+  }
+
+  # ...or return 0 if no difference
+  return 0;
+}
+
+
+# Usage: mac_from_dots('255.255.255.255.255.255') 
+# Would return 'ff:ff:ff:ff:ff:ff"
+sub mac_from_dots {
+  my $dots = shift;
+  return join(':', map { sprintf('%02x', $_) } split(/\./, $dots) );
+}
