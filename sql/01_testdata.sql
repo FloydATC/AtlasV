@@ -1,8 +1,21 @@
 
-INSERT INTO siteclasses (id,name) VALUES (1, 'Leaf');
-INSERT INTO siteclasses (id,name) VALUES (2, 'Branch');
-INSERT INTO siteclasses (id,name) VALUES (3, 'Priority');
-INSERT INTO siteclasses (id,name) VALUES (4, 'Core');
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (1,'LINEPROTO UP',100,2);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (2,'LINEPROTO DOWN',150,1);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (3,'INTERFACE UP',200,4);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (4,'INTERFACE DOWN',250,3);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (5,'HOST UP',300,6);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (6,'HOST DOWN',350,5);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (7,'HOSTGROUP UP',400,8);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (8,'HOSTGROUP DOWN',450,7);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (9,'SITE UP',500,10);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (10,'SITE DOWN',550,9);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (11,'SITEGROUP UP',600,12);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (12,'SITEGROUP DOWN',650,11);
+
+INSERT INTO siteclasses (id,name,alert_type_up,alert_type_down) VALUES (1, 'Leaf',9,10);
+INSERT INTO siteclasses (id,name,alert_type_up,alert_type_down) VALUES (2, 'Branch',9,10);
+INSERT INTO siteclasses (id,name,alert_type_up,alert_type_down) VALUES (3, 'Priority',9,10);
+INSERT INTO siteclasses (id,name,alert_type_up,alert_type_down) VALUES (4, 'Core',9,10);
 
 INSERT INTO sites (id,name,x,y) VALUES (1,'Test site A',100,100);
 INSERT INTO sites (id,name,x,y) VALUES (2,'Test site B',200,100);
@@ -17,10 +30,10 @@ INSERT INTO sitegroupmembers (site,sitegroup) VALUES (2,1);
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (3,2); 
 INSERT INTO sitegroupmembers (site,sitegroup) VALUES (4,2); 
 
-INSERT INTO hostclasses (id,name) VALUES (1, 'Switch');
-INSERT INTO hostclasses (id,name) VALUES (2, 'Router');
-INSERT INTO hostclasses (id,name) VALUES (3, 'UPS');
-INSERT INTO hostclasses (id,name) VALUES (4, 'Server');
+INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (1, 'Switch',5,6);
+INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (2, 'Router',5,6);
+INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (3, 'UPS',5,6);
+INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (4, 'Server',5,6);
 
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (1,'10.1.1.252',1,'A-01',100,100);
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (2,'10.1.1.251',1,'A-02',100,200);

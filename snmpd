@@ -22,6 +22,40 @@
 # Cisco	 1.3.6.1.4.1.9 
 # https://www.iana.org/assignments/enterprise-numbers/enterprise-numbers
 
+
+#$ snmpwalk -c public -v 1 10.113.10.30 1.3.6.1.2.1.33 -m /usr/share/snmp/mibs/STDUPSV1.txt
+# Eaton 5P
+# MGE UPS SYSTEMS GALAXY 5000 60 kVA
+#
+# input ON, output ON
+# host=7, snmp_name=upsBatteryStatus, suffix=1, value=2 (normal)
+# host=7, snmp_name=upsOutputSource, suffix=1, value=3 (normal)
+# host=7, snmp_name=upsAlarmsPresent, suffix=1, value=0
+#
+# input ON, output OFF
+# host=7, snmp_name=upsBatteryStatus, suffix=1, value=2 (normal)
+# host=7, snmp_name=upsOutputSource, suffix=1, value=2 (none)
+# host=7, snmp_name=upsAlarmsPresent, suffix=1, value=(greater than 0)
+#
+# input OFF, output ON
+# host=7, snmp_name=upsBatteryStatus, suffix=1, value=2 (normal)
+# host=7, snmp_name=upsOutputSource, suffix=1, value=5 (battery)
+# host=7, snmp_name=upsAlarmsPresent, suffix=1, value=(greater than 0)
+#
+# input OFF, output OFF
+# no response
+#
+# Raise alarm if status != 2 or source != 3 or alarms > 0
+
+
+#$ snmpwalk -c public -v 1 10.132.10.32 1.3.6.1.4.1.318 -m /usr/share/snmp/mibs/powernet417.txt 
+# Smart-UPS RT 3000 XL
+#
+# upsBasicBatteryStatus.0 = INTEGER: batteryNormal(2)
+# upsBasicOutputStatus.0 = INTEGER: onLine(2)
+# upsAdvStateSystemMessages.0 = "" # 3 digit Decimal code representing the current active message
+
+
 use strict;
 use warnings;
 #use Net::SNMP;
@@ -30,6 +64,28 @@ use Time::HiRes;
 use Data::Dumper;
 use JSON;
 
+my %oids = qw(
+  ifIndex                   1.3.6.1.2.1.2.2.1.1          
+  ifName                    1.3.6.1.2.1.31.1.1.1.1       
+  vtpVlanState              1.3.6.1.4.1.9.9.46.1.3.1.1.2 
+  dot1dTpFdbPort            1.3.6.1.2.1.17.4.3.1.2       
+  dot1dBasePortIfIndex      1.3.6.1.2.1.17.1.4.1.2       
+  ifVlan                    1.3.6.1.4.1.9.9.68.1.2.2.1.2 
+  ifAlias                   1.3.6.1.2.1.31.1.1.1.18      
+  ifHighSpeed               1.3.6.1.2.1.31.1.1.1.15      
+  ifAdminStatus             1.3.6.1.2.1.2.2.1.7          
+  ifOperStatus              1.3.6.1.2.1.2.2.1.8          
+  ipNetToMediaPhysAddress   1.3.6.1.2.1.4.22.1.2         
+
+  upsBatteryStatus          1.3.6.1.2.1.33.1.2.1
+  upsOutputSource           1.3.6.1.2.1.33.1.4.1
+  upsAlarmsPresent          1.3.6.1.2.1.33.1.6.1
+
+  upsBasicBatteryStatus     1.3.6.1.4.1.318.1.1.1.2.1.1
+  upsBasicOutputStatus      1.3.6.1.4.1.318.1.1.1.4.1.1
+  upsAdvStateSystemMessages 1.3.6.1.4.1.318.1.1.1.11.2.6
+);
+my %r_oids = reverse %oids;
 
 #my $json = JSON->new( allow_nonref => 1 );
 my $json = JSON->new();
@@ -41,12 +97,13 @@ while (1) {
   my @hosts = query_result($session);
   my %host_ip_by_id = map { $_->{'id'} => $_->{'ip'} } @hosts; 
   my %host_id_by_ip = map { $_->{'ip'} => $_->{'id'} } @hosts;
+  
 
-  # Fetch SNMP OIDs to try
-  print $session "SELECT name,oid FROM snmp_oids\n";
-  my @oids = query_result($session);
-  my %snmp_name_by_oid = map { $_->{'oid'} => $_->{'name'} } @oids;
-  my %snmp_oid_by_name = map { $_->{'name'} => $_->{'oid'} } @oids;
+#  # Fetch SNMP OIDs to try
+#  print $session "SELECT name,oid FROM snmp_oids\n";
+#  my @oids = query_result($session);
+#  my %snmp_name_by_oid = map { $_->{'oid'} => $_->{'name'} } @oids;
+#  my %snmp_oid_by_name = map { $_->{'name'} => $_->{'oid'} } @oids;
   
   my $snmp = SNMP::Effective->new(
     MaxSessions   => 32,
@@ -72,13 +129,13 @@ while (1) {
       # Process SNMP data returned by $host
       my $host_id = $host_id_by_ip{$host};
       foreach my $prefix (sort by_dots keys %{$host->data}) {
-        my $snmp_name = $snmp_name_by_oid{$prefix};
+        my $snmp_name = $r_oids{$prefix};
         $host->data->{$snmp_name} = $host->data->{$prefix};
         # DEBUG
-        next unless $snmp_name eq 'ifName';
+        next unless $snmp_name =~ 'ups';
         foreach my $suffix (sort by_dots keys %{$host->data->{$snmp_name}}) {
           my $value = $host->data->{$snmp_name}->{$suffix};
-#          warn "host=$host_id, snmp_name=$snmp_name, suffix=$suffix, value=$value\n";
+          warn "host=$host_id, snmp_name=$snmp_name, suffix=$suffix, value=$value\n";
         }
       }
 
@@ -114,7 +171,7 @@ while (1) {
       }
               
     },
-    walk          => [ values %snmp_oid_by_name ],
+    walk          => [ values %oids ],
   );
 
   $snmp->execute();
@@ -191,3 +248,4 @@ sub mac_from_dots {
   my $dots = shift;
   return join(':', map { sprintf('%02x', $_) } split(/\./, $dots) );
 }
+

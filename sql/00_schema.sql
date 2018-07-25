@@ -16,6 +16,43 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `alert_types`
+--
+
+DROP TABLE IF EXISTS `alert_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alert_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(16) DEFAULT NULL,
+  `priority` int(11) NOT NULL,
+  `cancel_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `alerts`
+--
+
+DROP TABLE IF EXISTS `alerts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alerts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `alert_type` int(11) NOT NULL,
+  `object_type` varchar(16) DEFAULT NULL,
+  `object_id` int(11) NULL,
+  `object_name` varchar(32) NOT NULL,
+  `test` boolean DEFAULT false,
+  `raised` timestamp,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`alert_type`) REFERENCES `alert_types` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `siteclasses`
 --
 
@@ -25,8 +62,12 @@ DROP TABLE IF EXISTS `siteclasses`;
 CREATE TABLE `siteclasses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
+  `alert_type_up` int(11) NOT NULL,
+  `alert_type_down` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `name` (`name`),
+  CONSTRAINT `siteclasses_ibfk_1` FOREIGN KEY (`alert_type_up`) REFERENCES `alert_types` (`id`),
+  CONSTRAINT `siteclasses_ibfk_2` FOREIGN KEY (`alert_type_down`) REFERENCES `alert_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,8 +122,12 @@ DROP TABLE IF EXISTS `hostclasses`;
 CREATE TABLE `hostclasses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
+  `alert_type_up` int(11) NOT NULL,
+  `alert_type_down` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `name` (`name`),
+  CONSTRAINT `hostclasses_ibfk_1` FOREIGN KEY (`alert_type_up`) REFERENCES `alert_types` (`id`),
+  CONSTRAINT `hostclasses_ibfk_2` FOREIGN KEY (`alert_type_down`) REFERENCES `alert_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
