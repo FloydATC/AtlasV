@@ -243,22 +243,29 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
--- Table structure for table `interfaces`
+-- Table structure for table `ports`
 --
 
-DROP TABLE IF EXISTS `interfaces`;
+DROP TABLE IF EXISTS `ports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `interfaces` (
+CREATE TABLE `ports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `up` float DEFAULT NULL,
   `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
+  `index` int(11) DEFAULT NULL,
+  `admin` tinyint DEFAULT NULL,
+  `speed` int(11) DEFAULT NULL,
+  `vlan` int(11) DEFAULT NULL,
   `description` varchar(64) DEFAULT NULL,
   `host` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `host` (`host`),
-  CONSTRAINT `interfaces_ibfk_1` FOREIGN KEY (`host`) REFERENCES `hosts` (`id`)
+  KEY `index` (`index`),
+  UNIQUE KEY `name_host` (`name`,`host`),
+  CONSTRAINT `ports_ibfk_1` FOREIGN KEY (`host`) REFERENCES `hosts` (`id`),
+  CONSTRAINT `ports_ibfk_2` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -270,7 +277,7 @@ CREATE TABLE `interfaces` (
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER interface_up_change BEFORE UPDATE ON interfaces FOR EACH ROW
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER port_up_change BEFORE UPDATE ON ports FOR EACH ROW
 BEGIN
   IF OLD.up <> NEW.up THEN
     SET NEW.since = NOW();
@@ -307,14 +314,34 @@ DROP TABLE IF EXISTS `macsightings`;
 CREATE TABLE `macsightings` (
   `mac` int(11) NOT NULL,
   `vlan` int(11) DEFAULT NULL,
-  `interface` int(11) NOT NULL,
-  `recorded` datetime NOT NULL,
+  `port` int(11) NOT NULL,
+  `recorded` datetime DEFAULT NOW(),
   KEY `mac` (`mac`),
   KEY `vlan` (`vlan`),
-  KEY `interface` (`interface`),
+  KEY `port` (`port`),
   CONSTRAINT `macsightings_ibfk_1` FOREIGN KEY (`mac`) REFERENCES `macs` (`id`),
   CONSTRAINT `macsightings_ibfk_2` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`),
-  CONSTRAINT `macsightings_ibfk_3` FOREIGN KEY (`interface`) REFERENCES `interfaces` (`id`)
+  CONSTRAINT `macsightings_ibfk_3` FOREIGN KEY (`port`) REFERENCES `ports` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `arpsightings`
+--
+
+DROP TABLE IF EXISTS `arpsightings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `arpsightings` (
+  `mac` int(11) NOT NULL,
+  `ip` varchar(16) NOT NULL,
+  `port` int(11) NOT NULL,
+  `recorded` datetime DEFAULT NOW(),
+  KEY `mac` (`mac`),
+  KEY `ip` (`ip`),
+  KEY `port` (`port`),
+  CONSTRAINT `arpsightings_ibfk_1` FOREIGN KEY (`mac`) REFERENCES `macs` (`id`),
+  CONSTRAINT `arpsightings_ibfk_2` FOREIGN KEY (`port`) REFERENCES `ports` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -413,13 +440,13 @@ DROP TABLE IF EXISTS `vlansightings`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vlansightings` (
   `vlan` int(11) NOT NULL,
-  `interface` int(11) NOT NULL,
+  `port` int(11) NOT NULL,
   `recorded` datetime NOT NULL,
   KEY `vlan` (`vlan`),
-  KEY `interface` (`interface`),
+  KEY `port` (`port`),
   KEY `recorded` (`recorded`),
   CONSTRAINT `vlansightings_ibfk_1` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`),
-  CONSTRAINT `vlansightings_ibfk_2` FOREIGN KEY (`interface`) REFERENCES `interfaces` (`id`)
+  CONSTRAINT `vlansightings_ibfk_2` FOREIGN KEY (`port`) REFERENCES `ports` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

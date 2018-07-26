@@ -64,8 +64,8 @@ END$$
 
 # Interfaces
 
-DROP TRIGGER IF EXISTS interface_up_change$$ 
-CREATE TRIGGER interface_up_change BEFORE UPDATE ON interfaces FOR EACH ROW
+DROP TRIGGER IF EXISTS port_up_change$$ 
+CREATE TRIGGER port_up_change BEFORE UPDATE ON ports FOR EACH ROW
 BEGIN
   IF OLD.up <> NEW.up THEN
     SET NEW.since = NOW();

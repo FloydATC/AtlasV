@@ -45,16 +45,7 @@ my $line = IO::Socket::INET->new(
   Blocking	=> 0,
 ) || confess "Error binding port tcp/1337: $@";
 
-my @db = ( 
-  'dbi:mysql:dbname=atlas5', 'atlas5', 'atlas5',
-  { 
-    ShowErrorStatement  => 1,
-    AutoCommit 		=> 1,
-    RaiseError 		=> 0,
-    PrintError 		=> 0, 
-  } 
-);
-my $dbh = DBI->connect(@db);
+my $dbh = DBI->connect(AtlasV::db());
 unless ($dbh) {
   confess "Error: ".$DBI::errstr;
 }
