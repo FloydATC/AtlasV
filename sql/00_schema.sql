@@ -254,6 +254,7 @@ CREATE TABLE `ports` (
   `up` float DEFAULT NULL,
   `since` datetime DEFAULT NULL,
   `name` varchar(64) NOT NULL,
+  `type` int(11) DEFAULT NULL,
   `index` int(11) DEFAULT NULL,
   `admin` tinyint DEFAULT NULL,
   `speed` int(11) DEFAULT NULL,
@@ -319,6 +320,7 @@ CREATE TABLE `macsightings` (
   KEY `mac` (`mac`),
   KEY `vlan` (`vlan`),
   KEY `port` (`port`),
+  UNIQUE KEY `mac_vlan_port` (`mac`,`vlan`,`port`),
   CONSTRAINT `macsightings_ibfk_1` FOREIGN KEY (`mac`) REFERENCES `macs` (`id`),
   CONSTRAINT `macsightings_ibfk_2` FOREIGN KEY (`vlan`) REFERENCES `vlans` (`id`),
   CONSTRAINT `macsightings_ibfk_3` FOREIGN KEY (`port`) REFERENCES `ports` (`id`)
@@ -334,12 +336,13 @@ DROP TABLE IF EXISTS `arpsightings`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `arpsightings` (
   `mac` int(11) NOT NULL,
-  `ip` varchar(16) NOT NULL,
+  `ipn` int(11) UNSIGNED NOT NULL,
   `port` int(11) NOT NULL,
   `recorded` datetime DEFAULT NOW(),
   KEY `mac` (`mac`),
-  KEY `ip` (`ip`),
+  KEY `ipn` (`ipn`),
   KEY `port` (`port`),
+  UNIQUE KEY `mac_ipn_port` (`mac`,`ipn`,`port`),
   CONSTRAINT `arpsightings_ibfk_1` FOREIGN KEY (`mac`) REFERENCES `macs` (`id`),
   CONSTRAINT `arpsightings_ibfk_2` FOREIGN KEY (`port`) REFERENCES `ports` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

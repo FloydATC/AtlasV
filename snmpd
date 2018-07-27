@@ -75,6 +75,7 @@ $dbh->{'mysql_auto_reconnect'} = 1;
 
 my %oids = qw(
   ifIndex                   1.3.6.1.2.1.2.2.1.1          
+  ifType		    1.3.6.1.2.1.2.2.1.3
   ifName                    1.3.6.1.2.1.31.1.1.1.1       
   vtpVlanState              1.3.6.1.4.1.9.9.46.1.3.1.1.2 
   dot1dTpFdbPort            1.3.6.1.2.1.17.4.3.1.2       
@@ -162,15 +163,21 @@ while (1) {
         my $vlan_insert_sth = $dbh->prepare('INSERT INTO vlans (id) VALUES (?)');
         my $port_insert_sth = $dbh->prepare('INSERT IGNORE INTO ports (name,host) VALUES (?,?)');
         my $port_select_sth = $dbh->prepare('SELECT id FROM ports WHERE name=? AND host=?');
-        my $port_update_sth = $dbh->prepare('UPDATE ports SET `index`=?, up=?, admin=?, speed=?, vlan=?, description=? WHERE id=?');
+        my $port_update_sth = $dbh->prepare('UPDATE ports SET `type`=?, `index`=?, up=?, admin=?, speed=?, vlan=?, description=? WHERE id=?');
         foreach my $ifindex (sort by_dots keys %{$host->data->{'ifIndex'}}) {
           my $ifname = $host->data->{'ifName'}->{$ifindex};
+          my $iftype = $host->data->{'ifType'}->{$ifindex};
           my $ifvlan = $host->data->{'ifVlan'}->{$ifindex} || 0; # undef = no vlan, e.g trunk
           my $ifspeed = $host->data->{'ifHighSpeed'}->{$ifindex};
           my $ifalias = $host->data->{'ifAlias'}->{$ifindex};
           my $ifadmin = $host->data->{'ifAdminStatus'}->{$ifindex};
           my $ifoper = $host->data->{'ifOperStatus'}->{$ifindex};
-          #warn "$host> PORT $ifname speed=$ifspeed vlan=$ifvlan alias=$ifalias admin=$ifadmin oper=$ifoper\n";
+          #warn "$host> PORT $ifname type=$iftype speed=$ifspeed vlan=$ifvlan alias=$ifalias admin=$ifadmin oper=$ifoper\n";
+
+          # With SNMP, 1=Up 2=Down and other values may be possible in $ifadmin and $ifoper. 
+          # Change any other value than 1 to 0.
+          $ifadmin = ($ifadmin == 1 ? 1 : 0);
+          $ifoper = ($ifoper == 1 ? 1 : 0);
 
           # Ensure vlan exists in database
           $vlan_insert_sth->execute($ifvlan);
@@ -182,7 +189,7 @@ while (1) {
           warn "WARNING! port id undefined while updating port, should not be possible\n" unless defined $port_id;
 
           # Update port information
-          $port_update_sth->execute($ifindex, $ifoper, $ifadmin, $ifspeed, $ifvlan, $ifalias, $port_id);
+          $port_update_sth->execute($iftype, $ifindex, $ifoper, $ifadmin, $ifspeed, $ifvlan, $ifalias, $port_id);
           warn $dbh->errstr if $dbh->errstr;
         }
         $vlan_insert_sth->finish;
@@ -199,7 +206,7 @@ while (1) {
         my $mac_select_sth = $dbh->prepare('SELECT id FROM macs WHERE address=?');
         my $port_insert_sth = $dbh->prepare('INSERT IGNORE INTO ports (name,host) VALUES (?,?)');
         my $port_select_sth = $dbh->prepare('SELECT id FROM ports WHERE name=? AND host=?');
-        my $arp_insert_sth = $dbh->prepare('INSERT INTO arpsightings (mac,ip,port) VALUES (?,?,?)');
+        my $arp_insert_sth = $dbh->prepare('REPLACE INTO arpsightings (mac,ipn,port) VALUES (?,INET_ATON(?),?)');
         foreach my $suffix (sort by_dots keys %{$host->data->{'ipNetToMediaPhysAddress'}}) {
           my ($ifindex, @octets) = split(/\./, $suffix, 5);
           my $ifname = $host->data->{'ifName'}->{$ifindex};
@@ -239,7 +246,7 @@ while (1) {
         my $mac_select_sth = $dbh->prepare('SELECT id FROM macs WHERE address=?');
         my $port_insert_sth = $dbh->prepare('INSERT IGNORE INTO ports (name,host) VALUES (?,?)');
         my $port_select_sth = $dbh->prepare('SELECT id FROM ports WHERE name=? AND host=?');
-        my $macsighting_insert_sth = $dbh->prepare('INSERT INTO macsightings (mac,vlan,port) VALUES (?,?,?)');
+        my $macsighting_insert_sth = $dbh->prepare('REPLACE INTO macsightings (mac,vlan,port) VALUES (?,?,?)');
         foreach my $suffix (sort by_dots keys %{$host->data->{'dot1dTpFdbPort'}}) {
           my $mac = mac_from_dots($suffix);
           my $port = $host->data->{'dot1dTpFdbPort'}->{$suffix};
@@ -355,3 +362,82 @@ sub mac_from_dots {
   return join(':', map { sprintf('%02x', $_) } split(/\./, $dots) );
 }
 
+
+
+__END__
+
+# Below are some sample SQL queries to make use of the information collected by this script
+
+
+# Search MAC address table for most recent sightings
+
+SELECT 
+  m.address, 
+  IF(p.vlan = 0, "trunk", p.vlan) AS vlan, 
+  h.name, 
+  p.name, 
+  p.description, 
+  ms.recorded
+FROM macsightings AS ms
+LEFT JOIN macs AS m ON (m.id = ms.mac)
+LEFT JOIN ports AS p ON (p.id = ms.port)
+LEFT JOIN hosts AS h ON (h.id = p.host)
+ORDER BY m.address, ms.recorded
+;
+
+
+# Search ARP table for most recent MAC sightings
+
+SELECT 
+  m.address, 
+  INET_NTOA(a.ipn) AS ip,  
+  IF(p.vlan = 0, "trunk", p.vlan) AS vlan, 
+  h.name, 
+  p.name, 
+  p.description, 
+  a.recorded
+FROM arpsightings AS a
+LEFT JOIN macs AS m ON (m.id = a.mac)
+LEFT JOIN ports AS p ON (p.id = a.port)
+LEFT JOIN hosts AS h ON (h.id = p.host)
+ORDER BY m.address, a.recorded
+;
+
+
+# Search ARP table for the most recent IP sightings
+
+SELECT 
+  INET_NTOA(a.ipn) AS ip, 
+  m.address, 
+  IF(p.vlan = 0, "trunk", p.vlan) AS vlan, 
+  h.name, 
+  p.name, 
+  p.description, 
+  a.recorded
+FROM arpsightings AS a
+LEFT JOIN macs AS m ON (m.id = a.mac)
+LEFT JOIN ports AS p ON (p.id = a.port)
+LEFT JOIN hosts AS h ON (h.id = p.host)
+ORDER BY a.ipn, a.recorded
+;
+
+
+# Select port information for hosts
+
+SELECT
+  h.name AS host,
+  p.name AS interface,
+  t.name AS type,
+  IF(p.admin = 1, "up", "down") AS admin,
+  IF(p.up = 1, "up", "down") AS oper,
+  p.speed,
+  p.vlan,
+  p.description
+FROM ports AS p
+LEFT JOIN hosts AS h ON (h.id = p.host)
+LEFT JOIN snmp_iftypes AS t ON (t.id = p.type)
+ORDER BY h.name, p.index
+;
+
+
+ 
