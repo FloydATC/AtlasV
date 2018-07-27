@@ -7,12 +7,32 @@ DELIMITER $$
 DROP TRIGGER IF EXISTS host_up_change$$ 
 CREATE TRIGGER host_up_change BEFORE UPDATE ON hosts FOR EACH ROW
 BEGIN
-  IF OLD.up <> NEW.up THEN
+  IF ((OLD.up = 0 AND NEW.up > 0) OR (OLD.up > 0 AND NEW.up = 0) OR (OLD.up IS NULL AND NEW.up IS NOT NULL)) THEN
     SET NEW.since = NOW();
   END IF;
+  IF NEW.up = 0 AND OLD.up > 0 AND NEW.alert = 1 AND new.disabled = 0 THEN
+    # Raise alert 
+    INSERT INTO alerts (alert_type, object_type, object_id, object_name)
+    VALUES ((SELECT id FROM alert_types WHERE name = "HOST DOWN"), 'hosts', NEW.id, NEW.name);
+
+    # Cancel any opposite alerts about this object
+    DELETE alerts FROM alerts
+    LEFT JOIN alert_types ON (alert_types.id = (SELECT id FROM alert_types WHERE name = "HOST DOWN"))
+    WHERE alert_type = alert_types.cancel_id
+    AND object_id = NEW.id;
+  END IF;
+  IF NEW.up > 0 AND OLD.up = 0 AND NEW.alert = 1 AND NEW.disabled = 0 THEN
+    # Raise alert
+    INSERT INTO alerts (alert_type, object_type, object_id, object_name)
+    VALUES ((SELECT id FROM alert_types WHERE name = "HOST UP"), 'hosts', NEW.id, NEW.name);
+
+    # Cancel any opposite alerts about this object
+    DELETE alerts FROM alerts
+    LEFT JOIN alert_types ON (alert_types.id = (SELECT id FROM alert_types WHERE name = "HOST UP"))
+    WHERE alert_type = alert_types.cancel_id
+    AND object_id = NEW.id;
+  END IF;
 END$$
-
-
 
 # Hostgroups
 

@@ -11,6 +11,16 @@ INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (9,'SITE UP',500,10)
 INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (10,'SITE DOWN',550,9);
 INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (11,'SITEGROUP UP',600,12);
 INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (12,'SITEGROUP DOWN',650,11);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (13,'INTERNET UP',70,14); 
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (14,'INTERNET DOWN',75,13); 
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (15,'TEMP.NORMAL',80,16);
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (16,'TEMP.WARNING',85,15); 
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (17,'POWER RESTORED',90,18); 
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (18,'POWER FAILURE',95,17); 
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (19,'GENERATOR OFF',93,20); 
+INSERT INTO alert_types (id,name,priority,cancel_id) VALUES (20,'GENERATOR ON',97,19); 
+
+
 
 INSERT INTO siteclasses (id,name,alert_type_up,alert_type_down) VALUES (1, 'Leaf',9,10);
 INSERT INTO siteclasses (id,name,alert_type_up,alert_type_down) VALUES (2, 'Branch',9,10);
@@ -34,6 +44,7 @@ INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (1, 'Swit
 INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (2, 'Router',5,6);
 INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (3, 'UPS',5,6);
 INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (4, 'Server',5,6);
+INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (5, 'Sensor',5,6);
 
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (1,'10.1.1.252',1,'A-01',100,100);
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (2,'10.1.1.251',1,'A-02',100,200);
@@ -65,7 +76,12 @@ INSERT INTO commlinks (host1,host2) VALUES (7,8);
 INSERT INTO commlinks (host1,host2) VALUES (1,5);
 INSERT INTO commlinks (host1,host2) VALUES (1,7);
 
-INSERT INTO users (username,realm,password) VALUES ('andlun','AtlasV@man-monitor-02.oikt.net','73bf3fcd2b3861bde5f8a4999786a12f');
-INSERT INTO users (username,realm,password) VALUES ('andlun','AtlasV@pixie','6005f2fdbc44249f1ca3bc189e64c63e');
-INSERT INTO users (username,realm,password) VALUES ('andlun','AtlasV@ikt-atlas-01.ansatt.oikt.net','9c4eabc2c1d884a0320aaf3f32a685ad');
+INSERT INTO users (username,realm,password,alert,email,sms) VALUES ('andlun','AtlasV@man-monitor-02.oikt.net','73bf3fcd2b3861bde5f8a4999786a12f',1,'andreas.lund@oikt.no','90077162');
+INSERT INTO users (username,realm,password,alert,email,sms) VALUES ('andlun','AtlasV@pixie','6005f2fdbc44249f1ca3bc189e64c63e',1,'andreas.lund@oikt.no','90077162');
+INSERT INTO users (username,realm,password,alert,email,sms) VALUES ('andlun','AtlasV@ikt-atlas-01.ansatt.oikt.net','9c4eabc2c1d884a0320aaf3f32a685ad',1,'andreas.lund@oikt.no','90077162');
 
+INSERT INTO alert_groups (name,hours_begin,hours_end,weekdays_begin,weekdays_end,email_level,sms_level) VALUES ('Test 24/7','00:00:00','23:59:59',0,6,0,0);
+
+INSERT INTO alert_groupusers (alert_group,user) VALUES (1,1);
+INSERT INTO alert_groupusers (alert_group,user) VALUES (1,2);
+INSERT INTO alert_groupusers (alert_group,user) VALUES (1,3);

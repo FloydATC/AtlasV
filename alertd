@@ -1,0 +1,215 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+# use Net::SMTP;
+use Encode qw( encode decode ); # For proper UTF8 handling
+# use SMS;
+# use Time::HiRes;
+use Data::Dumper;
+# use JSON;
+use Carp;
+use DBI;
+use AtlasV;
+
+my $SMTPHOST = 'smtp.example.net';
+my $MAILFROM = 'atlas@example.net';
+
+my $DEBUG = 0;
+my $FREEZE = 0; # 1=Do NOT clear events after sending notification (for testing purposes)
+my $MINWAIT = 60; # Newest alert must be this many seconds old before processing alert group
+my $MAXWAIT = 300; # ...unless the oldest alert is this many seconds old 
+
+my $dbh = DBI->connect(AtlasV::db());
+unless ($dbh) {
+  confess "Error: ".$DBI::errstr;
+}
+$dbh->{'mysql_auto_reconnect'} = 1;
+
+  
+# Primary loop: Wait for alert group (to avoid generating message storms)
+warn "$0 $$ running\n";
+while (1) {
+
+  # Check for current alerts
+  my $sth = $dbh->prepare("
+    SELECT 
+      COUNT(id) AS alerts,
+      TIME_TO_SEC( TIMEDIFF(NOW(), MIN(raised)) ) AS oldest,
+      TIME_TO_SEC( TIMEDIFF(NOW(), MAX(raised)) ) AS newest 
+    FROM alerts
+  ");
+  $sth->execute();
+  my $hashref = $sth->fetchrow_hashref;
+  $sth->finish;
+  
+  if ($hashref->{'alerts'} && ($hashref->{'oldest'} >= $MAXWAIT || $hashref->{'newest'} >= $MINWAIT)) {
+    # Wake up, we have one or more alerts ready for processing!
+    # Get current recepients, with minimum alert levels required
+    $sth = $dbh->prepare("
+      SELECT 
+        users.email,
+        MIN(alert_groups.email_level) AS email_level,
+        users.sms,
+        MIN(alert_groups.sms_level) AS sms_level
+      FROM alert_groupusers
+      LEFT JOIN alert_groups ON (alert_groups.id = alert_groupusers.alert_group)
+      LEFT JOIN users ON (users.id = alert_groupusers.user)
+      WHERE alert_groups.weekdays_begin <= WEEKDAY(NOW())  
+      AND alert_groups.weekdays_end >= WEEKDAY(NOW())
+      AND alert_groups.hours_begin <= TIME(NOW())
+      AND alert_groups.hours_end >= TIME(NOW())  
+      AND alert_groups.enabled = TRUE
+      AND users.alert = TRUE
+      GROUP BY users.id
+    ");
+    $sth->execute();
+    # email                 email_level  sms       sms_level
+    # --------------------  -----------  --------  ---------
+    # name1@example.com     0            00000000  0        
+    # name2@example.com     0            11111111  0        
+    my @admins = ();
+    while (my $hashref = $sth->fetchrow_hashref) {
+      push @admins, $hashref;
+    }
+    $DEBUG && warn "NOTIFY ADMINS:\n".Dumper(@admins)."\n";
+
+    # Get current alert list
+    $sth = $dbh->prepare("  
+      SELECT 
+        alerts.id AS alert_id,
+        alerts.test,
+        alert_types.priority AS priority,
+        alert_types.name AS alert_name,  
+        alerts.object_type,
+        alerts.object_name,
+        alerts.raised
+      FROM alerts
+      LEFT JOIN alert_types ON (alert_types.id = alerts.alert_type)
+      ORDER BY alerts.id
+    ");
+    $sth->execute();
+    # alert_id  test  priority     alert_name  object_type  object_name   raised             
+    # --------  ----  -----------  ----------  -----------  ------------  -------------------
+    # 1         0     350          HOST DOWN   hosts        RARADH-SW-01  2013-04-12 22:24:51
+    # 2         0     300          HOST UP     hosts        RARADH-SW-01  2013-04-12 22:24:53
+
+    # Summarize the highest level alerts, count the others
+    my @hashrefs = ();
+    my @alerts = ();  
+    my $level = 0;    
+    my $suppressed = 0;
+    while (my $hashref = $sth->fetchrow_hashref) {
+      $DEBUG && warn sprintf("ALERT: %s %s\n", $hashref->{'alert_name'}, $hashref->{'object_name'});
+      push @hashrefs, $hashref;
+      if ($hashref->{'priority'} > $level) {
+        $suppressed += @alerts;
+        @alerts = ( $hashref );
+        $level = $hashref->{'priority'};
+      } elsif($hashref->{'priority'} == $level) {
+        push @alerts, $hashref;
+      } else {
+        $suppressed++;
+      }
+    }  
+    $sth->finish;
+    my @objects = sort map { '"'.$_->{'object_name'}.'"' } @alerts;
+    if (@objects > 3) {
+      @objects = (@objects[0..2], '(and '.(@objects-3).' more)');
+    }
+     
+    # Get a total count of hosts down 
+    my $hosts_down = 0;
+    $sth = $dbh->prepare("
+      SELECT COUNT(id) AS down
+      FROM hosts
+      WHERE disabled = 0
+      AND alert = 1     
+      AND up = 0        
+      AND up IS NOT NULL
+    ");
+    $sth->execute;
+    if (my $hashref = $sth->fetchrow_hashref) {
+      $hosts_down = $hashref->{'down'};
+    }
+    $sth->finish;
+    
+    # Add informative notes
+    my @notes = ();
+    if ($suppressed) {
+      push @notes, $suppressed.' other alert'.($suppressed==1?'':'s');
+    }
+    if ($hosts_down) {
+      push @notes, $hosts_down.' host'.($hosts_down==1?' is':'s are').' down';
+    }
+     
+    my $message = 'ATLAS - '.($alerts[0]->{'test'}?'** TEST ** ':'').$alerts[0]->{'alert_name'}.': '.join(', ', @objects).' '.(@notes ? '(Note: '.join(', ', @notes).')' : '');
+    $message = encode('utf8', decode('utf8', $message)); # Necessary for Perl to properly send UTF8 characters 
+    my $notified = 0;
+
+    # Loop through sms recepients and send alert message if $level is sufficient
+    my %sent_sms = ();
+    eval {
+      foreach my $admin (@admins) {
+        next unless $admin->{'sms'}; # No number
+        next if $sent_sms{$admin->{'sms'}}; # Don't send duplicates
+        $DEBUG && warn "will send SMS to ".$admin->{'sms'}." if ".$admin->{'sms_level'}." <= $level\n";
+        if ($admin->{'sms'} && $admin->{'sms_level'} <= $level) {
+          warn "NOTIFY(SMS) ".$admin->{'sms'}.": ".$message."\n";
+##          my @results = SMS::send($message, $admin->{'sms'});
+          $notified++;
+          $sent_sms{$admin->{'sms'}} = 1;
+        } else {
+          warn "NOTIFY(SMS) ignoring $admin->{'sms'} level $admin->{'sms_level'} <= $level\n";
+        }
+      }  
+    };   
+
+    # Loop through email recepients and send alert mail if $level is sufficient
+    my %sent_email = ();
+    eval {
+      foreach my $admin (@admins) {
+        next unless $admin->{'email'}; # No email address
+        next if $sent_email{$admin->{'email'}}; # Don't send duplicates
+        $DEBUG && warn "will send EMAIL to ".$admin->{'email'}." if ".$admin->{'email_level'}." <= $level\n";
+        if ($admin->{'email'} && $admin->{'email_level'} <= $level) {
+#          my $smtp = Net::SMTP->new($SMTPHOST);
+#          if ($smtp) {
+            warn "NOTIFY (EMAIL) ".$admin->{'email'}.": ".$message."\n";
+#            $smtp->mail($MAILFROM);
+#            $smtp->to($admin->{'email'});
+#            $smtp->data();
+#            $smtp->datasend("From: $MAILFROM\n");
+#            $smtp->datasend("To: ".$admin->{'email'}."\n");
+#            $smtp->datasend("Subject: ".$message."\n");
+#            $smtp->datasend("\n");
+#            foreach my $hashref (@hashrefs) {
+#              my $objectname = encode('utf8', decode('utf8', $hashref->{'object_name'}));
+#              $smtp->datasend(sprintf("%-20s %-10s %s: \"%s\"\n", $hashref->{'raised'}, ($hashref->{'test'}?'** TEST **':''), $hashref->{'alert_name'}, $objectname));
+#            }
+#            $smtp->dataend();
+#            $smtp->quit; 
+            $notified++; 
+            $sent_email{$admin->{'email'}} = 1;
+#          }
+        } else {
+          warn "NOTIFY (EMAIL) ignoring $admin->{'email'} level $admin->{'email_level'} <= $level\n";
+        }
+      }  
+    };   
+         
+    # Log to console if no notifications were sent
+    unless ($notified) {
+      warn "NOTIFY (NOBODY): ".$message."\n";
+    }
+     
+    # Clear the alerts
+    $dbh->do("DELETE FROM alerts WHERE id IN (".join(',', map { $_->{'alert_id'} } @hashrefs).")") unless $FREEZE;
+    
+  } 
+  sleep(10);
+
+
+} # Endless loop
+
+

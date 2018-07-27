@@ -52,6 +52,49 @@ CREATE TABLE `alerts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+--
+-- Table structure for table `alert_groups`
+--
+
+DROP TABLE IF EXISTS `alert_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alert_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `hours_begin` time NOT NULL,
+  `hours_end` time NOT NULL,
+  `weekdays_begin` tinyint(4) NOT NULL,
+  `weekdays_end` tinyint(4) NOT NULL,
+  `email_level` int(11) NOT NULL,
+  `sms_level` int(11) NOT NULL,
+  `enabled` tinyint(1) DEFAULT 1,
+  `auto` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `alerts`
+--
+
+DROP TABLE IF EXISTS `alert_groupusers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alert_groupusers` (
+  `alert_group` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  UNIQUE KEY `alert_groupuser_user` (`alert_group`,`user`),
+  CONSTRAINT `alert_groupusers_ibfk_1` FOREIGN KEY (`alert_group`) REFERENCES `alert_groups` (`id`),
+  CONSTRAINT `alert_groupusers_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
 --
 -- Table structure for table `siteclasses`
 --
@@ -99,14 +142,6 @@ CREATE TABLE `sites` (
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER site_up_change BEFORE UPDATE ON sites FOR EACH ROW
-BEGIN
-  IF OLD.up <> NEW.up THEN
-    SET NEW.since = NOW();
-  END IF;
-END */;;
-DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -144,6 +179,7 @@ CREATE TABLE `hosts` (
   `site` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `disabled` tinyint(1) DEFAULT '0',
+  `alert` tinyint(1) DEFAULT '1',
   `class` int(11) DEFAULT '1',
   `x` int(11) DEFAULT '100',
   `y` int(11) DEFAULT '100',
@@ -172,14 +208,6 @@ CREATE TABLE `hosts` (
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER host_up_change BEFORE UPDATE ON hosts FOR EACH ROW
-BEGIN
-  IF OLD.up <> NEW.up THEN
-    SET NEW.since = NOW();
-  END IF;
-END */;;
-DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -229,14 +257,6 @@ CREATE TABLE `hostgroups` (
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER hostgroup_up_change BEFORE UPDATE ON hostgroups FOR EACH ROW
-BEGIN
-  IF OLD.up <> NEW.up THEN
-    SET NEW.since = NOW();
-  END IF;
-END */;;
-DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -277,14 +297,6 @@ CREATE TABLE `ports` (
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER port_up_change BEFORE UPDATE ON ports FOR EACH ROW
-BEGIN
-  IF OLD.up <> NEW.up THEN
-    SET NEW.since = NOW();
-  END IF;
-END */;;
-DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -389,14 +401,6 @@ CREATE TABLE `sitegroups` (
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER sitegroup_up_change BEFORE UPDATE ON sitegroups FOR EACH ROW
-BEGIN
-  IF OLD.up <> NEW.up THEN
-    SET NEW.since = NOW();
-  END IF;
-END */;;
-DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -414,10 +418,14 @@ CREATE TABLE `users` (
   `username` varchar(64) NOT NULL,
   `realm` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
+  `alert` tinyint(1) DEFAULT 0,
+  `email` varchar(64) DEFAULT NULL,
+  `sms` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_realm` (`username`,`realm`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Table structure for table `vlans`
@@ -491,14 +499,6 @@ CREATE TABLE `commlinks` (
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER commlink_up_change BEFORE UPDATE ON commlinks FOR EACH ROW
-BEGIN
-  IF OLD.up <> NEW.up THEN
-    SET NEW.since = NOW();
-  END IF;
-END */;;
-DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;

@@ -11,5 +11,7 @@ stored_procedures:
 triggers:
 	mysql -f atlas5 < sql/03_triggers.sql
 
+db:     tables testdata stored_procedures triggers
+
 clean:
 	find -name "*~" -delete
