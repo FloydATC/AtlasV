@@ -66,6 +66,8 @@ use JSON;
 use DBI;
 use AtlasV;
 
+my $DEBUG = 0;
+
 my $dbh = DBI->connect(AtlasV::db());
 unless ($dbh) {
   confess "Error: ".$DBI::errstr;
@@ -140,7 +142,7 @@ while (1) {
       my $error = shift;
       
       if ($error) { 
-        warn "$host: $error\n"; 
+        $DEBUG && warn "$host: $error\n"; 
         return;
       }
       
@@ -303,7 +305,7 @@ while (1) {
   my $now = time;
   my $interval = 60;
   my $delta = $interval - ($now % $interval);
-  warn "Time: $now -> will sleep $delta seconds\n";
+  $DEBUG && warn "Time: $now -> will sleep $delta seconds\n";
   sleep ($delta);
 
 }
