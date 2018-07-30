@@ -97,7 +97,7 @@ my %oids = qw(
   upsBasicOutputStatus      1.3.6.1.4.1.318.1.1.1.4.1.1
   upsAdvStateSystemMessages 1.3.6.1.4.1.318.1.1.1.11.2.6
 );
-my %r_oids = reverse %oids;
+my %r_oids = reverse(%oids);
 
 my $lifetime = '7 DAY'; # https://www.w3schools.com/sql/func_mysql_date_sub.asp
 
@@ -137,6 +137,7 @@ while (1) {
       Retries     => 3,
       RetryNoSuch => 0,
     },
+    walk          => [ values %oids ],
     Callback      => sub { 
       my $host = shift;
       my $error = shift;
@@ -145,23 +146,30 @@ while (1) {
         $DEBUG && warn "$host: $error\n"; 
         return;
       }
+      $DEBUG && warn "$host: got response\n";
+
+#      warn Dumper($host->data);
       
       # Process SNMP data returned by $host
       my $host_id = $host_id_by_ip{$host};
       foreach my $prefix (sort by_dots keys %{$host->data}) {
         my $snmp_name = $r_oids{$prefix};
         $host->data->{$snmp_name} = $host->data->{$prefix};
+ 
         # DEBUG
-        next unless $snmp_name =~ 'ups';
+        next unless $DEBUG && $snmp_name =~ 'ups';
         foreach my $suffix (sort by_dots keys %{$host->data->{$snmp_name}}) {
           my $value = $host->data->{$snmp_name}->{$suffix};
-          warn "host=$host_id, snmp_name=$snmp_name, suffix=$suffix, value=$value\n";
+          warn "UPS: host=$host_id, snmp_name=$snmp_name, suffix=$suffix, value=$value\n";
+          warn Dumper($host->data);
         }
       }
 
+      #warn Dumper($host->data);
+
       # Extract port information (ifIndex = ifIndex)
-      {
-        # Lexical scope for the statement handlers
+      if ($host->data->{'ifIndex'}) {
+        $DEBUG && warn "$host has ifIndex (interface table)\n";
         my $vlan_insert_sth = $dbh->prepare('INSERT INTO vlans (id) VALUES (?)');
         my $port_insert_sth = $dbh->prepare('INSERT IGNORE INTO ports (name,host) VALUES (?,?)');
         my $port_select_sth = $dbh->prepare('SELECT id FROM ports WHERE name=? AND host=?');
@@ -188,7 +196,7 @@ while (1) {
           $port_insert_sth->execute($ifname, $host_id);
           $port_select_sth->execute($ifname, $host_id);
           my $port_id = $port_select_sth->fetchrow_hashref->{'id'};
-          warn "WARNING! port id undefined while updating port, should not be possible\n" unless defined $port_id;
+          warn "WARNING! $host port id undefined while updating port, should not be possible\n" unless defined $port_id;
 
           # Update port information
           $port_update_sth->execute($iftype, $ifindex, $ifoper, $ifadmin, $ifspeed, $ifvlan, $ifalias, $port_id);
@@ -202,8 +210,8 @@ while (1) {
       }
 
       # Extract ARP table data (ifIndex.a.b.c.d = CCCCCC)
-      {
-        # Lexical scope for the statement handlers
+      if ($host->data->{'ipNetToMediaPhysAddress'}) {
+        $DEBUG && warn "$host has ipNetToMediaPhysAddress (ARP table)\n";
         my $mac_insert_sth = $dbh->prepare('INSERT IGNORE INTO macs (address) VALUES (?)');
         my $mac_select_sth = $dbh->prepare('SELECT id FROM macs WHERE address=?');
         my $port_insert_sth = $dbh->prepare('INSERT IGNORE INTO ports (name,host) VALUES (?,?)');
@@ -221,13 +229,13 @@ while (1) {
           $mac_insert_sth->execute($mac);
           $mac_select_sth->execute($mac);
           my $mac_id = $mac_select_sth->fetchrow_hashref->{'id'};
-          warn "WARNING! mac id undefined while recording ARP, should not be possible\n" unless defined $mac_id;
+          warn "WARNING! $host mac id undefined while recording ARP, should not be possible\n" unless defined $mac_id;
           
           # Get unique id for this interface port
           $port_insert_sth->execute($ifname, $host_id);
           $port_select_sth->execute($ifname, $host_id);
           my $port_id = $port_select_sth->fetchrow_hashref->{'id'};
-          warn "WARNING! port id undefined while recording ARP, should not be possible\n" unless $port_id;
+          warn "WARNING! $host port id undefined while recording ARP, should not be possible\n" unless $port_id;
           
           # Record ARP IP address sighting with port
           $arp_insert_sth->execute($mac_id, $inet, $port_id);
@@ -241,8 +249,8 @@ while (1) {
       }
       
       # Extract MAC forwarding data (n.n.n.n.n.n = port)
-      {
-        # Lexical scope for the statement handlers
+      if ($host->data->{'dot1dTpFdbPort'}) {
+        $DEBUG && warn "$host has dot1dTpFdbPort (MAC table)\n";
         my $vlan_insert_sth = $dbh->prepare('INSERT INTO vlans (id) VALUES (?)');
         my $mac_insert_sth = $dbh->prepare('INSERT IGNORE INTO macs (address) VALUES (?)');
         my $mac_select_sth = $dbh->prepare('SELECT id FROM macs WHERE address=?');
@@ -253,6 +261,7 @@ while (1) {
           my $mac = mac_from_dots($suffix);
           my $port = $host->data->{'dot1dTpFdbPort'}->{$suffix};
           my $ifindex = $host->data->{'dot1dBasePortIfIndex'}->{$port};
+          next unless $ifindex; # Juniper sometimes returns invalid port (0) for vlan interface
           my $ifname = $host->data->{'ifName'}->{$ifindex};
           my $ifvlan = $host->data->{'ifVlan'}->{$ifindex} || 0; # undef = no vlan, e.g trunk
           #warn "$host> MAC $mac ifname=$ifname ifvlan=$ifvlan\n";
@@ -261,13 +270,13 @@ while (1) {
           $mac_insert_sth->execute($mac);
           $mac_select_sth->execute($mac);
           my $mac_id = $mac_select_sth->fetchrow_hashref->{'id'};
-          warn "WARNING! mac id undefined while recording MAC sighting, should not be possible\n" unless defined $mac_id;
+          warn "WARNING! $host mac id undefined while recording MAC sighting, should not be possible\n" unless defined $mac_id;
         
           # Get unique id for this interface port
           $port_insert_sth->execute($ifname, $host_id);
           $port_select_sth->execute($ifname, $host_id);
           my $port_id = $port_select_sth->fetchrow_hashref->{'id'};
-          warn "WARNING! port id undefined while recording MAC sighting, should not be possible\n" unless defined $port_id;          
+          warn "WARNING! $host port id undefined while recording MAC sighting, should not be possible\n" unless defined $port_id;          
           
           # Ensure vlan ID exists in database
           $vlan_insert_sth->execute($ifvlan);
@@ -284,9 +293,8 @@ while (1) {
         $macsighting_insert_sth->finish;
       }
 
-                    
-    },
-    walk          => [ values %oids ],
+      $DEBUG && warn "$host finished\n---\n";              
+    }
   );
 
   $snmp->execute();
