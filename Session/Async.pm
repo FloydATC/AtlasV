@@ -6,7 +6,7 @@ use parent 'Session';
 use Session;
 use Carp;
 use JSON;
-
+use Data::Dumper;
 
 sub new {
   my $class = shift;
@@ -85,6 +85,8 @@ sub execute {
   }
 
   # Do not return to caller
+  warn Dumper($self);
+  warn "$fname terminated unexpectedly";
   exit;
 }
 
