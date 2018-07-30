@@ -14,7 +14,7 @@
       onmouseover="map.svg_mouseover(evt);"
       onmouseout="map.svg_mouseout(evt);"
       onmousemove="map.svg_mousemove(evt);"
-      style="background: white;">
+      style="background: white; width: 2225px; height: 3222px; ">
 <rect x="0" y="0" class="scrollable"      width="100%"
       height="100%"
       fill-opacity="1.0"
