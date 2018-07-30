@@ -65,6 +65,7 @@ INSERT INTO hosts (id,ip,site,name,x,y) VALUES (6,'10.1.1.247',2,'B-02',200,200)
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (7,'10.1.1.246',3,'C-01',100,200);
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (8,'10.1.1.245',3,'C-02',200,200);
 
+
 INSERT INTO commlinks (host1,host2) VALUES (1,2);
 INSERT INTO commlinks (host1,host2) VALUES (1,3);
 INSERT INTO commlinks (host1,host2) VALUES (3,4);
@@ -75,6 +76,15 @@ INSERT INTO commlinks (host1,host2) VALUES (7,8);
 
 INSERT INTO commlinks (host1,host2) VALUES (1,5);
 INSERT INTO commlinks (host1,host2) VALUES (1,7);
+
+INSERT INTO sites (id,name,x,y) VALUES (5,'RARADH',300,300);
+INSERT INTO sitegroups (id,name) VALUES (3,'Ralingen');
+INSERT INTO sitegroupmembers (site,sitegroup) VALUES (5,3);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (9,'172.29.0.40',5,'RARADH-FW-02',100,100);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (10,'172.29.9.1',5,'RARADH-GW-01',200,100);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (11,'10.82.10.101',5,'RARADH-SW-01',300,100);
+INSERT INTO hosts (id,ip,site,name,x,y) VALUES (12,'10.82.10.30',5,'RARADH-UPS-01',400,100);
+
 
 INSERT INTO users (username,realm,password,alert,email,sms) VALUES ('andlun','AtlasV@man-monitor-02.oikt.net','73bf3fcd2b3861bde5f8a4999786a12f',1,'andreas.lund@oikt.no','90077162');
 INSERT INTO users (username,realm,password,alert,email,sms) VALUES ('andlun','AtlasV@pixie','6005f2fdbc44249f1ca3bc189e64c63e',1,'andreas.lund@oikt.no','90077162');
