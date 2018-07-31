@@ -166,6 +166,45 @@ CREATE TABLE `hostclasses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+--
+-- Table structure for table `snmp_oids`
+--
+
+DROP TABLE IF EXISTS `snmp_oids`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `snmp_oids` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `oid` varchar(64) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `oid` (`oid`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
+--
+-- Table structure for table `snmp_oids`
+--
+
+DROP TABLE IF EXISTS `hostclass_snmp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hostclass_snmp` (
+  `hostclass` int(11) NOT NULL,
+  `snmp_oid` int(11) NOT NULL,
+  UNIQUE KEY `hostclass_oid` (`hostclass`,`snmp_oid`),
+  CONSTRAINT `hostclass_snmp_ibfk_1` FOREIGN KEY (`hostclass`) REFERENCES `hostclasses` (`id`),
+  CONSTRAINT `hostclass_snmp_ibfk_2` FOREIGN KEY (`snmp_oid`) REFERENCES `snmp_oids` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
+
 --
 -- Table structure for table `hosts`
 --

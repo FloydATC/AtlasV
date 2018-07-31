@@ -46,6 +46,44 @@ INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (3, 'UPS'
 INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (4, 'Server',5,6);
 INSERT INTO hostclasses (id,name,alert_type_up,alert_type_down) VALUES (5, 'Sensor',5,6);
 
+INSERT INTO snmp_oids (id,name,oid) VALUES (1,'ifIndex',                    '1.3.6.1.2.1.2.2.1.1');
+INSERT INTO snmp_oids (id,name,oid) VALUES (2,'ifType',                     '1.3.6.1.2.1.2.2.1.3');
+INSERT INTO snmp_oids (id,name,oid) VALUES (3,'ifName',                     '1.3.6.1.2.1.31.1.1.1.1');      
+INSERT INTO snmp_oids (id,name,oid) VALUES (4,'vtpVlanState',               '1.3.6.1.4.1.9.9.46.1.3.1.1.2'); 
+INSERT INTO snmp_oids (id,name,oid) VALUES (5,'dot1dTpFdbPort',             '1.3.6.1.2.1.17.4.3.1.2');
+INSERT INTO snmp_oids (id,name,oid) VALUES (6,'dot1dBasePortIfIndex',       '1.3.6.1.2.1.17.1.4.1.2');     
+INSERT INTO snmp_oids (id,name,oid) VALUES (7,'ifVlan',                     '1.3.6.1.4.1.9.9.68.1.2.2.1.2'); 
+INSERT INTO snmp_oids (id,name,oid) VALUES (8,'ifAlias',                    '1.3.6.1.2.1.31.1.1.1.18');   
+INSERT INTO snmp_oids (id,name,oid) VALUES (9,'ifHighSpeed',                '1.3.6.1.2.1.31.1.1.1.15');   
+INSERT INTO snmp_oids (id,name,oid) VALUES (10,'ifAdminStatus',             '1.3.6.1.2.1.2.2.1.7');   
+INSERT INTO snmp_oids (id,name,oid) VALUES (11,'ifOperStatus',              '1.3.6.1.2.1.2.2.1.8');       
+INSERT INTO snmp_oids (id,name,oid) VALUES (12,'ipNetToMediaPhysAddress',   '1.3.6.1.2.1.4.22.1.2');       
+INSERT INTO snmp_oids (id,name,oid) VALUES (13,'upsBatteryStatus',          '1.3.6.1.2.1.33.1.2.1');
+INSERT INTO snmp_oids (id,name,oid) VALUES (14,'upsOutputSource',           '1.3.6.1.2.1.33.1.4.1');
+INSERT INTO snmp_oids (id,name,oid) VALUES (15,'upsAlarmsPresent',          '1.3.6.1.2.1.33.1.6.1');
+INSERT INTO snmp_oids (id,name,oid) VALUES (16,'upsBasicBatteryStatus',     '1.3.6.1.4.1.318.1.1.1.2.1.1');
+INSERT INTO snmp_oids (id,name,oid) VALUES (17,'upsBasicOutputStatus',      '1.3.6.1.4.1.318.1.1.1.4.1.1');
+INSERT INTO snmp_oids (id,name,oid) VALUES (18,'upsAdvStateSystemMessages', '1.3.6.1.4.1.318.1.1.1.11.2.6');
+
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,1);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,2);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,3);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,4);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,5);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,6);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,7);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,8);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,9);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,10);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,11);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (1,12);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (3,13);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (3,14);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (3,15);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (3,16);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (3,17);
+INSERT INTO hostclass_snmp (hostclass,snmp_oid) VALUES (3,18);
+
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (1,'10.1.1.252',1,'A-01',100,100);
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (2,'10.1.1.251',1,'A-02',100,200);
 INSERT INTO hosts (id,ip,site,name,x,y) VALUES (3,'10.1.1.250',1,'A-03',100,300);
