@@ -65,6 +65,7 @@ use Data::Dumper;
 use JSON;
 use DBI;
 use AtlasV;
+use Carp;
 
 my $DEBUG = 0;
 
@@ -75,30 +76,6 @@ unless ($dbh) {
 $dbh->{'mysql_auto_reconnect'} = 1;
 
 
-my %oids = qw(
-  ifIndex                   1.3.6.1.2.1.2.2.1.1          
-  ifType		    1.3.6.1.2.1.2.2.1.3
-  ifName                    1.3.6.1.2.1.31.1.1.1.1       
-  vtpVlanState              1.3.6.1.4.1.9.9.46.1.3.1.1.2 
-  dot1dTpFdbPort            1.3.6.1.2.1.17.4.3.1.2       
-  dot1dBasePortIfIndex      1.3.6.1.2.1.17.1.4.1.2       
-  ifVlan                    1.3.6.1.4.1.9.9.68.1.2.2.1.2 
-  ifAlias                   1.3.6.1.2.1.31.1.1.1.18      
-  ifHighSpeed               1.3.6.1.2.1.31.1.1.1.15      
-  ifAdminStatus             1.3.6.1.2.1.2.2.1.7          
-  ifOperStatus              1.3.6.1.2.1.2.2.1.8          
-  ipNetToMediaPhysAddress   1.3.6.1.2.1.4.22.1.2         
-
-  upsBatteryStatus          1.3.6.1.2.1.33.1.2.1
-  upsOutputSource           1.3.6.1.2.1.33.1.4.1
-  upsAlarmsPresent          1.3.6.1.2.1.33.1.6.1
-
-  upsBasicBatteryStatus     1.3.6.1.4.1.318.1.1.1.2.1.1
-  upsBasicOutputStatus      1.3.6.1.4.1.318.1.1.1.4.1.1
-  upsAdvStateSystemMessages 1.3.6.1.4.1.318.1.1.1.11.2.6
-);
-my %r_oids = reverse(%oids);
-
 my $lifetime = '7 DAY'; # https://www.w3schools.com/sql/func_mysql_date_sub.asp
 
 #my $json = JSON->new( allow_nonref => 1 );
@@ -107,28 +84,36 @@ warn "$0 $$ running\n";
 while (1) {
 
   # Expire data
-  print $session "DELETE FROM macsightings WHERE recorded < DATE_SUB(NOW(), INTERVAL $lifetime)\n";
-  { my @res = query_result($session); }
-  print $session "DELETE FROM arpsightings WHERE recorded < DATE_SUB(NOW(), INTERVAL $lifetime)\n";
-  { my @res = query_result($session); }
+  $dbh->do("DELETE FROM macsightings WHERE recorded < DATE_SUB(NOW(), INTERVAL $lifetime)");
+  $dbh->do("DELETE FROM arpsightings WHERE recorded < DATE_SUB(NOW(), INTERVAL $lifetime)");
 
   # Fetch list of hosts to scan
-  print $session "SELECT id,ip FROM hosts WHERE disabled = false AND scanned IS NULL OR scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)\n";
-  my @hosts = query_result($session);
+  my @hosts = ();
+  {
+    my $sth = $dbh->prepare("SELECT id,ip,class FROM hosts WHERE disabled = false AND scanned IS NULL OR scanned < DATE_SUB(NOW(), INTERVAL 1 HOUR)");
+    $sth->execute();
+    while (my $host = $sth->fetchrow_hashref) {
+      push @hosts, $host;
+    }
+  }
   my %host_ip_by_id = map { $_->{'id'} => $_->{'ip'} } @hosts; 
   my %host_id_by_ip = map { $_->{'ip'} => $_->{'id'} } @hosts;
-  
 
-#  # Fetch SNMP OIDs to try
-#  print $session "SELECT name,oid FROM snmp_oids\n";
-#  my @oids = query_result($session);
-#  my %snmp_name_by_oid = map { $_->{'oid'} => $_->{'name'} } @oids;
-#  my %snmp_oid_by_name = map { $_->{'name'} => $_->{'oid'} } @oids;
+  # Fetch SNMP OIDs to try
+  my @oids = ();
+  {
+    my $sth = $dbh->prepare("SELECT oid,name,hostclass FROM snmp_oids,hostclass_snmp WHERE hostclass_snmp.snmp_oid=snmp_oids.id");
+    $sth->execute();
+    while (my $oid = $sth->fetchrow_hashref) {
+      push @oids, $oid;
+    }
+  }
+  my %r_oids = map { $_->{'oid'} => $_->{'name'} } @oids;  
   
   my $snmp = SNMP::Effective->new(
     MaxSessions   => 32,
     MasterTimeout => 240,
-    DestHost      => [ values %host_ip_by_id ],
+    #DestHost      => [ values %host_ip_by_id ],
     Arg           => {
       Community   => 'public',
       Version     => 1,
@@ -137,7 +122,7 @@ while (1) {
       Retries     => 3,
       RetryNoSuch => 0,
     },
-    walk          => [ values %oids ],
+    #walk          => [ values %oids ],
     Callback      => sub { 
       my $host = shift;
       my $error = shift;
@@ -297,18 +282,21 @@ while (1) {
     }
   );
 
+  # Add hosts/oids to scan
+  foreach my $host (@hosts) {
+    # Make a list of OIDs to scan based on host class
+    my @walk = map { $_->{'oid'} } grep { $_->{'hostclass'} == $host->{'class'} } @oids;
+  
+    $snmp->add(
+      dest_host => $host->{ip},
+      walk => [ @walk ],
+    );
+  }
+
+  # Start scan
   $snmp->execute();
   
   
-#  foreach my $record (@records) {
-#    #warn "$0 $$ scan host id=".$record->{'id'}." ip=".$record->{'ip'}."\n";
-#
-#    # Scan host
-#    # ...
-#
-#    print $session "UPDATE hosts SET scanned=NOW() WHERE id=".int($record->{'id'})."\n";
-#    query_result($session);
-#  }
 
   my $now = time;
   my $interval = 60;
