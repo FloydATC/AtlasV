@@ -253,6 +253,32 @@ CREATE TABLE `hosts` (
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Table structure for table `ups_status`
+--
+  
+DROP TABLE IF EXISTS `ups_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ups_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `host` int(11) NOT NULL,
+  `ups_type` int(11) NOT NULL,
+  `alarms` varchar(16) DEFAULT NULL,
+  `outputstatus` varchar(32) DEFAULT NULL,
+  `batterystatus` varchar(32) DEFAULT NULL,
+  `recorded` timestamp,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `host` (`host`),
+  CONSTRAINT `ups_status_ibfk_1` FOREIGN KEY (`host`) REFERENCES `hosts` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+            
+            
+            
+            
+
+--
 -- Table structure for table `hostgroupmembers`
 --
 

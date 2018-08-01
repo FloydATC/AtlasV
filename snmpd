@@ -142,15 +142,56 @@ while (1) {
         $host->data->{$snmp_name} = $host->data->{$prefix};
  
         # DEBUG
-        next unless $DEBUG && $snmp_name =~ 'ups';
-        foreach my $suffix (sort by_dots keys %{$host->data->{$snmp_name}}) {
-          my $value = $host->data->{$snmp_name}->{$suffix};
-          warn "UPS: host=$host_id, snmp_name=$snmp_name, suffix=$suffix, value=$value\n";
-          warn Dumper($host->data);
-        }
+        #next unless $DEBUG && $snmp_name =~ 'ups';
+        #foreach my $suffix (sort by_dots keys %{$host->data->{$snmp_name}}) {
+        #  my $value = $host->data->{$snmp_name}->{$suffix};
+        #  warn "UPS: host=$host_id, snmp_name=$snmp_name, suffix=$suffix, value=$value\n";
+        #  warn Dumper($host->data);
+        #}
       }
 
       #warn Dumper($host->data);
+      
+      # Extract UPS information (type 1) - failure states in CAPS
+      if ($host->data->{'upsBatteryStatus'} || $host->data->{'upsOutputSource'} || $host->data->{'upsAlarmsPresent'}) {
+        $DEBUG && warn "$host has UPS data (type 1)\n";
+        my $sth = $dbh->prepare("REPLACE INTO ups_status (host,ups_type,alarms,outputstatus,batterystatus) VALUES (?,1,?,?,?)");
+        my $alarms = $host->data->{'upsAlarmsPresent'}->{'1'} || 0;
+        my $output = 'UNKNOWN('.$host->data->{'upsOutputSource'}->{'1'}.')';
+        if ($host->data->{'upsOutputSource'}->{'1'} == 3) { $output = 'online'; }
+        if ($host->data->{'upsOutputSource'}->{'1'} == 4) { $output = 'IN BYPASS'; }
+        if ($host->data->{'upsOutputSource'}->{'1'} == 5) { $output = 'ON BATTERY'; }
+        my $battery = 'UNKNOWN('.$host->data->{'upsBatteryStatus'}->{'1'}.')'; 
+        if ($host->data->{'upsBatteryStatus'}->{'1'} == 2) { $battery = 'normal'; }
+        if ($host->data->{'upsBatteryStatus'}->{'1'} == 3) { $battery = 'LOW'; }
+        if ($host->data->{'upsBatteryStatus'}->{'1'} == 4) { $battery = 'DEPLETED'; }
+        $sth->execute($host_id, $alarms, $output, $battery);
+        $sth->finish;
+      }
+
+      # Extract UPS information (type 2) - failure states in CAPS
+      if ($host->data->{'upsBasicBatteryStatus'} || $host->data->{'upsBasicOutputStatus'} || $host->data->{'upsAdvStateSystemMessages'}) {
+        $DEBUG && warn "$host has UPS data (type 2)\n";
+        my $sth = $dbh->prepare("REPLACE INTO ups_status (host,ups_type,alarms,outputstatus,batterystatus) VALUES (?,2,?,?,?)");
+        my $alarms = $host->data->{'upsAdvStateSystemMessages'}->{'1'} || 0;
+        my $output = 'UNKNOWN('.$host->data->{'upsBasicOutputStatus'}->{'1'}.')';
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 2) { $output = 'online'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 3) { $output = 'ON BATTERY'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 4) { $output = 'ON SMART BOOST'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 5) { $output = 'IN TIMED SLEEP'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 6) { $output = 'IN SOFTWARE BYPASS'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 7) { $output = 'OFF'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 8) { $output = 'REBOOTING'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 9) { $output = 'IN SWITCHED BYPASS'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 10) { $output = 'IN FAILURE BYPASS'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 11) { $output = 'WAITING FOR POWER'; }
+        if ($host->data->{'upsBasicOutputStatus'}->{'1'} == 12) { $output = 'IN SMART TRIM'; }
+        my $battery = 'UNKNOWN('.$host->data->{'upsBasicBatteryStatus'}->{'1'}.')';
+        if ($host->data->{'upsBasicBatteryStatus'}->{'1'} == 2) { $battery = 'normal'; }
+        if ($host->data->{'upsBasicBatteryStatus'}->{'1'} == 3) { $battery = 'LOW'; }
+        $sth->execute($host_id, $alarms, $output, $battery);
+        $sth->finish;
+      }
 
       # Extract port information (ifIndex = ifIndex)
       if ($host->data->{'ifIndex'}) {
