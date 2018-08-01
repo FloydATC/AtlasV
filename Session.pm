@@ -23,7 +23,9 @@ sub new {
 
 sub peer {
   my $self = shift;
-  
+
+  # Return a human readable string, either pid=??? or an IP address
+  # identifying the remote end of this session  
   return $self->{'peer'} if $self->{'peer'};
   
   if (ref($self->socket) eq 'GLOB' && $self->{'pid'}) { 

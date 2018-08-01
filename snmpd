@@ -111,19 +111,19 @@ while (1) {
   my %r_oids = map { $_->{'oid'} => $_->{'name'} } @oids;  
   
   my $snmp = SNMP::Effective->new(
-    MaxSessions   => 32,
-    MasterTimeout => 240,
+    max_sessions   => 32,
+    master_timeout => 240,
     #DestHost      => [ values %host_ip_by_id ],
-    Arg           => {
-      Community   => 'public',
-      Version     => 1,
-      RemotePort  => 161,
-      Timeout     => '1000000', # microseconds
-      Retries     => 3,
-      RetryNoSuch => 0,
+    Arg            => {
+      Community    => 'public',
+      Version      => 1,
+      RemotePort   => 161,
+      Timeout      => '1000000', # microseconds
+      Retries      => 3,
+      RetryNoSuch  => 0,
     },
     #walk          => [ values %oids ],
-    Callback      => sub { 
+    callback       => sub { 
       my $host = shift;
       my $error = shift;
       

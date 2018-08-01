@@ -60,16 +60,16 @@ my $nonce = {}; # Volatile nonce registry for Digest HTTP authentication
 my $key = {}; # Volatile key registry for authenticated users
 
 print "Atlas V launched\n";
-my $pcapd = Session::Async->new( cmd => 'pcapd', args => [], select => $select, type => 'line', dbh => $dbh );
+my $pcapd = Session::Async->new( cmd => 'pcapd', args => [], select => $select, type => 'line', dbh => $dbh, persist => 1 );
 $sessions->{$pcapd->socket} = $pcapd;
 
-my $pingd = Session::Async->new( cmd => 'pingd', args => [], select => $select, type => 'line', dbh => $dbh );
+my $pingd = Session::Async->new( cmd => 'pingd', args => [], select => $select, type => 'line', dbh => $dbh, persist => 1 );
 $sessions->{$pingd->socket} = $pingd;
 
-my $snmpd = Session::Async->new( cmd => 'snmpd', args => [], select => $select, type => 'line', dbh => $dbh );
+my $snmpd = Session::Async->new( cmd => 'snmpd', args => [], select => $select, type => 'line', dbh => $dbh, persist => 1 );
 $sessions->{$pcapd->socket} = $snmpd;
 
-my $alertd = Session::Async->new( cmd => 'alertd', args => [], select => $select, type => 'line', dbh => $dbh );
+my $alertd = Session::Async->new( cmd => 'alertd', args => [], select => $select, type => 'line', dbh => $dbh, persist => 1 );
 $sessions->{$alertd->socket} = $alertd;
 
 
@@ -84,10 +84,20 @@ while (1) {
     #print "$0 $$ LINE connection from ".$sessions->{$socket}->name()."\n";
   }
 
+  #foreach my $socket ($select->has_exception(0)) {
+  #  die "socket $socket has exception\n".Dumper($sessions);
+  #}
+
   # Read from sockets
   foreach my $socket ($select->can_read(0)) {
     #print "$0 $$ attempting to read from $socket\n";
     my $session = $sessions->{$socket};
+    unless (defined $session) {
+      # This happens when a Session::Async dies unexpectedly
+      # Close the handle, it will then be cleaned up
+      $socket->close();
+      next;
+    }
     my $bytes = $session->read();
     
     if ($session->type() eq 'http_client') {
@@ -117,7 +127,17 @@ while (1) {
   # Clean up closed sessions
   foreach my $socket (keys %{$sessions}) {
     if ($sessions->{$socket}->closed()) {
-      #print "$0 $$ cleaning up ".$sessions->{$socket}->peer()."\n";
+      print "$0 $$ cleaning up closed session ".$sessions->{$socket}->peer()."\n";
+      # Restart persistent sessions that were not supposed to stop
+      if ($sessions->{$socket}->{'persist'}) {
+        my $old = $sessions->{$socket};
+        print "$0 $$ restarting persistent session '".$old->{'cmd'}."'\n";
+        my $new = Session::Async->new( cmd => $old->{'cmd'}, args => $old->{'args'}, select => $select, type => $old->{'type'}, dbh => $dbh, persist => 1 );
+        $sessions->{$new->socket} = $new;
+        #print "$0 $$ new session=$new socket=".$new->socket."\n";
+        #print "old:".Dumper($old);
+        #print "new:".Dumper($new);
+      }      
       delete $sessions->{$socket};
     }
   }
